@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Корпоративный ИИ на ваших серверах — MakeBiz</title>
+<meta name="description" content="Разворачиваем локальные LLM и AI-сервисы в контролируемом контуре компании. Рассчитываем инфраструктуру под реальную нагрузку, интегрируем и сопровождаем.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#03235F; --navy-2:#0A2E6E; --navy-ink:#061A44;
+  --accent:#074EE8; --accent-600:#0642C4; --accent-soft:#EAF0FE;
+  --ink:#0B1B33; --muted:#5B6B85; --muted-2:#8595AD;
+  --line:#E4EAF3; --line-2:#EEF2F9;
+  --bg:#FFFFFF; --bg-soft:#F5F8FD; --bg-soft2:#EDF2FB;
+  --ok:#12855B; --ok-soft:#E7F5EF; --warn:#B7791F; --warn-soft:#FBF3E3; --danger:#C0392B; --danger-soft:#FBECEA;
+  --radius:16px; --radius-sm:11px; --radius-lg:22px;
+  --shadow:0 1px 2px rgba(6,26,68,.04), 0 12px 34px rgba(6,26,68,.07);
+  --shadow-sm:0 1px 2px rgba(6,26,68,.05), 0 6px 18px rgba(6,26,68,.06);
+  --shadow-lg:0 20px 60px rgba(6,26,68,.14);
+  --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  color:var(--ink); background:var(--bg); line-height:1.55;
+  -webkit-font-smoothing:antialiased; font-size:17px;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-soft);
+  padding:7px 14px;border-radius:100px;
+}
+h1,h2,h3,h4{color:var(--navy);line-height:1.14;letter-spacing:-.01em;font-weight:800}
+h2{font-size:clamp(28px,3.6vw,44px);font-weight:800}
+h3{font-size:22px;font-weight:700}
+p{color:var(--ink)}
+.lead{color:var(--muted);font-size:19px}
+.section{padding:88px 0}
+.section--soft{background:var(--bg-soft)}
+.section-head{max-width:760px;margin-bottom:44px}
+.section-head h2{margin:16px 0 14px}
+.section-head p{color:var(--muted);font-size:19px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;
+  padding:15px 26px;border-radius:12px;border:1px solid transparent;
+  transition:.18s ease;white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 22px rgba(7,78,232,.24)}
+.btn-primary:hover{background:var(--accent-600);transform:translateY(-1px);box-shadow:0 12px 28px rgba(7,78,232,.3)}
+.btn-ghost{background:#fff;color:var(--navy);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:#fff}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-2);transform:translateY(-1px)}
+.btn-lg{padding:17px 32px;font-size:17px}
+.btn-block{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line-2);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;color:var(--navy);letter-spacing:-.02em}
+.logo .mark{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--navy));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;
+}
+.logo small{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.02em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:15px;font-weight:500;color:var(--ink);transition:.15s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.nav-phone{font-weight:600;font-size:15px;color:var(--navy);white-space:nowrap}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.2s}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:
+   radial-gradient(1100px 520px at 78% -10%, #EAF0FE 0%, rgba(234,240,254,0) 60%),
+   linear-gradient(180deg,#fff 0%, var(--bg-soft) 100%);
+   padding:76px 0 70px;border-bottom:1px solid var(--line-2)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(34px,4.6vw,56px);font-weight:900;margin:20px 0 20px}
+.hero .lead{max-width:560px;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.hero-note{font-size:14px;color:var(--muted-2);display:flex;align-items:center;gap:8px}
+.markers{list-style:none;display:grid;gap:12px;margin-top:30px}
+.markers li{display:flex;align-items:flex-start;gap:11px;font-size:15.5px;font-weight:500;color:var(--ink)}
+.markers .ic{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
+
+/* Hero visual: infra panel */
+.hero-visual{position:relative}
+.panel-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);padding:22px;position:relative;overflow:hidden;
+}
+.panel-card::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(7,78,232,.03),transparent 40%);pointer-events:none}
+.pc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.pc-title{font-weight:700;color:var(--navy);font-size:15px;display:flex;align-items:center;gap:9px}
+.pc-dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
+.pc-tag{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:4px 9px;border-radius:6px;letter-spacing:.03em}
+.node-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px}
+.node{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:var(--bg-soft)}
+.node .nl{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.node .nv{font-size:15px;font-weight:700;color:var(--navy);margin-top:3px;display:flex;align-items:center;gap:7px}
+.node .bar{height:5px;border-radius:4px;background:var(--line-2);margin-top:9px;overflow:hidden}
+.node .bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),#3D77F0)}
+.flow{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:14px;padding-top:15px;border-top:1px dashed var(--line)}
+.flow .f{flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--muted)}
+.flow .f b{display:block;color:var(--navy);font-size:13px;margin-top:2px}
+.flow .arw{color:var(--accent);font-weight:800}
+
+/* generic cards */
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:.18s}
+.card:hover{border-color:#C9D6EE;box-shadow:var(--shadow);transform:translateY(-2px)}
+.card .ci{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.card h3{font-size:19px;margin-bottom:9px}
+.card p{color:var(--muted);font-size:15.5px}
+.card svg{width:23px;height:23px}
+
+/* problem */
+.problem-box{background:linear-gradient(135deg,var(--navy),var(--navy-ink));color:#fff;border-radius:var(--radius-lg);padding:52px;position:relative;overflow:hidden}
+.problem-box::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(7,78,232,.35),transparent 70%)}
+.problem-box h2{color:#fff;position:relative;max-width:780px}
+.problem-box p{color:#C7D3EA;font-size:18px;margin-top:18px;position:relative;max-width:820px}
+
+/* categories */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;cursor:pointer;transition:.18s;position:relative}
+.cat:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.cat .ci{width:44px;height:44px;border-radius:11px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.cat h3{font-size:18px;margin-bottom:7px}
+.cat p{color:var(--muted);font-size:14.5px}
+.cat .go{margin-top:14px;font-size:14px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:6px}
+
+/* ============ CALCULATOR ============ */
+.calc-section{background:linear-gradient(180deg,var(--bg-soft) 0%, #fff 100%);padding:84px 0}
+.calc-shell{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);overflow:hidden;
+}
+.calc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 28px;border-bottom:1px solid var(--line-2);background:var(--bg-soft)}
+.calc-top .ct-l{display:flex;align-items:center;gap:13px}
+.calc-top h3{font-size:19px}
+.calc-top .sub{font-size:13.5px;color:var(--muted);margin-top:2px}
+.calc-progress{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--muted)}
+.pbar{width:150px;height:7px;border-radius:5px;background:var(--line-2);overflow:hidden}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#3D77F0);border-radius:5px;transition:.4s;width:0}
+
+.calc-body{display:grid;grid-template-columns:210px 1fr 320px;min-height:520px}
+.steps-nav{border-right:1px solid var(--line-2);padding:24px 16px;background:#fff}
+.step-item{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:11px;margin-bottom:4px;cursor:pointer;transition:.15s;color:var(--muted);font-weight:600;font-size:14.5px}
+.step-item .num{width:26px;height:26px;border-radius:50%;background:var(--line-2);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:.15s}
+.step-item.active{background:var(--accent-soft);color:var(--navy)}
+.step-item.active .num{background:var(--accent);color:#fff}
+.step-item.done .num{background:var(--ok);color:#fff}
+.step-item.done{color:var(--ink)}
+.step-item.disabled{opacity:.5;pointer-events:none}
+
+.step-panel{padding:30px 34px;min-width:0}
+.step-panel h3{font-size:22px;margin-bottom:6px}
+.step-panel .step-desc{color:var(--muted);font-size:15px;margin-bottom:24px}
+.step-actions{display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:22px;border-top:1px solid var(--line-2)}
+
+/* summary rail */
+.summary{border-left:1px solid var(--line-2);padding:24px 22px;background:var(--bg-soft);position:relative}
+.summary .st{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.sum-block{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-bottom:12px}
+.sum-block .l{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.sum-block .v{font-size:15px;font-weight:700;color:var(--navy);margin-top:3px}
+.sum-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sum-chip{font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:4px 9px;border-radius:6px}
+.profile-meter{display:flex;gap:5px;margin-top:9px}
+.profile-meter i{flex:1;height:7px;border-radius:3px;background:var(--line-2)}
+.profile-meter i.on{background:var(--accent)}
+.conf-ring{display:flex;align-items:center;gap:12px;margin-top:8px}
+.conf-ring .num{font-size:26px;font-weight:800;color:var(--navy)}
+.summary-hint{font-size:12.5px;color:var(--muted);background:var(--warn-soft);border:1px solid #F0E2C4;border-radius:10px;padding:11px 12px;margin-top:6px;line-height:1.45}
+
+/* form fields */
+.field{margin-bottom:18px}
+.field > label{display:block;font-size:14.5px;font-weight:600;color:var(--navy);margin-bottom:7px}
+.field .hint{font-size:12.5px;color:var(--muted-2);margin-top:6px}
+.field .unit{font-size:12px;color:var(--muted);font-weight:600}
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  width:100%;font-family:inherit;font-size:15px;color:var(--ink);
+  padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;transition:.15s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(7,78,232,.12)}
+textarea{resize:vertical;min-height:80px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235B6B85' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+/* choice cards (chips) */
+.choices{display:grid;gap:10px}
+.choices.c2{grid-template-columns:1fr 1fr}
+.choice{
+  display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:12px;
+  padding:13px 15px;cursor:pointer;transition:.15s;background:#fff;
+}
+.choice:hover{border-color:#B9CBEC;background:var(--bg-soft)}
+.choice.sel{border-color:var(--accent);background:var(--accent-soft)}
+.choice .cb{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.15s;background:#fff}
+.choice.sel .cb{background:var(--accent);border-color:var(--accent)}
+.choice .cb svg{width:12px;height:12px;color:#fff;opacity:0}
+.choice.sel .cb svg{opacity:1}
+.choice .cc .tt{font-weight:600;font-size:15px;color:var(--navy)}
+.choice .cc .dd{font-size:13px;color:var(--muted);margin-top:2px}
+.choice.radio .cb{border-radius:50%}
+
+/* category group in step 1 */
+.catgroup{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.catgroup-head{display:flex;align-items:center;gap:13px;padding:15px 17px;cursor:pointer;background:#fff;transition:.15s}
+.catgroup-head:hover{background:var(--bg-soft)}
+.catgroup-head .ci{width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.catgroup-head .tt{font-weight:700;font-size:16px;color:var(--navy)}
+.catgroup-head .dd{font-size:13px;color:var(--muted);margin-top:1px}
+.catgroup-head .cnt{margin-left:auto;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:20px;opacity:0;transition:.15s}
+.catgroup-head .cnt.on{opacity:1}
+.catgroup-head .chev{margin-left:6px;color:var(--muted);transition:.25s}
+.catgroup.open .chev{transform:rotate(180deg)}
+.catgroup-body{display:none;padding:6px 15px 15px;border-top:1px solid var(--line-2);background:var(--bg-soft)}
+.catgroup.open .catgroup-body{display:block}
+.scenario{display:flex;align-items:flex-start;gap:11px;padding:11px 12px;border-radius:10px;cursor:pointer;transition:.12s}
+.scenario:hover{background:#fff}
+.scenario .cb{width:19px;height:19px;border-radius:6px;border:2px solid var(--line);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff}
+.scenario.sel .cb{background:var(--accent);border-color:var(--accent)}
+.scenario .cb svg{width:11px;height:11px;color:#fff;opacity:0}
+.scenario.sel .cb svg{opacity:1}
+.scenario .nm{font-weight:600;font-size:14.5px;color:var(--navy)}
+.scenario .ds{font-size:12.5px;color:var(--muted)}
+.pool-tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);background:var(--line-2);padding:2px 7px;border-radius:5px;margin-left:6px}
+
+.callout{display:flex;gap:11px;background:var(--accent-soft);border:1px solid #CFDDFB;border-radius:12px;padding:14px 16px;font-size:14px;color:var(--navy-ink);margin-top:6px}
+.callout svg{flex-shrink:0;color:var(--accent);margin-top:1px}
+.warnbox{display:flex;gap:11px;background:var(--warn-soft);border:1px solid #F0E2C4;border-radius:12px;padding:13px 15px;font-size:13.5px;color:#6B5316;margin-top:14px}
+.warnbox svg{flex-shrink:0;color:var(--warn);margin-top:1px}
+
+/* result screen */
+.result-head{text-align:center;max-width:640px;margin:0 auto 6px}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+.rcard{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
+.rcard .rl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.rcard.hl{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border:none;color:#fff;grid-column:span 2}
+.rcard.setup-card{background:linear-gradient(135deg,var(--accent-600),var(--accent));border:none}
+.rcard.setup-card .rl span{cursor:help}
+.rcard.hl .rl{color:#9DB4DC}
+.class-badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:700;background:rgba(255,255,255,.14);padding:6px 13px;border-radius:8px;margin-bottom:12px}
+.rcard.hl h3{color:#fff;font-size:26px;margin-bottom:8px}
+.rcard.hl p{color:#C7D3EA;font-size:15px}
+.budget-num{font-size:28px;font-weight:900;color:var(--navy);letter-spacing:-.02em;white-space:nowrap}
+.budget-sub{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+.proc-tags{display:flex;flex-wrap:wrap;gap:8px}
+.proc-tag{font-size:13px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:8px;display:flex;align-items:center;gap:6px}
+.node-list{list-style:none;display:grid;gap:9px}
+.node-list li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink);font-weight:500}
+.node-list .nd{width:8px;height:8px;border-radius:2px;background:var(--accent);flex-shrink:0}
+.scale-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scale-list .s{font-size:14px}
+.scale-list .s b{display:block;color:var(--navy);font-size:16px;font-weight:700}
+.scale-list .s span{color:var(--muted);font-size:12.5px}
+.conf-wrap{display:flex;align-items:center;gap:18px}
+.conf-donut{width:74px;height:74px;flex-shrink:0}
+.conf-reasons{font-size:13px;color:var(--muted);line-height:1.5}
+.conf-reasons b{color:var(--navy)}
+.variants{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.variant{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--bg-soft)}
+.variant.pro{border-color:var(--accent);background:var(--accent-soft)}
+.variant .vt{font-weight:700;color:var(--navy);font-size:16px;display:flex;align-items:center;justify-content:space-between}
+.variant .vp{font-size:22px;font-weight:800;color:var(--navy);margin:8px 0}
+.variant ul{list-style:none;display:grid;gap:6px;margin-top:8px}
+.variant li{font-size:13.5px;color:var(--muted);display:flex;gap:8px}
+.variant li::before{content:"—";color:var(--accent)}
+.placement-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.p-opt{border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);background:#fff}
+.p-opt.rec{border-color:var(--accent);background:var(--accent-soft);color:var(--navy)}
+.p-opt .pi{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+
+/* lead form */
+.lead-form{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border-radius:var(--radius-lg);padding:34px;margin-top:26px;color:#fff}
+.lead-form h3{color:#fff;font-size:24px;margin-bottom:6px}
+.lead-form p{color:#C7D3EA;font-size:15px;margin-bottom:22px}
+.lead-form label{color:#DCE6F7;font-size:13.5px}
+.lead-form input,.lead-form select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#fff}
+.lead-form input::placeholder{color:#8DA2C6}
+.lead-form input:focus,.lead-form select:focus{border-color:#5B8DF5;box-shadow:0 0 0 3px rgba(91,141,245,.25);background:rgba(255,255,255,.12)}
+.lead-form select option{color:var(--ink)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#A9BBDA;margin:6px 0 18px}
+.consent input{width:auto;margin-top:2px;accent-color:var(--accent)}
+.form-ok{background:var(--ok-soft);border:1px solid #B8E2CD;border-radius:14px;padding:24px;text-align:center}
+.form-ok .ic{width:52px;height:52px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.form-ok h3{color:var(--ok);font-size:21px;margin-bottom:8px}
+.form-ok p{color:#2C6A4F;font-size:15px}
+
+/* comparison table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+table.cmp{width:100%;border-collapse:collapse;min-width:640px}
+table.cmp th,table.cmp td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line-2);font-size:14.5px}
+table.cmp thead th{background:var(--navy);color:#fff;font-weight:600;font-size:14px;position:sticky;top:0}
+table.cmp thead th:first-child{border-top-left-radius:0}
+table.cmp tbody td:first-child{font-weight:600;color:var(--navy)}
+table.cmp .hl-col{background:var(--accent-soft)}
+table.cmp tbody tr:hover td{background:var(--bg-soft)}
+table.cmp tbody tr:hover td.hl-col{background:#DFE9FE}
+
+/* when local / when early */
+.two-panels{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel-good,.panel-early{border-radius:var(--radius);padding:30px}
+.panel-good{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.panel-early{background:var(--bg-soft);border:1px dashed #C3D0E6}
+.panel-good h3,.panel-early h3{margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.panel-good ul,.panel-early ul{list-style:none;display:grid;gap:11px}
+.panel-good li,.panel-early li{display:flex;gap:11px;font-size:15px;color:var(--ink)}
+.panel-good li .mk{color:var(--ok);flex-shrink:0;font-weight:800}
+.panel-early li .mk{color:var(--muted-2);flex-shrink:0;font-weight:800}
+
+/* security layers */
+.layers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:layer}
+.layer{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 18px;transition:.15s}
+.layer:hover{border-color:var(--accent);transform:translateX(3px)}
+.layer .ln{counter-increment:layer;width:30px;height:30px;border-radius:8px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.layer .ln::before{content:counter(layer)}
+.layer .lt{font-weight:600;font-size:15px;color:var(--navy)}
+
+/* steps timeline */
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-top:20px}
+.tl-step{position:relative;padding:0 14px}
+.tl-step .dot{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;position:relative;z-index:2;box-shadow:0 0 0 5px #fff, 0 0 0 6px var(--line)}
+.tl-step::before{content:"";position:absolute;top:18px;left:0;right:0;height:2px;background:var(--line);z-index:1}
+.tl-step:first-child::before{left:50%}
+.tl-step:last-child::before{right:50%}
+.tl-step h4{font-size:16px;color:var(--navy);margin:16px 0 8px}
+.tl-step ul{list-style:none;display:grid;gap:5px}
+.tl-step li{font-size:13px;color:var(--muted)}
+
+/* economics */
+.econ-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
+.econ-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.econ-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 15px;font-size:14px;font-weight:500;color:var(--ink)}
+.econ-item .d{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.tco-card{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border-radius:var(--radius);padding:28px;color:#fff}
+.tco-card h3{color:#fff;margin-bottom:16px}
+.tco-opt{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:15px}
+.tco-opt:last-child{border-bottom:none}
+.tco-opt .badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.14)}
+
+/* turnkey setup */
+.setup-section{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-lg);padding:44px}
+.setup-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.setup-list li{position:relative;padding-left:28px;font-size:15px;color:var(--ink);font-weight:500}
+.setup-list li::before{content:"✓";position:absolute;left:0;top:0;width:19px;height:19px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.setup-price{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border-radius:var(--radius);padding:32px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.setup-price::after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(7,78,232,.4),transparent 70%)}
+.sp-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#9DB4DC;position:relative}
+.sp-num{font-size:42px;font-weight:900;color:#fff;letter-spacing:-.02em;margin:8px 0 12px;position:relative}
+.sp-sub{font-size:15px;color:#DCE6F7;margin-bottom:14px;position:relative}
+.sp-note{font-size:13px;color:#A9BBDA;line-height:1.5;margin-bottom:22px;position:relative}
+.setup-price .btn{position:relative}
+/* why us */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
+.stat .n{font-size:34px;font-weight:900;color:var(--accent);letter-spacing:-.02em}
+.stat .l{font-size:14px;color:var(--muted);margin-top:6px;font-weight:500}
+
+/* FAQ */
+.faq{max-width:840px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--line);padding:6px 0}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;cursor:pointer;font-weight:600;font-size:17px;color:var(--navy)}
+.faq-q .fx{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;transition:.2s}
+.faq-item.open .fx{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:.28s ease;color:var(--muted);font-size:15.5px}
+.faq-item.open .faq-a{max-height:340px;padding-bottom:20px}
+
+/* final CTA */
+.final-cta{background:linear-gradient(135deg,var(--navy) 0%,var(--accent) 130%);border-radius:var(--radius-lg);padding:60px 52px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.final-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 20% 0%,rgba(255,255,255,.12),transparent 60%)}
+.final-cta h2{color:#fff;position:relative;font-size:clamp(28px,3.4vw,40px)}
+.final-cta p{color:#DCE6F7;font-size:18px;max-width:600px;margin:16px auto 30px;position:relative}
+.final-cta .hero-cta{justify-content:center;position:relative}
+.final-cta .btn-ghost{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);color:#fff}
+.final-cta .btn-ghost:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* footer */
+footer{background:var(--navy-ink);color:#9DB0D2;padding:56px 0 30px;font-size:14px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px}
+footer .logo{color:#fff}
+footer .logo small{color:#7E93BC}
+footer h5{color:#fff;font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
+footer a{display:block;color:#9DB0D2;margin-bottom:9px;transition:.15s}
+footer a:hover{color:#fff}
+.foot-legal{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:12.5px;color:#7E93BC;line-height:1.7}
+.foot-legal .disc{margin-top:12px;padding:14px 16px;background:rgba(255,255,255,.04);border-radius:10px}
+
+/* responsive */
+@media(max-width:1080px){
+  .calc-body{grid-template-columns:1fr}
+  .steps-nav{display:flex;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line-2);padding:14px 16px;gap:6px}
+  .step-item{margin-bottom:0;white-space:nowrap;padding:9px 12px}
+  .step-item .num{width:23px;height:23px}
+  .summary{border-left:none;border-top:1px solid var(--line-2)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-visual{max-width:480px}
+  .g3,.g4,.cat-grid,.layers{grid-template-columns:1fr 1fr}
+  .econ-grid,.two-panels,.timeline,.setup-section{grid-template-columns:1fr}
+  .timeline{gap:14px}
+  .tl-step::before{display:none}
+  .nav-links{display:none}
+  .nav-phone{display:none}
+  .nav-cta .btn-primary{display:none}
+  .burger{display:flex}
+  .mobile-menu.open{display:flex}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .section{padding:60px 0}
+  .wrap{padding:0 18px}
+  .g2,.g3,.g4,.cat-grid,.layers,.result-grid,.variants,.scale-list,.econ-list,.placement-opts,.why-grid{grid-template-columns:1fr}
+  .rcard.hl{grid-column:span 1}
+  .two-col,.three-col{grid-template-columns:1fr}
+  .problem-box,.final-cta{padding:36px 24px}
+  .setup-section{padding:28px 22px}
+  .setup-list{grid-template-columns:1fr}
+  .step-panel{padding:22px 18px}
+  .calc-top{flex-direction:column;align-items:flex-start}
+  .pbar{width:120px}
+  .lead-form{padding:24px 20px}
+}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:16px 24px;gap:4px;z-index:59;box-shadow:var(--shadow)}
+.mobile-menu a{padding:12px 0;font-weight:600;color:var(--navy);border-bottom:1px solid var(--line-2)}
+.mobile-menu .btn{margin-top:12px}
+
+@media print{
+  header,.mobile-menu,.calc-top,.steps-nav,.summary,.step-actions,.lead-form,footer,.hero,.section:not(#calc-print){display:none!important}
+  .rcard.hl{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.fade{animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <span class="mark">M</span>
+      <span>MakeBiz<small>Локальный ИИ</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#vozmozhnosti">Возможности</a>
+      <a href="#calc">Калькулятор</a>
+      <a href="#security">Безопасность</a>
+      <a href="#kak">Как внедряем</a>
+      <a href="#scenarii">Сценарии</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="nav-phone">+7 495 000-00-00</span>
+      <a href="#calc" class="btn btn-primary">Рассчитать конфигурацию</a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#vozmozhnosti">Возможности</a>
+  <a href="#calc">Калькулятор</a>
+  <a href="#security">Безопасность</a>
+  <a href="#kak">Как внедряем</a>
+  <a href="#scenarii">Сценарии</a>
+  <a href="#faq">Вопросы</a>
+  <a href="#calc" class="btn btn-primary">Рассчитать конфигурацию</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Локальная LLM и AI-инфраструктура под ключ</span>
+      <h1>Корпоративный ИИ на ваших серверах</h1>
+      <p class="lead">Разворачиваем локальные LLM и AI-сервисы для сотрудников, клиентов, звонков, документов, изображений и видео. Рассчитываем инфраструктуру под реальную нагрузку, интегрируем с вашими системами и сопровождаем в production.</p>
+      <div class="hero-cta">
+        <a href="#calc" class="btn btn-primary btn-lg">Рассчитать конфигурацию</a>
+        <a href="#final" class="btn btn-ghost btn-lg">Обсудить пилот</a>
+      </div>
+      <div class="hero-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Расчёт занимает 4-7 минут. Названия оборудования не требуются
+      </div>
+      <ul class="markers">
+        <li><span class="ic">✓</span> Данные в выбранном контуре, внешние вызовы можно ограничить</li>
+        <li><span class="ic">✓</span> Без внешней тарификации за каждый токен</li>
+        <li><span class="ic">✓</span> Несколько моделей в одной платформе, замена без перестройки</li>
+        <li><span class="ic">✓</span> Интеграция с CRM, 1С, телефонией и документами</li>
+        <li><span class="ic">✓</span> Установка системы под ключ от 500 000 ₽ (без учёта железа)</li>
+      </ul>
+    </div>
+    <div class="hero-visual">
+      <div class="panel-card">
+        <div class="pc-head">
+          <div class="pc-title"><span class="pc-dot"></span> AI-контур компании</div>
+          <span class="pc-tag">ON-PREM</span>
+        </div>
+        <div class="node-row">
+          <div class="node"><div class="nl">Текстовый пул</div><div class="nv">2 узла</div><div class="bar"><i style="width:72%"></i></div></div>
+          <div class="node"><div class="nl">Речь / real-time</div><div class="nv">1 узел</div><div class="bar"><i style="width:54%"></i></div></div>
+        </div>
+        <div class="node-row">
+          <div class="node"><div class="nl">Данные и RAG</div><div class="nv">Индекс + поиск</div><div class="bar"><i style="width:63%"></i></div></div>
+          <div class="node"><div class="nl">Резерв</div><div class="nv">N+1</div><div class="bar"><i style="width:40%"></i></div></div>
+        </div>
+        <div class="flow">
+          <div class="f">Запрос<b>SSO + роли</b></div>
+          <span class="arw">→</span>
+          <div class="f">Контур<b>LLM + RAG</b></div>
+          <span class="arw">→</span>
+          <div class="f">Действие<b>CRM · 1С</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="problem-box">
+      <h2>Публичный AI удобен для экспериментов. Корпоративным процессам нужен управляемый контур.</h2>
+      <p>В рабочих запросах могут находиться договоры, персональные данные, код, звонки клиентов, финансовая информация и коммерческая тайна. При большой постоянной нагрузке также важно контролировать стоимость, скорость, доступность и версии моделей. Локальная AI-платформа позволяет собрать эти требования в одной архитектуре.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES / process-first ============ -->
+<section class="section section--soft" id="vozmozhnosti">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Начните не с модели, а с процесса</span>
+      <h2>Выберите, что должен делать ИИ</h2>
+      <p>Укажите, что вы хотите автоматизировать. Калькулятор сам определит, какие типы вычислений, хранения, резервирования и интеграций потребуются.</p>
+    </div>
+    <div class="cat-grid" id="catGrid"><!-- rendered by JS --></div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="calc-section" id="calc">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;margin:0 auto 34px">
+      <span class="eyebrow">Конфигуратор нагрузки</span>
+      <h2>Рассчитайте локальный AI-контур</h2>
+      <p style="margin:0 auto">Выберите процессы, число пользователей и объём операций. Мы покажем предварительный класс решения, срок и диапазон бюджета. Это конфигуратор и опросник, а не точная цена.</p>
+    </div>
+    <div class="calc-shell">
+      <div class="calc-top">
+        <div class="ct-l">
+          <div>
+            <h3 id="calcStepTitle">Что должен делать локальный ИИ?</h3>
+            <div class="sub" id="calcStepSub">Шаг 1 из 5 — выберите один или несколько процессов</div>
+          </div>
+        </div>
+        <div class="calc-progress">
+          <span id="calcProgLabel">Шаг 1 / 5</span>
+          <span class="pbar"><i id="calcProgBar"></i></span>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="steps-nav" id="stepsNav"><!-- JS --></div>
+        <div class="step-panel" id="stepPanel"><!-- JS --></div>
+        <aside class="summary" id="summaryRail"><!-- JS --></aside>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--muted-2);margin-top:16px">Предварительная оценка. Точная конфигурация и стоимость определяются после проверки сценария, данных, модели, пиков и требований к доступности.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<section class="section" id="scenarii">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Полный контур, а не одна модель</span>
+      <h2>Что входит в решение</h2>
+      <p>Локальная модель без интеграций остаётся демонстрацией. Мы соединяем её с реальными процессами, данными и системами компании, а затем сопровождаем результат.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3 8 4-16 3 8h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Нагрузочный расчёт</h3><p>Пики, параллельность, скорость, рост и резерв. Считаем не абстрактную мощность, а реальные операции.</p></div>
+      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 9h6M7 13h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Модели и база знаний</h3><p>Выбор, тестирование, RAG и управление версиями. Архитектура не привязана к одной модели.</p></div>
+      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="18" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M7 6.5h.01M7 17.5h.01" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div><h3>Инфраструктура</h3><p>Вычисления, хранение, сеть, резервирование и мониторинг под выбранный SLA.</p></div>
+      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></div><h3>Интеграции</h3><p>Bitrix24, CRM, 1С, телефония, СЭД, DWH, сайты и мессенджеры под ваши процессы.</p></div>
+      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3 7-7 9-4-2-7-4-7-9V6l7-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Безопасность</h3><p>SSO, роли, аудит, шифрование и изоляция. Контроль всего пути данных, а не только места установки.</p></div>
+      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 3v3H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Сопровождение</h3><p>Обновления, поддержка, оптимизация и capacity planning. Managed On-Prem как основной сервис.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TURNKEY SETUP ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="setup-section">
+      <div>
+        <span class="eyebrow">Установка и настройка под ключ</span>
+        <h2 style="margin:16px 0 14px">Железо, это половина. Систему нужно развернуть.</h2>
+        <p class="lead" style="margin-bottom:22px">Купить сервер мало. Чтобы LLM реально работала в вашем контуре, её нужно установить и настроить. Мы делаем это под ключ: настройка сервера и установка оборудования вместе с развёртыванием самой системы, моделей и интеграций.</p>
+        <ul class="setup-list">
+          <li>Настройка сервера и установка оборудования</li>
+          <li>Платформа инференса и управление моделями</li>
+          <li>Установка и оптимизация моделей</li>
+          <li>RAG, корпоративный поиск и база знаний</li>
+          <li>SSO, роли, аудит и изоляция</li>
+          <li>Интеграции: Bitrix24, 1С, телефония, СЭД</li>
+          <li>Мониторинг и резервное копирование</li>
+          <li>Запуск, обучение и передача в эксплуатацию</li>
+        </ul>
+      </div>
+      <div class="setup-price">
+        <div class="sp-label">Установка системы под ключ</div>
+        <div class="sp-num">от 500 000 ₽</div>
+        <div class="sp-sub">Настройка сервера + установка железа + развёртывание системы. Всё вместе, под ключ.</div>
+        <div class="sp-note">Без учёта стоимости оборудования — это отдельная услуга в дополнение к нему. Итоговая цена зависит от числа процессов, моделей и интеграций и рассчитывается в калькуляторе.</div>
+        <a href="#calc" class="btn btn-primary btn-block">Рассчитать под свою задачу</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPLOYMENT COMPARISON ============ -->
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Мы не навязываем покупку</span>
+      <h2>Публичный API, российский cloud или локальный контур</h2>
+      <p>В результате расчёта покажем, где рациональнее собственный контур, выделенная аренда или гибрид.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="cmp">
+        <thead><tr><th>Критерий</th><th>Публичный API</th><th>Российский выделенный cloud</th><th class="hl-col" style="color:#fff;background:var(--accent)">Локальный контур</th></tr></thead>
+        <tbody>
+          <tr><td>Быстрый старт</td><td>Высокий</td><td>Высокий</td><td class="hl-col">Средний</td></tr>
+          <tr><td>Начальные вложения</td><td>Низкие</td><td>Низкие / средние</td><td class="hl-col">Средние / высокие</td></tr>
+          <tr><td>Контроль инфраструктуры</td><td>Низкий</td><td>Средний</td><td class="hl-col">Высокий</td></tr>
+          <tr><td>Изоляция данных</td><td>Зависит от сервиса</td><td>Высокая при правильной архитектуре</td><td class="hl-col">Максимальная управляемость</td></tr>
+          <tr><td>Оплата за использование</td><td>Обычно да, за токены</td><td>Аренда / ресурсы</td><td class="hl-col">Собственный TCO</td></tr>
+          <tr><td>Работа без интернета</td><td>Нет</td><td>Нет</td><td class="hl-col">Возможна</td></tr>
+          <tr><td>Постоянная большая нагрузка</td><td>Может быть дорого</td><td>Зависит от тарифа</td><td class="hl-col">Часто экономически интересно</td></tr>
+          <tr><td>Эксплуатация</td><td>У провайдера</td><td>Совместная</td><td class="hl-col">У клиента или MakeBiz</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHEN LOCAL / WHEN EARLY ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Инженерная дисциплина</span>
+      <h2>Когда локальный контур действительно оправдан</h2>
+      <p>Мы не предлагаем купить сервер, пока не проверили, что выбранная задача, модель и нагрузка на нём работают.</p>
+    </div>
+    <div class="two-panels">
+      <div class="panel-good">
+        <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#12855B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Локальный ИИ оправдан</h3>
+        <ul>
+          <li><span class="mk">→</span> Конфиденциальные документы и код</li>
+          <li><span class="mk">→</span> Постоянная высокая нагрузка</li>
+          <li><span class="mk">→</span> Закрытая сеть и строгие права доступа</li>
+          <li><span class="mk">→</span> Интеграция с внутренними системами</li>
+          <li><span class="mk">→</span> Предсказуемая задержка и независимость от внешнего API</li>
+          <li><span class="mk">→</span> Полный аудит и несколько AI-процессов на общей платформе</li>
+        </ul>
+      </div>
+      <div class="panel-early">
+        <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8595AD" stroke-width="2"/><path d="M12 8v5" stroke="#8595AD" stroke-width="2" stroke-linecap="round"/><path d="M12 16h.01" stroke="#8595AD" stroke-width="2.5" stroke-linecap="round"/></svg> Покупать сервер рано</h3>
+        <ul>
+          <li><span class="mk">·</span> Нагрузка небольшая или нерегулярная</li>
+          <li><span class="mk">·</span> Задача ещё не проверена на данных</li>
+          <li><span class="mk">·</span> Нет владельца процесса</li>
+          <li><span class="mk">·</span> Нет подготовленных данных</li>
+          <li><span class="mk">·</span> Нужен разовый проект</li>
+          <li><span class="mk">·</span> Невозможно заранее оценить качество</li>
+        </ul>
+        <a href="#calc" class="btn btn-ghost" style="margin-top:20px">Начать с пилота на выделенной инфраструктуре</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECURITY ============ -->
+<section class="section section--soft" id="security">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Безопасность</span>
+      <h2>Локальное размещение — только первый уровень</h2>
+      <p>Мы проектируем не только место установки модели, но и полный путь данных: кто может отправить запрос, какие источники доступны, что модель может сделать и как каждое действие фиксируется.</p>
+    </div>
+    <div class="layers">
+      <div class="layer"><span class="ln"></span><span class="lt">Сеть и изоляция</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Идентификация и SSO</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Права на источники данных</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Фильтрация входных данных</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Защита от prompt injection</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Контроль исходящих ответов</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Аудит действий агентов</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Подтверждение критичных операций</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Резервное копирование</span></div>
+      <div class="layer"><span class="ln"></span><span class="lt">Мониторинг и реагирование</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW WE DEPLOY ============ -->
+<section class="section" id="kak">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Как внедряем</span>
+      <h2>От расчёта до промышленной эксплуатации</h2>
+      <p>Мы фиксируем метрики до начала проекта: качество ответа, скорость, долю автоматизации, стоимость операции и правила передачи человеку. Покупка инфраструктуры начинается после проверки этих параметров.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-step"><div class="dot">1</div><h4>Интервью и расчёт</h4><ul><li>Процесс и данные</li><li>Нагрузка и SLA</li><li>Ограничения</li><li>Варианты размещения</li></ul></div>
+      <div class="tl-step"><div class="dot">2</div><h4>Benchmark</h4><ul><li>Тест моделей</li><li>Качество и скорость</li><li>Память и стоимость</li><li>Критерии приёмки</li></ul></div>
+      <div class="tl-step"><div class="dot">3</div><h4>Пилот</h4><ul><li>Ограниченный контур</li><li>Интеграция</li><li>Реальные пользователи</li><li>Измерение KPI</li></ul></div>
+      <div class="tl-step"><div class="dot">4</div><h4>Production</h4><ul><li>Инфраструктура</li><li>Безопасность и резерв</li><li>Мониторинг</li><li>Обучение</li></ul></div>
+      <div class="tl-step"><div class="dot">5</div><h4>Сопровождение</h4><ul><li>Обновления</li><li>Новые процессы</li><li>Отчётность</li><li>Оптимизация</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ECONOMICS ============ -->
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Экономика</span>
+      <h2>Считаем не цену сервера, а стоимость владения</h2>
+      <p>После запуска собственного контура расходы становятся прогнозируемыми. Для каждого проекта мы сравниваем покупку, выделенную аренду и гибрид на горизонте 36 месяцев.</p>
+    </div>
+    <div class="econ-grid">
+      <div class="econ-list">
+        <div class="econ-item"><span class="d"></span> Инфраструктура</div>
+        <div class="econ-item"><span class="d"></span> Поставка и гарантия</div>
+        <div class="econ-item"><span class="d"></span> Внедрение</div>
+        <div class="econ-item"><span class="d"></span> Интеграции</div>
+        <div class="econ-item"><span class="d"></span> Электроэнергия и размещение</div>
+        <div class="econ-item"><span class="d"></span> Сопровождение</div>
+        <div class="econ-item"><span class="d"></span> Резерв мощности</div>
+        <div class="econ-item"><span class="d"></span> Обновление моделей</div>
+        <div class="econ-item"><span class="d"></span> Стоимость простоя</div>
+        <div class="econ-item"><span class="d"></span> Рост нагрузки</div>
+      </div>
+      <div class="tco-card">
+        <h3>Сравнить на 36 месяцев</h3>
+        <div class="tco-opt"><span>Внешний API</span><span class="badge">оплата за токены</span></div>
+        <div class="tco-opt"><span>Выделенная аренда</span><span class="badge">OPEX</span></div>
+        <div class="tco-opt"><span>Собственный контур</span><span class="badge">CAPEX + TCO</span></div>
+        <p style="color:#A9BBDA;font-size:13px;margin-top:16px">Финальный TCO выполняется после консультации: цена внешнего API зависит от модели и структуры токенов.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY MAKEBIZ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Почему MakeBiz</span>
+      <h2>Один ответственный за процесс, AI-платформу и инфраструктуру</h2>
+      <p>Опыт внедрения CRM, аналитики и AI для среднего и крупного бизнеса. Собственная команда разработки, проектирование бизнес-процессов и поддержка после запуска.</p>
+    </div>
+    <div class="why-grid">
+      <div class="stat"><div class="n">150+</div><div class="l">проектов внедрения*</div></div>
+      <div class="stat"><div class="n">Bitrix24</div><div class="l">1С, телефония, СЭД</div></div>
+      <div class="stat"><div class="n">On-Prem</div><div class="l">от пилота до сопровождения</div></div>
+      <div class="stat"><div class="n">24×7</div><div class="l">Managed-контур и SLA</div></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted-2);margin-top:14px">* Демо-показатели для макета. На боевом сайте выводятся только подтверждённые после внутренней проверки данные.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section--soft" id="faq">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;margin:0 auto 40px">
+      <span class="eyebrow">Вопросы</span>
+      <h2>Частые вопросы</h2>
+    </div>
+    <div class="faq" id="faqList"><!-- JS --></div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section" id="final">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Получите предварительную архитектуру под вашу нагрузку</h2>
+      <p>Выберите процессы и объёмы. Калькулятор сформирует класс решения, диапазон бюджета и список вопросов для технической команды.</p>
+      <div class="hero-cta">
+        <a href="#calc" class="btn btn-primary btn-lg">Начать расчёт</a>
+        <a href="#calc" class="btn btn-ghost btn-lg">Отправить техническое задание</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo"><span class="mark">M</span><span>MakeBiz<small>Локальный ИИ</small></span></a>
+        <p style="margin-top:16px;max-width:320px">Независимый интегратор локального корпоративного ИИ: рассчитываем систему от бизнес-процесса и нагрузки, проверяем на данных, поставляем инфраструктуру и отвечаем за эксплуатацию.</p>
+      </div>
+      <div>
+        <h5>Направление</h5>
+        <a href="#vozmozhnosti">Возможности</a>
+        <a href="#calc">Калькулятор нагрузки</a>
+        <a href="#security">Безопасность</a>
+        <a href="#kak">Как внедряем</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <a href="tel:+74950000000">+7 495 000-00-00</a>
+        <a href="mailto:ai@makebiz.ru">ai@makebiz.ru</a>
+        <a href="#">Telegram</a>
+        <a href="#">Реквизиты</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      ООО «МейкБиз» (демо-реквизиты для макета) · ИНН 0000000000 · ОГРН 0000000000000 · г. Москва
+      <div class="disc">
+        Значения бюджета и сроки в калькуляторе являются предварительными инженерными диапазонами для квалификации задачи и не являются офертой. Локальное размещение помогает контролировать обработку данных, но само по себе не является юридической гарантией соответствия требованиям. Финальная архитектура определяется после интервью, анализа данных и нагрузочного тестирования.
+      </div>
+      <div style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap">
+        <a href="#" style="display:inline">Политика обработки персональных данных</a>
+        <a href="#" style="display:inline">Согласие на обработку</a>
+        <a href="#" style="display:inline">Политика cookie</a>
+        <a href="#" style="display:inline">Условия использования калькулятора</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   MakeBiz — Локальный AI-контур: движок калькулятора
+   Логика по мастер-брифу (разделы 15-19). Все коэффициенты и цены
+   вынесены в объекты ниже (аналог админ-панели). Цены — предварительные
+   инженерные диапазоны, не оферта.
+   ===================================================================== */
+'use strict';
+
+/* ---------- Иконки ---------- */
+const IC = {
+  emp:'<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  cli:'<svg viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+  sp:'<svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2v4h4M9 13h6M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  cr:'<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+  dt:'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 15l3-3 2 2 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+/* ---------- Каталог категорий и сценариев ---------- */
+const CATEGORIES = [
+  {id:'emp', icon:IC.emp, title:'Помогать сотрудникам', desc:'Ассистенты, поиск по знаниям, CRM, Service Desk, код'},
+  {id:'cli', icon:IC.cli, title:'Общаться с клиентами', desc:'Чат-бот, первая линия, классификация обращений'},
+  {id:'sp',  icon:IC.sp,  title:'Анализировать звонки', desc:'Транскрибация, аналитика, подсказки, голосовой робот'},
+  {id:'doc', icon:IC.doc, title:'Работать с документами', desc:'OCR, договоры, корпоративный поиск и RAG'},
+  {id:'cr',  icon:IC.cr,  title:'Создавать контент', desc:'Тексты, изображения, видео с бренд-контролем'},
+  {id:'dt',  icon:IC.dt,  title:'Данные и видео', desc:'BI по данным, события ИБ, промышленное зрение'}
+];
+
+const SCENARIOS = {
+  emp_kb:   {cat:'emp', name:'Корпоративный ассистент по знаниям', desc:'Ответы по регламентам, инструкциям и документам', pools:['text','data']},
+  emp_crm:  {cat:'emp', name:'Ассистент менеджера в CRM', desc:'Резюме сделок, письма, следующий шаг, заполнение карточек', pools:['text'], integ:true},
+  emp_itsd: {cat:'emp', name:'IT Service Desk Copilot', desc:'Классификация заявок, ответы по базе знаний', pools:['text']},
+  emp_hr:   {cat:'emp', name:'HR-ассистент', desc:'Отпуска, льготы, онбординг, регламенты', pools:['text']},
+  emp_code: {cat:'emp', name:'Локальный coding assistant', desc:'Объяснение кода, тесты, документация без отправки во вне', pools:['text']},
+  cli_bot:  {cat:'cli', name:'Внешний клиентский чат-бот', desc:'Сайт и мессенджеры, консультации, квалификация лида', pools:['text'], ha:true},
+  cli_cls:  {cat:'cli', name:'Классификация писем и обращений', desc:'Тема, приоритет, подразделение, маршрутизация', pools:['text']},
+  sp_rt:    {cat:'sp',  name:'Подсказки оператору (real-time)', desc:'Распознавание звонка и подсказка в реальном времени', pools:['speech'], rt:true, ha:true},
+  sp_batch: {cat:'sp',  name:'Транскрибация и речевая аналитика', desc:'Пакетная обработка, диаризация, оценка качества', pools:['speech']},
+  sp_robot: {cat:'sp',  name:'Голосовой робот', desc:'Входящие и исходящие диалоги, разрешённые действия', pools:['speech'], rt:true, ha:true},
+  doc_ocr:  {cat:'doc', name:'OCR и обработка документов', desc:'Распознавание, классификация, извлечение реквизитов', pools:['docs']},
+  doc_legal:{cat:'doc', name:'Анализ договоров', desc:'Извлечение условий, сравнение версий, риски', pools:['docs','text']},
+  doc_rag:  {cat:'doc', name:'Корпоративный поиск (RAG)', desc:'Поиск по базе знаний с ссылками на источник', pools:['data','text']},
+  cr_text:  {cat:'cr',  name:'Массовая генерация текстов', desc:'Карточки, описания, варианты креативов, бренд-контроль', pools:['text']},
+  cr_img:   {cat:'cr',  name:'Генерация изображений', desc:'Создание и редактирование, стабильность товара', pools:['vision']},
+  cr_video: {cat:'cr',  name:'Генерация видео', desc:'Короткие ролики и монтаж (широкий диапазон до benchmark)', pools:['video']},
+  dt_bi:    {cat:'dt',  name:'BI-ассистент по данным', desc:'Вопросы к данным, графики, объяснение источников', pools:['text','data']},
+  dt_sec:   {cat:'dt',  name:'Аналитика событий ИБ', desc:'Обработка событий, правила, интеграция с SIEM', pools:['data']},
+  dt_cv:    {cat:'dt',  name:'Промышленное зрение / видеоаналитика', desc:'Потоки камер, контроль качества и безопасность', pools:['vision2']}
+};
+
+/* ---------- Коэффициенты (аналог редактируемой админ-панели) ---------- */
+const F = {
+  answerTokens:{short:100, normal:300, detailed:800, doc:2000, unknown:350},
+  context:{single:1.0, chat:1.2, pages:1.5, bigdoc:3.0, huge:5.0, unknown:1.35},
+  quality:{standard:1.0, elevated:1.6, advanced:2.2, max:4.0},
+  peak:{even:2, office:5, service:8, marketing:12},
+  audioQ:{good:1.0, mixed:1.25, bad:1.6, unknown:1.3},
+  diar:{no:1.0, two:1.15, many:1.4},
+  analysis:{text:1.0, summary:1.25, quality:1.6, complex:2.0},
+  deadline:{d24:1.0, h4:1.3, h1:1.8, rt:3.0},
+  scan:{digital:1.0, goodscan:1.3, photo:1.7, hard:2.0},
+  extraction:{ocr:1.0, classify:1.4, legal:2.2},
+  imgRes:{web:1.0, high:1.7},
+  growth:{none:1.0, g25:1.25, g50:1.5, g100:2.0, unknown:1.3},
+  avail:{pilot:1.0, s85:1.1, s127:1.15, a247:1.25, a247r:2.0, geo:2.6}
+};
+
+/* Пресеты объёмов -> внутренние численные ориентиры (середина диапазона) */
+const P = {
+  messages:{p1:5000, p2:50000, p3:300000, p4:750000, p5:3000000, p6:8000000, unknown:100000},
+  minutes:{p1:5000, p2:50000, p3:300000, p4:750000, p5:3000000, p6:8000000, unknown:120000},
+  pages:{p1:5000, p2:50000, p3:300000, p4:750000, p5:1500000, unknown:80000},
+  images:{p1:500, p2:5000, p3:30000, p4:75000, p5:150000, unknown:8000}
+};
+
+/* Классы решений и диапазоны бюджета (млн ₽), раздел 18.2 */
+const CLASSES = [
+  {key:'A', name:'Класс A. Пилот', desc:'Один процесс, небольшая группа, без строгого SLA. Проверяем гипотезу на выделенных ресурсах.', year:[1.7,6], setup:[0.5,1.2], term:'3-8 недель', prodTerm:'6-10 недель'},
+  {key:'B', name:'Класс B. Подразделение', desc:'1-3 процесса на 50-300 пользователей. Выделенный узел, базовые интеграции, поддержка подрядчика.', year:[5,15], setup:[1,2.5], term:'2-4 месяца', prodTerm:'2-4 месяца'},
+  {key:'C', name:'Класс C. Корпоративный контур', desc:'Несколько систем и процессов, 300-2 000 пользователей. Специализированные узлы, отдельный слой хранения и резерв.', year:[12,35], setup:[2.5,6], term:'3-6 месяцев', prodTerm:'3-6 месяцев'},
+  {key:'D', name:'Класс D. Высокая нагрузка 24×7', desc:'Внешние клиенты, контакт-центр, высокая доступность и резерв. Несколько контуров реального времени.', year:[25,70], setup:[5,12], term:'4-9 месяцев', prodTerm:'4-9 месяцев'},
+  {key:'E', name:'Класс E. AI-кластер', desc:'Множество процессов, крупные модели, обучение. Конфигурация и бюджет считаются индивидуально.', year:[60,null], setup:[12,null], term:'от 6 месяцев', prodTerm:'от 6 месяцев'}
+];
+
+/* ---------- Состояние ---------- */
+const S = {
+  step:1,
+  processes:new Set(),
+  otherText:'',
+  role:'', industry:'',
+  employees:'', usersPotential:'', concurrentPeak:'',
+  workMode:'', growth:'',
+  // нагрузка
+  textMessages:'', answerLen:'', contextProfile:'', qualityLevel:'', peakFactor:'',
+  speechMinutes:'', speechMode:'', audioQuality:'', diarization:'', analysisDepth:'', deadline:'', concurrentLines:'',
+  docsPages:'', scanShare:'', extractionType:'', tables:false,
+  images:'', imageRes:'', imageVariants:'',
+  videos:'', videoDuration:'', videoRes:'',
+  cameras:'', cameraFps:'', cameraRes:'',
+  ragPages:'',
+  // данные и безопасность
+  dataCategories:new Set(),
+  airgap:false,
+  integrations:new Set(),
+  retention:''
+};
+const TOTAL_STEPS = 5;
+const STEP_TITLES = [
+  ['Что должен делать локальный ИИ?','выберите один или несколько процессов'],
+  ['Масштаб компании и пользователей','кто и в каком объёме будет работать с ИИ'],
+  ['Реальная нагрузка','объём операций по выбранным процессам'],
+  ['Данные, интеграции и безопасность','контур, доступ и требования к надёжности'],
+  ['Предварительный профиль контура','класс решения, бюджет и следующий шаг']
+];
+
+/* ===================== ДВИЖОК РАСЧЁТА ===================== */
+function activePools(){
+  const p = new Set();
+  S.processes.forEach(id=>{ (SCENARIOS[id]?.pools||[]).forEach(x=>p.add(x)); });
+  return p;
+}
+function anyScenario(fn){ for(const id of S.processes){ if(fn(SCENARIOS[id])) return true; } return false; }
+function num(v,def){ const n=Number(v); return isFinite(n)&&n>0?n:def; }
+
+function compute(){
+  const pools = activePools();
+  const hasText=pools.has('text'), hasSpeech=pools.has('speech'), hasDocs=pools.has('docs');
+  const hasImg=pools.has('vision'), hasVideo=pools.has('video'), hasCV=pools.has('vision2'), hasData=pools.has('data');
+  const hasRT = anyScenario(s=>s&&s.rt);
+  const hasHA = anyScenario(s=>s&&s.ha);
+
+  const growthF = F.growth[S.growth||'unknown'];
+  const peakF = F.peak[S.peakFactor] || (hasHA?8:5);
+
+  // Текстовый пул
+  let textLoad=0, textConcurrent=0;
+  if(hasText){
+    const msgs=P.messages[S.textMessages||'unknown'];
+    const tok=F.answerTokens[S.answerLen||'unknown'];
+    const avgTps=msgs*tok/2592000;
+    textConcurrent=(avgTps*peakF)/20;
+    textLoad=textConcurrent*F.quality[S.qualityLevel||'elevated']*F.context[S.contextProfile||'unknown'];
+  }
+  // Речевой пул
+  let speechLoad=0, speechStreams=0;
+  if(hasSpeech){
+    const mins=P.minutes[S.speechMinutes||'unknown'];
+    const avgConc=mins/43200;
+    const spPeak = S.speechMode==='realtime'?Math.max(peakF,4):peakF;
+    speechStreams=avgConc*spPeak;
+    const batchLoad=speechStreams*F.audioQ[S.audioQuality||'unknown']*F.diar[S.diarization||'two']*F.analysis[S.analysisDepth||'summary']*F.deadline[S.deadline||(S.speechMode==='realtime'?'rt':'d24')];
+    const rtLoad = hasRT ? num(S.concurrentLines,30)*1.6 : 0;
+    speechLoad=Math.max(batchLoad,rtLoad);
+  }
+  // Документы
+  let docsLoad=0;
+  if(hasDocs){
+    const pages=P.pages[S.docsPages||'unknown'];
+    docsLoad=(pages/100000)*F.scan[S.scanShare||'goodscan']*F.extraction[S.extractionType||'classify']*(S.tables?1.3:1.0)*2;
+  }
+  // Изображения
+  let imgLoad=0;
+  if(hasImg){
+    const imgs=P.images[S.images||'unknown'];
+    imgLoad=(imgs/10000)*F.imgRes[S.imageRes||'web']*num(S.imageVariants,2);
+  }
+  // Видео
+  let videoLoad=0;
+  if(hasVideo){ videoLoad=num(S.videos,500)*num(S.videoDuration,1)*0.6*(S.videoRes==='high'?1.7:1.0); }
+  // Компьютерное зрение
+  let visionLoad=0;
+  if(hasCV){ visionLoad=num(S.cameras,30)*(num(S.cameraFps,25)/25)*(S.cameraRes==='high'?1.4:1.0)*0.8; }
+  // Данные / RAG
+  let dataLoad=0;
+  if(hasData){ dataLoad=(num(S.ragPages,0)/500000)*2 + 3; }
+
+  const raw = textLoad + speechLoad*0.7 + docsLoad + imgLoad + videoLoad + visionLoad + dataLoad;
+  const loadIndex = raw*growthF;
+
+  // Базовый класс
+  let ci = loadIndex<8?0 : loadIndex<40?1 : loadIndex<140?2 : loadIndex<400?3 : 4;
+
+  const wm=S.workMode||'s85';
+  const is247=(wm==='a247'||wm==='a247r'||wm==='geo');
+  if(is247) ci=Math.max(ci,2);
+  if(wm==='geo') ci=Math.max(ci,3);
+
+  const dc=S.dataCategories;
+  const sensitive=['personal','special','financial','banking','medical','secret','code','kii'].some(k=>dc.has(k));
+  const kii=dc.has('kii'), gostajna=dc.has('gostajna');
+  if(S.airgap) ci=Math.max(ci,2);
+  if(kii) ci=Math.max(ci,3);
+
+  const poolCount=[hasText,hasSpeech,hasDocs,hasImg,hasVideo,hasCV].filter(Boolean).length;
+  if(poolCount>=3) ci=Math.max(ci,2);
+  if(num(S.concurrentPeak,0)>300) ci=Math.min(4,ci+1);
+
+  const cls=CLASSES[ci];
+
+  // Размещение
+  let placement;
+  if(ci===0) placement='rent';
+  else if(S.airgap||kii||(sensitive&&ci>=2&&is247)) placement='own';
+  else if(hasVideo||hasCV||poolCount>=3) placement='hybrid';
+  else if(ci>=2) placement='own';
+  else placement='hybrid';
+
+  // Integration score
+  let integ=0; const ints=S.integrations;
+  if(ints.size>0){ integ = 1 + Math.max(0,ints.size-1); }
+  if(anyScenario(s=>s&&s.integ)) integ+=2;
+  if(S.airgap) integ+=3;
+  if(hasRT) integ+=2;
+  const integLevel = integ<=3?'низкая':integ<=7?'средняя':integ<=12?'высокая':'очень высокая';
+
+  // Security score
+  let sec=0;
+  ['personal','financial'].forEach(k=>{ if(dc.has(k)) sec+=2; });
+  ['special','banking','medical'].forEach(k=>{ if(dc.has(k)) sec+=3; });
+  if(dc.has('secret')) sec+=2; if(dc.has('code')) sec+=2;
+  if(kii) sec+=4; if(S.airgap) sec+=4;
+  if(is247) sec+=2; if(wm==='geo') sec+=3;
+
+  // Confidence score
+  let conf=100; const reasons=[];
+  if(!S.peakFactor){ conf-=8; reasons.push('не указан характер пиков'); }
+  if(!S.concurrentPeak){ conf-=8; reasons.push('не указана одновременность в пик'); }
+  if(!S.retention){ conf-=4; reasons.push('не задан срок хранения данных'); }
+  if(hasText&&!S.qualityLevel){ conf-=5; reasons.push('не выбран уровень сложности задач'); }
+  if(hasVideo){ conf-=15; reasons.push('генерация видео без benchmark даёт широкий диапазон'); }
+  if(hasCV){ conf-=8; reasons.push('видеоаналитика требует замеров на реальных камерах'); }
+  if(ints.size===0 && anyScenario(s=>s&&(s.integ||s.pools.includes('data')))){ conf-=5; reasons.push('не указаны интеграции'); }
+  conf-=6; reasons.push('нет примеров данных для benchmark');
+  conf=Math.max(35,Math.min(92,conf));
+
+  // Логические узлы
+  const nodes=[];
+  if(hasText){ const n=Math.max(1,Math.ceil(textLoad/60)); nodes.push(n+' '+plural(n,'вычислительный узел','вычислительных узла','вычислительных узлов')+' для текстовых процессов'); }
+  if(hasSpeech){ const n=Math.max(1,Math.ceil(speechLoad/120)); nodes.push(n+' '+plural(n,'узел','узла','узлов')+' обработки речи'+(hasRT?' (отдельный real-time контур)':'')); }
+  if(hasDocs){ nodes.push('Узел OCR и извлечения из документов'); }
+  if(hasImg||hasVideo){ nodes.push('Узел генеративной графики'+(hasVideo?' и видео':'')); }
+  if(hasCV){ nodes.push('Узел видеоаналитики (возможна edge-обработка)'); }
+  if(hasData||ints.size>=2){ nodes.push('Служебный узел данных, RAG и интеграций'); }
+  nodes.push('Основное и резервное хранилище');
+  if(is247) nodes.push('Автоматическое резервирование критичных сервисов (N+1)');
+
+  // Хранилище (грубая предварительная оценка, ТБ)
+  let stMin=0.5, stMax=2;
+  if(hasSpeech){ const mins=P.minutes[S.speechMinutes||'unknown']; const ret=num(S.retention,12); stMin+=mins*ret*0.5/1e6; stMax+=mins*ret*1.0/1e6*1.4; }
+  if(hasDocs||hasData){ let pg=0; if(hasDocs) pg+=P.pages[S.docsPages||'unknown']||P.pages.unknown; if(hasData) pg+=P.pages[S.ragPages||'unknown']||P.pages.unknown; const yrs=Math.max(1,num(S.retention,12)/12); stMin+=pg*0.15/1e6*1.5*yrs; stMax+=pg*0.15/1e6*5*yrs; }
+  const storage=[Math.max(0.5,Math.round(stMin*10)/10), Math.max(2,Math.round(stMax))];
+
+  // Варианты бюджета
+  let variants;
+  if(cls.key==='E'){
+    variants={optimal:'от 60 млн ₽', production:'индивидуально', mid:null};
+  } else {
+    const [lo,hi]=cls.year; const mid=Math.round(((lo+hi)/2)*10)/10;
+    variants={ optimal:fmtRange(lo, mid), production:fmtRange(mid, hi), mid };
+  }
+
+  // Стадия зрелости и CTA
+  let stage, ctaMain;
+  if(ci===0){ stage='0-1'; ctaMain='Обсудить пилот на ваших данных'; }
+  else if(ci===1){ stage='2'; ctaMain='Проверить задачу на ваших данных'; }
+  else if(ci<=3){ stage='3-4'; ctaMain='Получить техническую архитектуру и КП'; }
+  else { stage='5'; ctaMain='Обсудить AI-кластер и поставку'; }
+
+  return {
+    pools,hasText,hasSpeech,hasDocs,hasImg,hasVideo,hasCV,hasData,hasRT,hasHA,
+    loadIndex, classIdx:ci, cls, placement, integ, integLevel, sec, kii, gostajna, sensitive,
+    conf, reasons, nodes, storage, variants, stage, ctaMain,
+    textConcurrent:Math.round(textConcurrent), speechStreams:Math.round(speechStreams), is247
+  };
+}
+function plural(n,a,b,c){ n=Math.abs(n)%100; const n1=n%10; if(n>10&&n<20)return c; if(n1>1&&n1<5)return b; if(n1===1)return a; return c; }
+function fmtRange(a,b){ return fmtMln(a)+' – '+fmtMln(b); }
+function fmtMln(v){ if(v===null)return 'индивидуально'; const s=(Math.round(v*10)/10).toString().replace('.',','); return s+' млн ₽'; }
+function fmtFrom(v){ if(v===null)return 'индивидуально'; if(v<1){ return 'от '+Math.round(v*1000)+' 000 ₽'; } return 'от '+fmtMln(v); }
+function profileBand(li){ return li<8?{t:'Низкий',n:1}:li<30?{t:'Средний',n:2}:li<90?{t:'Высокий',n:3}:{t:'Очень высокий',n:4}; }
+
+/* ===================== РЕНДЕР ШАГОВ ===================== */
+const panel=document.getElementById('stepPanel');
+const nav=document.getElementById('stepsNav');
+const rail=document.getElementById('summaryRail');
+
+function h(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; }
+
+function render(){
+  document.getElementById('calcStepTitle').textContent=STEP_TITLES[S.step-1][0];
+  document.getElementById('calcStepSub').textContent='Шаг '+S.step+' из '+TOTAL_STEPS+' — '+STEP_TITLES[S.step-1][1];
+  document.getElementById('calcProgLabel').textContent='Шаг '+S.step+' / '+TOTAL_STEPS;
+  document.getElementById('calcProgBar').style.width=(S.step/TOTAL_STEPS*100)+'%';
+  renderNav(); renderSummary();
+  panel.className='step-panel fade';
+  if(S.step===1) renderStep1();
+  else if(S.step===2) renderStep2();
+  else if(S.step===3) renderStep3();
+  else if(S.step===4) renderStep4();
+  else renderStep5();
+  void panel.offsetWidth;
+}
+
+function renderNav(){
+  const labels=['Процессы','Масштаб','Нагрузка','Данные и SLA','Результат'];
+  nav.innerHTML='';
+  labels.forEach((l,i)=>{
+    const n=i+1;
+    const cls='step-item'+(n===S.step?' active':'')+(n<S.step?' done':'')+(n>S.step&&S.processes.size===0?' disabled':'');
+    const el=h('<div class="'+cls+'"><span class="num">'+(n<S.step?'✓':n)+'</span><span>'+l+'</span></div>');
+    el.onclick=()=>{ if(n<S.step||(n<=maxReachable())){ S.step=n; render(); } };
+    nav.appendChild(el);
+  });
+}
+function maxReachable(){ if(S.processes.size===0) return 1; return TOTAL_STEPS; }
+
+/* ---- Шаг 1: процессы ---- */
+function renderStep1(){
+  panel.innerHTML='<h3>Что должен делать локальный ИИ?</h3><p class="step-desc">Можно выбрать несколько процессов. Например: корпоративный ассистент + анализ звонков + подготовка коммерческих предложений. Движок посчитает отдельные пулы нагрузки.</p><div id="catAcc"></div>'+
+   '<div class="field" style="margin-top:18px"><label>Другая задача</label><textarea id="otherTask" placeholder="Опишите процесс своими словами, если его нет в списке">'+S.otherText+'</textarea></div>';
+  const acc=panel.querySelector('#catAcc');
+  CATEGORIES.forEach(cat=>{
+    const items=Object.entries(SCENARIOS).filter(([id,s])=>s.cat===cat.id);
+    const selCount=items.filter(([id])=>S.processes.has(id)).length;
+    const group=h('<div class="catgroup'+(selCount>0?' open':'')+'"></div>');
+    group.innerHTML='<div class="catgroup-head"><span class="ci">'+cat.icon+'</span><div><div class="tt">'+cat.title+'</div><div class="dd">'+cat.desc+'</div></div><span class="cnt'+(selCount>0?' on':'')+'">'+selCount+'</span><span class="chev"><svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></div>';
+    const body=h('<div class="catgroup-body"></div>');
+    items.forEach(([id,s])=>{
+      const row=h('<div class="scenario'+(S.processes.has(id)?' sel':'')+'"><span class="cb">'+IC.check+'</span><div><div class="nm">'+s.name+'</div><div class="ds">'+s.desc+'</div></div></div>');
+      row.onclick=(e)=>{ e.stopPropagation(); if(S.processes.has(id))S.processes.delete(id); else S.processes.add(id); render(); };
+      body.appendChild(row);
+    });
+    group.appendChild(body);
+    group.querySelector('.catgroup-head').onclick=()=>{ group.classList.toggle('open'); };
+    acc.appendChild(group);
+  });
+  panel.querySelector('#otherTask').oninput=(e)=>{ S.otherText=e.target.value; };
+  addActions(false, S.processes.size>0);
+}
+
+/* ---- Шаг 2: масштаб ---- */
+function renderStep2(){
+  panel.innerHTML='<h3>Масштаб компании и пользователей</h3><p class="step-desc">Достаточно ориентиров. Точные значения уточним на консультации.</p>'+
+  field('Ваша роль', selectEl('role',[['','Не указывать'],['owner','Собственник / ГД'],['cio','ИТ-директор / CIO'],['ciso','Руководитель ИБ / CISO'],['biz','Руководитель подразделения'],['cfo','Финансовый директор'],['other','Другое']], S.role))+
+  field('Отрасль', selectEl('industry',[['','Выберите'],['bank','Банки, страхование, финтех'],['prom','Промышленность и энергетика'],['telecom','Телеком и контакт-центры'],['gov','Госорганизации'],['retail','Ритейл и e-commerce'],['logi','Логистика'],['med','Медицина и фарма'],['legal','Юридические и консалтинг'],['it','IT-разработка'],['auto','Автодилеры и сервис'],['other','Другое']], S.industry))+
+  '<div class="two-col">'+
+    field('Сотрудников в компании', selectEl('employees',[['','Выберите'],['e1','до 50'],['e2','51-100'],['e3','101-300'],['e4','301-1 000'],['e5','1 001-5 000'],['e6','более 5 000']], S.employees))+
+    field('Потенциальных пользователей ИИ', inputEl('usersPotential','number',S.usersPotential,'например, 300'))+
+  '</div>'+
+  '<div class="two-col">'+
+    field('Одновременно в пик', inputEl('concurrentPeak','number',S.concurrentPeak,'например, 35'), 'Сколько человек реально работает в один момент в час пик')+
+    field('Режим работы и доступность', selectEl('workMode',[['','Выберите'],['pilot','Пилот, возможны перерывы'],['s85','Рабочее время 8×5'],['s127','Расширенный 12×7'],['a247','Production 24×7'],['a247r','24×7 с резервом (N+1)'],['geo','Георезервирование']], S.workMode))+
+  '</div>'+
+  field('Ожидаемый рост нагрузки на 24 месяца', selectEl('growth',[['','Выберите'],['none','Без роста'],['g25','до +25%'],['g50','до +50%'],['g100','до +100%'],['unknown','Не знаю']], S.growth));
+  bindInputs();
+  addActions(true, S.employees!=='' );
+}
+
+/* ---- Шаг 3: нагрузка (динамическая) ---- */
+function renderStep3(){
+  const pools=activePools();
+  let html='<h3>Реальная нагрузка</h3><p class="step-desc">Показаны только поля по выбранным процессам. Единицы — бизнес-понятные: сообщения, минуты, страницы. Если не знаете — выберите «Не знаю», расчёт станет шире, а точность ниже.</p>';
+
+  if(pools.has('text')){
+    html+='<div class="callout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div><b>Текстовые процессы.</b> Токены не спрашиваем — оцениваем через понятные профили длины и сложности.</div></div>';
+    html+=field('Сообщений (ответов ИИ) в месяц', selectEl('textMessages',[['','Выберите'],['p1','до 10 тыс.'],['p2','10-100 тыс.'],['p3','100-500 тыс.'],['p4','500 тыс. - 1 млн'],['p5','1-5 млн'],['p6','более 5 млн'],['unknown','Не знаю']], S.textMessages));
+    html+='<div class="two-col">'+
+      field('Длина ответа', selectEl('answerLen',[['','Выберите'],['short','Короткий, 2-3 предложения'],['normal','Обычный, несколько абзацев'],['detailed','Подробный'],['doc','Большой документ / отчёт'],['unknown','Не знаю']], S.answerLen))+
+      field('Объём входных данных', selectEl('contextProfile',[['','Выберите'],['single','Одно сообщение / карточка'],['chat','Переписка, несколько фрагментов'],['pages','Несколько страниц документов'],['bigdoc','Большой документ'],['huge','Очень большой комплект'],['unknown','Не знаю']], S.contextProfile),'Насколько большой контекст получает ИИ')+
+    '</div>';
+    html+='<div class="two-col">'+
+      field('Сложность задач', selectEl('qualityLevel',[['','Выберите'],['standard','Стандартный: FAQ, классификация'],['elevated','Повышенный: работа с документами'],['advanced','Продвинутый: аналитика, код, право'],['max','Максимальный: сложное рассуждение']], S.qualityLevel))+
+      field('Насколько пик выше среднего', selectEl('peakFactor',[['','Выберите'],['even','Равномерная нагрузка (×2)'],['office','Обычная офисная (×5)'],['service','Клиентский сервис с часами пик (×8)'],['marketing','Маркетинговые всплески (×12)']], S.peakFactor))+
+    '</div>';
+  }
+  if(pools.has('speech')){
+    html+='<hr style="border:none;border-top:1px solid var(--line-2);margin:22px 0">';
+    html+='<div class="callout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/><path d="M5 11a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div><b>Речь и звонки.</b> Считаем эквивалентные потоки и отдельно real-time контур.</div></div>';
+    html+='<div class="two-col">'+
+      field('Минут звонков в месяц', selectEl('speechMinutes',[['','Выберите'],['p1','до 10 тыс.'],['p2','10-100 тыс.'],['p3','100-500 тыс.'],['p4','500 тыс. - 1 млн'],['p5','1-5 млн'],['p6','более 5 млн'],['unknown','Не знаю']], S.speechMinutes))+
+      field('Режим обработки', selectEl('speechMode',[['','Выберите'],['batch','Пакетно'],['realtime','Реальное время']], S.speechMode))+
+    '</div>';
+    html+='<div class="two-col">'+
+      field('Качество аудио', selectEl('audioQuality',[['','Выберите'],['good','Хорошее, отдельные каналы'],['mixed','Смешанное'],['bad','Плохое, шум, телефон'],['unknown','Не знаю']], S.audioQuality))+
+      field('Глубина анализа', selectEl('analysisDepth',[['','Выберите'],['text','Только текст'],['summary','Резюме и темы'],['quality','Оценка качества и факты'],['complex','Сложный анализ, много правил']], S.analysisDepth))+
+    '</div>';
+    html+='<div class="two-col">'+
+      field('Разделять спикеров', selectEl('diarization',[['','Выберите'],['no','Не нужно'],['two','Два спикера'],['many','Много спикеров']], S.diarization))+
+      field('Одновременных линий (real-time)', inputEl('concurrentLines','number',S.concurrentLines,'например, 120'),'Заполните для подсказок оператору и голосового робота')+
+    '</div>';
+  }
+  if(pools.has('docs')){
+    html+='<hr style="border:none;border-top:1px solid var(--line-2);margin:22px 0">';
+    html+='<div class="callout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><div><b>Документы.</b> Считаем две нагрузки: распознавание/извлечение и последующий анализ.</div></div>';
+    html+='<div class="two-col">'+
+      field('Страниц в месяц', selectEl('docsPages',[['','Выберите'],['p1','до 10 тыс.'],['p2','10-100 тыс.'],['p3','100-500 тыс.'],['p4','500 тыс. - 1 млн'],['p5','более 1 млн'],['unknown','Не знаю']], S.docsPages))+
+      field('Качество исходников', selectEl('scanShare',[['','Выберите'],['digital','Цифровой текст'],['goodscan','Хороший скан'],['photo','Фото с телефона'],['hard','Сложные сканы']], S.scanShare))+
+    '</div>';
+    html+='<div class="two-col">'+
+      field('Что делаем с документами', selectEl('extractionType',[['','Выберите'],['ocr','Только OCR'],['classify','Классификация и извлечение'],['legal','Юридический анализ']], S.extractionType))+
+      field('Много таблиц', selectEl('tables',[['no','Нет'],['yes','Да']], S.tables?'yes':'no'))+
+    '</div>';
+  }
+  if(pools.has('vision')){
+    html+='<hr style="border:none;border-top:1px solid var(--line-2);margin:22px 0">';
+    html+='<div class="three-col">'+
+      field('Изображений в месяц', selectEl('images',[['','Выберите'],['p1','до 1 тыс.'],['p2','1-10 тыс.'],['p3','10-50 тыс.'],['p4','50-100 тыс.'],['p5','более 100 тыс.'],['unknown','Не знаю']], S.images))+
+      field('Разрешение', selectEl('imageRes',[['','Выберите'],['web','Веб / низкое'],['high','Высокое']], S.imageRes))+
+      field('Вариантов на задачу', inputEl('imageVariants','number',S.imageVariants,'2'))+
+    '</div>';
+  }
+  if(pools.has('video')){
+    html+='<hr style="border:none;border-top:1px solid var(--line-2);margin:22px 0">';
+    html+='<div class="warnbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div>Видео считается отдельным классом. До benchmark диапазон широкий, а точность оценки снижается.</div></div>';
+    html+='<div class="three-col">'+
+      field('Роликов в месяц', inputEl('videos','number',S.videos,'например, 500'))+
+      field('Длительность, мин', inputEl('videoDuration','number',S.videoDuration,'1'))+
+      field('Разрешение', selectEl('videoRes',[['','Выберите'],['web','Обычное'],['high','Высокое']], S.videoRes))+
+    '</div>';
+  }
+  if(pools.has('vision2')){
+    html+='<hr style="border:none;border-top:1px solid var(--line-2);margin:22px 0">';
+    html+='<div class="three-col">'+
+      field('Камер', inputEl('cameras','number',S.cameras,'например, 50'))+
+      field('FPS', inputEl('cameraFps','number',S.cameraFps,'25'))+
+      field('Разрешение', selectEl('cameraRes',[['','Выберите'],['web','HD'],['high','Full HD и выше']], S.cameraRes))+
+    '</div>';
+  }
+  if(pools.has('data')){
+    html+='<hr style="border:none;border-top:1px solid var(--line-2);margin:22px 0">';
+    html+=field('Объём базы знаний для поиска (страниц)', selectEl('ragPages',[['','Не знаю'],['p2','10-100 тыс.'],['p3','100-500 тыс.'],['p4','500 тыс. - 1 млн'],['p5','более 1 млн']], S.ragPages),'Для корпоративного поиска, RAG и BI');
+  }
+  if(pools.size===0){ html+='<div class="warnbox"><span>Сначала выберите процессы на шаге 1.</span></div>'; }
+  panel.innerHTML=html;
+  bindInputs();
+  addActions(true,true);
+}
+
+/* ---- Шаг 4: данные, интеграции, безопасность ---- */
+function renderStep4(){
+  let html='<h3>Данные, интеграции и безопасность</h3><p class="step-desc">Эти ответы определяют контур размещения, резерв и уровень безопасности.</p>';
+  html+='<label style="display:block;font-size:14.5px;font-weight:600;color:var(--navy);margin-bottom:10px">Категории данных в работе</label><div class="choices c2" id="dcBox">'+
+    dataChoice('public','Общедоступные данные')+dataChoice('internal','Внутренние документы')+
+    dataChoice('secret','Коммерческая тайна')+dataChoice('personal','Персональные данные')+
+    dataChoice('special','Спец. категории ПДн')+dataChoice('financial','Финансовые данные')+
+    dataChoice('banking','Банковская тайна')+dataChoice('medical','Медицинская информация')+
+    dataChoice('code','Исходный код')+dataChoice('kii','Данные КИИ')+
+    dataChoice('gostajna','Гостайна')+
+  '</div>';
+  html+='<div id="gostajnaWarn"></div>';
+  html+='<div class="field" style="margin-top:20px"><label>Работа без доступа в интернет (air-gap)</label>'+
+    selectEl('airgap',[['no','Не требуется'],['yes','Да, изолированный контур']], S.airgap?'yes':'no')+'</div>';
+  html+='<label style="display:block;font-size:14.5px;font-weight:600;color:var(--navy);margin:14px 0 10px">Интеграции</label><div class="choices c2" id="intBox">'+
+    ['Bitrix24','Другая CRM','1С','ERP','СЭД','Телефония','Корп. почта','Telegram / мессенджер','Веб-сайт','Файловые хранилища / S3','DWH / BI','AD / LDAP / SSO'].map(intChoice).join('')+
+  '</div>';
+  html+='<div class="field" style="margin-top:20px"><label>Срок хранения данных и результатов</label>'+
+    selectEl('retention',[['','Не знаю'],['6','6 месяцев'],['12','12 месяцев'],['36','36 месяцев'],['60','5 лет и более']], S.retention)+'</div>';
+  panel.innerHTML=html;
+
+  panel.querySelectorAll('#dcBox .choice').forEach(el=>{
+    el.onclick=()=>{ const k=el.dataset.k; if(S.dataCategories.has(k))S.dataCategories.delete(k); else S.dataCategories.add(k); el.classList.toggle('sel'); updateGostajna(); renderSummary(); };
+  });
+  panel.querySelectorAll('#intBox .choice').forEach(el=>{
+    el.onclick=()=>{ const k=el.dataset.k; if(S.integrations.has(k))S.integrations.delete(k); else S.integrations.add(k); el.classList.toggle('sel'); renderSummary(); };
+  });
+  bindInputs();
+  updateGostajna();
+  addActions(true,true,'Показать результат');
+}
+function updateGostajna(){
+  const box=panel.querySelector('#gostajnaWarn'); if(!box)return;
+  box.innerHTML = S.dataCategories.has('gostajna')
+    ? '<div class="warnbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div>При работе с гостайной автоматический расчёт бюджета не выполняется. Такой проект требует отдельной квалификации, лицензий и согласований.</div></div>'
+    : '';
+}
+function dataChoice(k,label){ return '<div class="choice'+(S.dataCategories.has(k)?' sel':'')+'" data-k="'+k+'"><span class="cb">'+IC.check+'</span><div class="cc"><div class="tt" style="font-size:14px">'+label+'</div></div></div>'; }
+function intChoice(label){ return '<div class="choice'+(S.integrations.has(label)?' sel':'')+'" data-k="'+label+'"><span class="cb">'+IC.check+'</span><div class="cc"><div class="tt" style="font-size:14px">'+label+'</div></div></div>'; }
+
+/* ---- Шаг 5: результат ---- */
+function renderStep5(){
+  const r=compute();
+  const procTags=[...S.processes].map(id=>'<span class="proc-tag">'+IC.check+SCENARIOS[id].name+'</span>').join('');
+  const showBudget=!r.gostajna;
+  const scaleItems=[
+    S.employees?['Сотрудников', empLabel(S.employees)]:null,
+    S.usersPotential?['Пользователей ИИ', S.usersPotential]:null,
+    S.concurrentPeak?['В пик одновременно', S.concurrentPeak]:null,
+    ['Режим', wmLabel(S.workMode)],
+    S.growth?['Рост 24 мес', growthLabel(S.growth)]:null
+  ].filter(Boolean);
+
+  let html='<div class="result-head"><h3 style="font-size:26px">Предварительный профиль вашего локального AI-контура</h3><p class="step-desc" style="margin-top:8px">Предварительная оценка. Точная конфигурация и стоимость определяются после проверки сценария, данных, модели, пиков и требований к доступности.</p></div>';
+  html+='<div id="calc-print"><div class="result-grid">';
+
+  // Рекомендация (highlight)
+  html+='<div class="rcard hl"><div class="rl">Рекомендация</div><div class="class-badge">'+r.cls.key+' · нагрузка: '+profileBand(r.loadIndex).t.toLowerCase()+'</div><h3>'+r.cls.name.replace(/^Класс [A-E]\. /,'')+'</h3><p>'+r.cls.desc+'</p></div>';
+
+  // Процессы
+  html+='<div class="rcard"><div class="rl">Выбранные процессы</div><div class="proc-tags">'+(procTags||'<span class="proc-tag">не выбрано</span>')+'</div></div>';
+
+  // Масштаб
+  html+='<div class="rcard"><div class="rl">Масштаб</div><div class="scale-list">'+scaleItems.map(s=>'<div class="s"><b>'+s[1]+'</b><span>'+s[0]+'</span></div>').join('')+'</div></div>';
+
+  // Логические узлы
+  html+='<div class="rcard"><div class="rl">Логические узлы <span style="cursor:help" title="Физический сервер или выделенная группа ресурсов. Точный состав определяет инженер после benchmark">ⓘ</span></div><ul class="node-list">'+r.nodes.map(n=>'<li><span class="nd"></span>'+n+'</li>').join('')+'</ul></div>';
+
+  // Размещение
+  html+='<div class="rcard"><div class="rl">Размещение</div><div class="placement-opts">'+
+    placeOpt('rent','Аренда','быстрый старт', r.placement)+
+    placeOpt('own','Свой контур','контроль и данные', r.placement)+
+    placeOpt('hybrid','Гибрид','критичное локально', r.placement)+
+  '</div><p style="font-size:13px;color:var(--muted);margin-top:12px">'+placementText(r.placement)+'</p></div>';
+
+  // Бюджет
+  if(showBudget){
+    const yr = r.cls.key==='E' ? 'от 60 млн ₽' : fmtRange(r.cls.year[0], r.cls.year[1]);
+    html+='<div class="rcard"><div class="rl">Бюджет первого года <span style="cursor:help" title="Инфраструктура, внедрение, интеграции, обучение и поддержка запуска">ⓘ</span></div><div class="budget-num">'+yr+'</div><div class="budget-sub">Включает предварительную оценку инфраструктуры и внедрения. Не является коммерческим предложением. Погрешность до benchmark может составлять ±30-50%.</div></div>';
+  } else {
+    html+='<div class="rcard"><div class="rl">Бюджет</div><div class="budget-sub" style="font-size:14px">Для выбранных данных (гостайна) автоматический бюджет не рассчитывается. Нужна отдельная квалификация проекта.</div></div>';
+  }
+
+  // Установка системы под ключ (отдельно от железа)
+  html+='<div class="rcard setup-card"><div class="rl" style="color:#9DB4DC">Развёртывание системы под ключ · без учёта железа</div><div class="budget-num" style="color:#fff;white-space:nowrap">'+fmtFrom(r.cls.setup[0])+'</div><div class="budget-sub" style="color:#C7D3EA">Настройка сервера, установка платформы инференса, развёртывание и оптимизация моделей, интеграции, доступы и мониторинг. Отдельная услуга в дополнение к оборудованию.</div></div>';
+
+  // Срок
+  html+='<div class="rcard"><div class="rl">Сроки</div><div class="scale-list"><div class="s"><b>'+r.cls.prodTerm.replace('месяцев','мес')+'</b><span>Production после согласования</span></div><div class="s"><b>'+(r.classIdx===0?'3-8 недель':'6-10 недель')+'</b><span>Пилот на данных</span></div></div></div>';
+
+  // Точность
+  const dash=confDonut(r.conf);
+  html+='<div class="rcard"><div class="rl">Точность предварительного расчёта</div><div class="conf-wrap">'+dash+'<div class="conf-reasons"><b>'+r.conf+' из 100.</b> Диапазон можно сузить: '+r.reasons.slice(0,3).join(', ')+'.</div></div></div>';
+
+  // Хранилище
+  html+='<div class="rcard"><div class="rl">Ориентир по хранилищу</div><div class="budget-num" style="font-size:26px">'+r.storage[0].toString().replace('.',',')+' – '+r.storage[1]+' ТБ</div><div class="budget-sub">С учётом резервных копий и индексов. Точное значение зависит от формата данных и политики хранения.</div></div>';
+
+  html+='</div>'; // result-grid
+
+  // Два варианта
+  if(showBudget){
+    html+='<div class="section-head" style="margin:34px 0 4px"><h3 style="font-size:20px">Два сценария старта</h3></div><div class="variants">'+
+      '<div class="variant"><div class="vt">Оптимальный старт</div><div class="vp">'+r.variants.optimal+'</div><ul><li>Минимальная конфигурация</li><li>Пилот без георезерва</li><li>Масштабирование по факту нагрузки</li></ul></div>'+
+      '<div class="variant pro"><div class="vt">Production с запасом <span style="font-size:11px;background:var(--accent);color:#fff;padding:3px 8px;border-radius:6px">запас 24 мес</span></div><div class="vp">'+r.variants.production+'</div><ul><li>Резерв мощности на рост</li><li>Высокий SLA и резервирование</li><li>Расширенное хранение</li></ul></div>'+
+    '</div>';
+  }
+  html+='</div>'; // calc-print
+
+  // Форма заявки
+  html+='<div class="lead-form" id="leadForm"><h3>'+r.ctaMain+'</h3><p>Оставьте рабочие контакты — соберём подробный отчёт (нагрузочный паспорт, архитектурный класс, риски, вопросы для benchmark и дорожную карту) и запишем на 30-минутный разбор архитектуры.</p>'+
+    '<div class="two-col"><div class="field"><label>Имя</label><input type="text" id="lfName" placeholder="Как к вам обращаться"></div><div class="field"><label>Компания</label><input type="text" id="lfCompany" placeholder="Название компании"></div></div>'+
+    '<div class="two-col"><div class="field"><label>Рабочий email</label><input type="email" id="lfEmail" placeholder="you@company.ru"></div><div class="field"><label>Телефон</label><input type="tel" id="lfPhone" placeholder="+7 ..."></div></div>'+
+    '<label class="consent"><input type="checkbox" id="lfConsent"> Согласен на обработку персональных данных в соответствии с политикой обработки. Расчёт носит предварительный характер и не является офертой.</label>'+
+    '<div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn-primary btn-lg" id="lfSubmit">Получить подробный отчёт</button><button class="btn btn-ghost btn-lg" id="lfPrint" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);color:#fff">Сохранить расчёт в PDF</button></div>'+
+  '</div>';
+
+  html+='<div class="step-actions"><button class="btn btn-ghost" id="btnBack">← Изменить параметры</button><button class="btn btn-navy" id="btnRestart">Начать заново</button></div>';
+
+  panel.innerHTML=html;
+  panel.querySelector('#btnBack').onclick=()=>{ S.step=4; render(); };
+  panel.querySelector('#btnRestart').onclick=()=>{ resetState(); S.step=1; render(); };
+  panel.querySelector('#lfPrint').onclick=()=>window.print();
+  panel.querySelector('#lfSubmit').onclick=submitLead;
+  renderSummary();
+}
+
+function placeOpt(key,title,sub,rec){ return '<div class="p-opt'+(key===rec?' rec':'')+'">'+(key===rec?'<div class="pi">рекомендуем</div>':'')+'<div style="font-weight:700;color:'+(key===rec?'var(--navy)':'var(--muted)')+'">'+title+'</div><div style="font-size:11px;margin-top:2px">'+sub+'</div></div>'; }
+function placementText(p){
+  if(p==='rent')return 'Для пилота и нестабильной нагрузки рациональнее выделенная аренда в РФ: быстрый старт без CAPEX.';
+  if(p==='own')return 'Постоянная высокая нагрузка и требования к данным делают собственный или выделенный контур экономически интересным на горизонте 3+ лет.';
+  return 'Критичные данные держим локально, пиковые и эпизодические задачи (видео, обучение) выносим на выделенные ресурсы.';
+}
+function confDonut(v){
+  const c=2*Math.PI*30, off=c*(1-v/100);
+  const col=v>=80?'#12855B':v>=60?'#074EE8':v>=40?'#B7791F':'#C0392B';
+  return '<svg class="conf-donut" viewBox="0 0 74 74"><circle cx="37" cy="37" r="30" fill="none" stroke="#E4EAF3" stroke-width="7"/><circle cx="37" cy="37" r="30" fill="none" stroke="'+col+'" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 37 37)"/><text x="37" y="42" text-anchor="middle" font-size="19" font-weight="800" fill="#03235F">'+v+'</text></svg>';
+}
+
+/* ---- helpers для полей ---- */
+function field(label, control, hint){ return '<div class="field"><label>'+label+'</label>'+control+(hint?'<div class="hint">'+hint+'</div>':'')+'</div>'; }
+function selectEl(id,opts,val){ return '<select data-k="'+id+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(String(val)===String(o[0])?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'; }
+function inputEl(id,type,val,ph){ return '<input type="'+type+'" data-k="'+id+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'">'; }
+function bindInputs(){
+  panel.querySelectorAll('[data-k]').forEach(el=>{
+    const k=el.dataset.k;
+    const handler=()=>{
+      let v=el.value;
+      if(k==='tables'){ S.tables=(v==='yes'); }
+      else if(k==='airgap'){ S.airgap=(v==='yes'); }
+      else { S[k]=v; }
+      renderSummary();
+    };
+    el.addEventListener(el.tagName==='SELECT'?'change':'input', handler);
+  });
+}
+function empLabel(v){ return {e1:'до 50',e2:'51-100',e3:'101-300',e4:'301-1 000',e5:'1 001-5 000',e6:'5 000+'}[v]||v; }
+function wmLabel(v){ return {pilot:'Пилот',s85:'8×5',s127:'12×7',a247:'24×7',a247r:'24×7 + резерв',geo:'Георезерв'}[v]||'не задан'; }
+function growthLabel(v){ return {none:'без роста',g25:'+25%',g50:'+50%',g100:'+100%',unknown:'не знаю'}[v]||v; }
+
+/* ---- Кнопки навигации шага ---- */
+function addActions(showBack, canNext, nextLabel){
+  const bar=h('<div class="step-actions"></div>');
+  const back=h('<button class="btn btn-ghost">← Назад</button>');
+  back.onclick=()=>{ if(S.step>1){ S.step--; render(); } };
+  back.style.visibility=showBack?'visible':'hidden';
+  const next=h('<button class="btn btn-primary">'+(nextLabel||'Далее →')+'</button>');
+  next.disabled=!canNext;
+  next.onclick=()=>{ if(S.step<TOTAL_STEPS){ S.step++; render(); scrollCalcTop(); } };
+  bar.appendChild(back); bar.appendChild(next);
+  panel.appendChild(bar);
+}
+function scrollCalcTop(){ const y=document.getElementById('calc').getBoundingClientRect().top+window.scrollY-80; window.scrollTo({top:y,behavior:'smooth'}); }
+
+/* ===================== ПРАВЫЙ ЖИВОЙ БЛОК ===================== */
+function renderSummary(){
+  if(S.processes.size===0){
+    rail.innerHTML='<div class="st">Предварительный итог</div><div class="summary-hint">Выберите процессы, чтобы увидеть предварительный профиль нагрузки и класс решения.</div>';
+    return;
+  }
+  const r=compute();
+  const band=profileBand(r.loadIndex);
+  const enough = S.step>=4 || (S.employees && S.workMode);
+  let html='<div class="st">Предварительный итог</div>';
+  html+='<div class="sum-block"><div class="l">Процессы</div><div class="sum-chips">'+[...S.processes].slice(0,4).map(id=>'<span class="sum-chip">'+shortName(id)+'</span>').join('')+(S.processes.size>4?'<span class="sum-chip">+'+(S.processes.size-4)+'</span>':'')+'</div></div>';
+  html+='<div class="sum-block"><div class="l">Профиль нагрузки</div><div class="v">'+band.t+'</div><div class="profile-meter">'+[1,2,3,4].map(i=>'<i class="'+(i<=band.n?'on':'')+'"></i>').join('')+'</div></div>';
+  html+='<div class="sum-block"><div class="l">Логических контуров</div><div class="v">'+r.nodes.length+'</div></div>';
+  html+='<div class="sum-block"><div class="l">Доступность</div><div class="v">'+wmLabel(S.workMode)+'</div></div>';
+  if(enough){
+    html+='<div class="sum-block" style="border-color:var(--accent);background:var(--accent-soft)"><div class="l">Предварительный класс</div><div class="v" style="font-size:18px">'+r.cls.key+' · '+r.cls.name.replace(/^Класс [A-E]\. /,'')+'</div><div class="conf-ring"><span class="num">'+r.conf+'</span><span style="font-size:12px;color:var(--muted)">точность<br>оценки</span></div></div>';
+  } else {
+    html+='<div class="summary-hint">Расчёт бюджета станет доступен после заполнения нагрузки и режима работы. Сильнее всего на класс влияет пик и одновременность.</div>';
+  }
+  rail.innerHTML=html;
+}
+function shortName(id){ return {emp_kb:'Ассистент',emp_crm:'CRM',emp_itsd:'Service Desk',emp_hr:'HR',emp_code:'Код',cli_bot:'Клиентский бот',cli_cls:'Классификация',sp_rt:'Подсказки',sp_batch:'Аналитика звонков',sp_robot:'Голосовой робот',doc_ocr:'OCR',doc_legal:'Договоры',doc_rag:'RAG-поиск',cr_text:'Тексты',cr_img:'Изображения',cr_video:'Видео',dt_bi:'BI',dt_sec:'ИБ',dt_cv:'Видеоаналитика'}[id]||'Процесс'; }
+
+/* ---- Отправка заявки (демо, без бэкенда) ---- */
+function submitLead(){
+  const name=val('lfName'),company=val('lfCompany'),email=val('lfEmail'),phone=val('lfPhone');
+  const consent=document.getElementById('lfConsent').checked;
+  if(!name||!company||!(email||phone)){ alert('Заполните имя, компанию и хотя бы один контакт'); return; }
+  if(!consent){ alert('Нужно согласие на обработку персональных данных'); return; }
+  const r=compute();
+  const payload={ // так расчёт уходил бы в Bitrix24
+    lead:{name,company,email,phone},
+    calc:{ processes:[...S.processes], class:r.cls.key, budgetFirstYear:r.cls.year, placement:r.placement, confidence:r.conf, workMode:S.workMode, dataCategories:[...S.dataCategories], integrations:[...S.integrations] },
+    version:{calculator:'v1-demo'}
+  };
+  console.log('[MakeBiz] Lead -> Bitrix24 (демо, не отправляется):', payload);
+  const lf=document.getElementById('leadForm');
+  lf.innerHTML='<div class="form-ok"><div class="ic">'+IC.check+'</div><h3>Заявка принята</h3><p>Демо-макет: данные не отправляются на сервер. На боевом сайте расчёт и контакты создают сделку в Bitrix24, а ответственный менеджер получает задачу с приоритетом. Мы пришлём подробный отчёт и ссылку на запись разбора.</p></div>';
+  lf.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function val(id){ const e=document.getElementById(id); return e?e.value.trim():''; }
+
+function resetState(){
+  S.processes=new Set(); S.dataCategories=new Set(); S.integrations=new Set();
+  ['otherText','role','industry','employees','usersPotential','concurrentPeak','workMode','growth','textMessages','answerLen','contextProfile','qualityLevel','peakFactor','speechMinutes','speechMode','audioQuality','diarization','analysisDepth','deadline','concurrentLines','docsPages','scanShare','extractionType','images','imageRes','imageVariants','videos','videoDuration','videoRes','cameras','cameraFps','cameraRes','ragPages','retention'].forEach(k=>S[k]='');
+  S.tables=false; S.airgap=false;
+}
+
+/* ===================== СТАТИЧЕСКИЕ БЛОКИ СТРАНИЦЫ ===================== */
+function renderCatGrid(){
+  const grid=document.getElementById('catGrid');
+  grid.innerHTML=CATEGORIES.map(c=>'<a class="cat" href="#calc" data-cat="'+c.id+'"><span class="ci">'+c.icon+'</span><h3>'+c.title+'</h3><p>'+c.desc+'</p><span class="go">Выбрать в калькуляторе <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>').join('');
+  grid.querySelectorAll('.cat').forEach(el=>{
+    el.addEventListener('click',()=>{ S.step=1; setTimeout(render,50);
+      setTimeout(()=>{ const g=[...document.querySelectorAll('.catgroup')].find(x=>x.querySelector('.tt')&&x.querySelector('.tt').textContent===CATEGORIES.find(c=>c.id===el.dataset.cat).title); if(g&&!g.classList.contains('open'))g.classList.add('open'); },120);
+    });
+  });
+}
+const FAQ=[
+  ['Вы правда развернёте ИИ на наших серверах?','Да. Мы рассчитываем контур под вашу нагрузку, проводим benchmark на ваших данных, поставляем и настраиваем инфраструктуру или используем выделенные ресурсы в РФ, а затем берём решение на сопровождение. Вариант размещения (свой контур, аренда или гибрид) подбираем под задачу, а не навязываем.'],
+  ['Мы правда перестанем платить за токены?','После запуска собственного контура вы не оплачиваете внешнему LLM-провайдеру каждый запрос или токен. Затраты переходят в управляемую модель владения: инфраструктура, электроэнергия, эксплуатация, лицензии при их наличии, обновления и поддержка. Для каждого проекта мы сравниваем это с внешним API и арендой на 36 месяцев.'],
+  ['А если появится модель лучше?','Архитектура не привязана к одной модели. Бизнес-логику, данные, права и интеграции мы отделяем от конкретной модели. Новую модель проверяем на тестовом наборе и безопасно заменяем после регрессионных испытаний в рамках сервиса Model Lifecycle.'],
+  ['Это законно и безопасно?','Локальное размещение помогает контролировать место обработки и ограничить передачу данных вовне, но само по себе не является юридической гарантией. Мы проектируем полный путь данных: SSO, роли, аудит, изоляцию и подтверждение критичных операций, а соответствие требованиям дополняем регламентами и юридической проверкой.'],
+  ['Сколько это стоит и как быстро?','Зависит от процессов и нагрузки. Класс A (пилот) — ориентировочно 1,7-6 млн ₽ за первый год и 3-8 недель, класс C (корпоративный контур) — 12-35 млн ₽ и 3-6 месяцев. Это предварительные инженерные диапазоны для квалификации, а не оферта. Точную смету даём после benchmark.'],
+  ['Что входит в установку под ключ и сколько это без железа?','Купить сервер мало — систему нужно развернуть, чтобы LLM работала. Под ключ мы делаем настройку сервера, установку оборудования, развёртывание платформы инференса, установку и оптимизацию моделей, подключение данных, ролей, интеграций и мониторинга. Установка и настройка под ключ, без учёта стоимости оборудования, начинается от 500 000 ₽ и зависит от числа процессов, моделей и интеграций. Это отдельная услуга в дополнение к железу.'],
+  ['С чего начать?','С расчёта в калькуляторе: выберите процессы и объёмы, получите предварительный класс и бюджет. Дальше — Local AI Assessment или платный пилот на ваших данных с фиксированными критериями качества до закупки инфраструктуры.']
+];
+function renderFAQ(){
+  const list=document.getElementById('faqList');
+  list.innerHTML=FAQ.map((f,i)=>'<div class="faq-item"><div class="faq-q">'+f[0]+'<span class="fx">+</span></div><div class="faq-a"><p>'+f[1]+'</p></div></div>').join('');
+  list.querySelectorAll('.faq-item').forEach(it=>{ it.querySelector('.faq-q').onclick=()=>it.classList.toggle('open'); });
+}
+
+/* ---- меню ---- */
+document.getElementById('burger').onclick=()=>document.getElementById('mobileMenu').classList.toggle('open');
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>document.getElementById('mobileMenu').classList.remove('open'));
+
+/* ---- init ---- */
+renderCatGrid(); renderFAQ(); render();
+</script>
+</body>
+</html>
