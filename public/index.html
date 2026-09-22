@@ -556,6 +556,70 @@ footer a:hover{color:#fff}
   .cost td{font-size:13px}
 }
 
+
+/* ===== калькулятор v3 ===== */
+.panel-early .btn{white-space:normal;text-align:center}
+.two-panels>*{min-width:0}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr;gap:24px}}
+.cat .ci svg{width:22px;height:22px}
+.calc2{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden}
+.seg{display:flex;gap:6px;padding:10px;background:var(--bg-soft);border-bottom:1px solid var(--line-2)}
+.seg button{flex:1;font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);background:transparent;border:1.5px solid transparent;border-radius:12px;padding:12px;cursor:pointer}
+.seg button.on{background:#fff;color:var(--navy);border-color:var(--accent);box-shadow:var(--shadow-sm)}
+.c2-body{display:grid;grid-template-columns:1fr 360px;align-items:start}
+#c2Left{padding:26px 30px}
+.c2-right{padding:22px;background:var(--bg-soft);border-left:1px solid var(--line-2);position:sticky;top:76px}
+.c2-row{margin-bottom:22px}
+.c2-lab{font-weight:700;color:var(--navy);font-size:15px;margin-bottom:10px}
+.c2-lab span{font-weight:500;color:var(--muted-2);font-size:13px;margin-left:8px}
+.c2-sep{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line-2);padding-top:18px;margin:6px 0 16px}
+.c2-sub{border-left:3px solid var(--accent-soft);padding-left:16px;margin:-6px 0 18px}
+.emp{font-size:15px;color:var(--muted);margin-bottom:4px}.emp b{font-size:30px;font-weight:900;color:var(--accent);margin-right:4px}
+#c2Emp{width:100%;accent-color:var(--accent);height:26px}
+.rng-l{display:flex;justify-content:space-between;font-size:12px;color:var(--muted-2)}
+.tasks2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.t2{display:flex;gap:10px;align-items:flex-start;text-align:left;font-family:inherit;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer;color:var(--ink);transition:.12s}
+.t2:hover{border-color:#B9CBEC}.t2.on{border-color:var(--accent);background:var(--accent-soft)}
+.t2i{width:32px;height:32px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.t2.on .t2i{background:var(--accent)}.t2i svg{width:17px;height:17px}
+.t2 b{display:block;font-size:14px;color:var(--navy);line-height:1.3}.t2 small{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:inherit;font-size:14px;font-weight:500;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 13px;cursor:pointer;text-align:left;line-height:1.3}
+.chip small{display:block;font-size:11.5px;color:var(--muted);font-weight:400}
+.chip:hover{border-color:#B9CBEC}.chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--navy);font-weight:600}
+.c2-res .l{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.c2-res .p{font-size:27px;font-weight:900;color:var(--navy);line-height:1.2;margin:6px 0}
+.c2-res .c{font-size:14px;color:var(--muted);margin-bottom:12px}
+.indiv{background:var(--warn-soft);border:1px solid #F0E2C4;color:#6B5316;border-radius:10px;padding:9px 11px;font-size:12.5px;margin-bottom:12px}
+.c2-t{width:100%;border-collapse:collapse;margin-bottom:12px}
+.c2-t td{font-size:13px;padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.c2-t td:last-child{text-align:right;font-weight:700;color:var(--navy);white-space:nowrap;padding-left:10px}
+.c2-t tr.mo td{color:var(--muted);border-bottom:none}.c2-t tr.mo td:last-child{color:var(--muted)}
+.c2-nodes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.c2-nodes span{font-size:11.5px;font-weight:600;background:#fff;border:1px solid var(--line);color:var(--navy);padding:4px 8px;border-radius:7px}
+.c2-res .fine{font-size:11.5px;color:var(--muted-2);margin-top:10px;line-height:1.45}
+.xp{font-size:11px;background:#0B1B33;color:#C7D3EA;padding:10px;border-radius:8px;margin-top:10px;white-space:pre-wrap}
+.packs2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pk2{position:relative;text-align:left;font-family:inherit;background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px 16px;cursor:pointer;color:var(--ink)}
+.pk2.on{border-color:var(--accent);background:var(--accent-soft)}
+.pk2 b{display:block;font-size:18px;color:var(--navy)}.pk2 small{display:block;font-size:13px;color:var(--muted);margin:2px 0 10px}
+.pk2 .pr{display:block;font-size:20px;font-weight:900;color:var(--accent)}
+.pk2 ul{list-style:none;margin-top:10px;display:grid;gap:4px}.pk2 li{font-size:13px;color:var(--ink)}.pk2 li::before{content:"✓ ";color:var(--ok);font-weight:800}
+.pk2 .tag{position:absolute;top:-10px;left:14px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px}
+.addons2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ad2{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:inherit;font-size:14px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;text-align:left;color:var(--ink)}
+.ad2.on{border-color:var(--accent);background:var(--accent-soft);font-weight:600}.ad2 i{font-style:normal;color:var(--muted);font-size:12.5px;white-space:nowrap}
+.c2-tune{margin-top:18px}
+.c2-lead{margin-top:22px}
+.c2bar{display:none}
+@media(max-width:900px){
+  .c2-body{grid-template-columns:1fr}.c2-right{position:static;border-left:none;border-top:1px solid var(--line-2)}
+  #c2Left{padding:20px 18px}
+  .c2bar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(6,26,68,.1);padding:10px 16px;align-items:center;justify-content:space-between;gap:12px}
+  .c2bar.show{display:flex}.c2bar small{display:block;font-size:11px;color:var(--muted)}.c2bar b{font-size:16px;color:var(--navy)}.c2bar .btn{padding:11px 16px}
+}
+@media(max-width:640px){.tasks2,.packs2,.addons2{grid-template-columns:1fr}.seg button{font-size:14px;padding:10px 6px}}
+
 @media print{
   header,.mobile-menu,footer,body>section:not(#calc){display:none!important}
   #calc .section-head,#calc .calc-top,#calc .steps-nav,#calc .summary,.no-print,#calc>.wrap>p{display:none!important}
@@ -619,7 +683,7 @@ footer a:hover{color:#fff}
       </div>
       <div class="hero-note">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        Расчёт занимает 4-7 минут. Названия оборудования не требуются
+        Расчёт за 30 секунд. Названия оборудования не требуются
       </div>
       <ul class="markers">
         <li><span class="ic">✓</span> Данные в выбранном контуре, внешние вызовы можно ограничить</li>
@@ -680,33 +744,27 @@ footer a:hover{color:#fff}
 <!-- ============ CALCULATOR ============ -->
 <section class="calc-section" id="calc">
   <div class="wrap">
-    <div class="section-head" style="text-align:center;margin:0 auto 34px">
+    <div class="section-head" style="text-align:center;margin:0 auto 30px">
       <span class="eyebrow">Калькулятор локального ИИ</span>
-      <h2>Подберите локальный ИИ под задачи вашей компании</h2>
-      <p style="margin:0 auto">Ответьте на несколько понятных вопросов. Мы оценим мощность сервера, стоимость оборудования и внедрения. Знания о видеокартах, моделях и токенах не требуются.</p>
+      <h2>Сколько стоит ИИ на ваших серверах</h2>
+      <p style="margin:0 auto">Выберите размер компании и задачи, цена меняется сразу. Или посмотрите готовые пакеты. Знания о видеокартах и моделях не нужны.</p>
     </div>
-    <div class="calc-shell">
-      <div class="calc-top">
-        <div class="ct-l">
-          <div>
-            <h3 id="calcStepTitle">Для чего вашей компании нужен локальный ИИ?</h3>
-            <div class="sub" id="calcStepSub">Шаг 1 из 5 · можно выбрать несколько вариантов</div>
-          </div>
-        </div>
-        <div class="calc-progress">
-          <span id="calcProgLabel">Шаг 1 / 5</span>
-          <span class="pbar"><i id="calcProgBar"></i></span>
-        </div>
-      </div>
-      <div class="calc-body">
-        <div class="steps-nav" id="stepsNav"><!-- JS --></div>
-        <div class="step-panel" id="stepPanel"><!-- JS --></div>
-        <aside class="summary" id="summaryRail"><!-- JS --></aside>
-      </div>
+    <div class="calc2">
+      <div class="seg" id="calcMode"><button type="button" data-mode="custom" class="on">Собрать под себя</button><button type="button" data-mode="packs">Готовые пакеты</button></div>
+      <div class="c2-body"><div id="c2Left"></div><aside class="c2-right" id="c2Right"></aside></div>
     </div>
-    <p style="text-align:center;font-size:13px;color:var(--muted-2);margin-top:16px">Расчёт предварительный. Итоговая конфигурация подтверждается после технического обследования и benchmark на выбранных моделях и ваших реальных данных.</p>
+    <div class="lead-form c2-lead" id="leadForm">
+      <h3>Получить точный расчёт</h3>
+      <p>Инженер проверит вашу конфигурацию, подберёт модели и оборудование и назначит техническую встречу. Выбранные параметры придут вместе с заявкой.</p>
+      <div class="two-col"><div class="field"><label>Имя</label><input type="text" id="lfName" placeholder="Как к вам обращаться"></div><div class="field"><label>Телефон</label><input type="tel" id="lfPhone" placeholder="+7 ..."></div></div>
+      <div class="two-col"><div class="field"><label>Компания</label><input type="text" id="lfCompany" placeholder="Название компании"></div><div class="field"><label>Email</label><input type="email" id="lfEmail" placeholder="you@company.ru"></div></div>
+      <label class="consent"><input type="checkbox" id="lfConsent"> Согласен на обработку персональных данных. Расчёт предварительный и не является офертой.</label>
+      <div class="lf-row"><button class="btn btn-primary btn-lg" id="lfSubmit" type="button">Получить точный расчёт</button><span id="lfErr"></span></div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--muted-2);margin-top:16px">Расчёт предварительный. Итоговая конфигурация подтверждается после технического обследования и теста на ваших задачах.</p>
   </div>
 </section>
+<div class="c2bar" id="c2Bar"></div>
 
 <!-- ============ WHAT'S INCLUDED ============ -->
 <section class="section" id="scenarii">
@@ -977,657 +1035,249 @@ footer a:hover{color:#fff}
 <script>
 'use strict';
 /* =====================================================================
-   MakeBiz · Калькулятор локального ИИ v2 (по ТЗ от 23.09.2026)
-   Все цены, пороги и коэффициенты в CFG: это аналог админ-панели.
-   Клиент видит только бизнес-задачи и понятные классы решений,
-   названия ускорителей и VRAM показываются только в режиме ?expert=1
+   MakeBiz · Калькулятор локального ИИ v3 (простой: индивидуально + пакеты)
+   Все цены в CFG (аналог админки). Внутренний технический режим: ?expert=1
    ===================================================================== */
 const CFG={
-  version:'2026.09-v2', priceDate:'сентябрь 2026',
-  // Вебхук Bitrix24 (права crm). Пример: https://portal.bitrix24.ru/rest/1/xxxxxxxx/
-  // Пока пусто, форма работает в демо-режиме (данные пишутся в консоль)
-  bitrixWebhook:'',
-  classes:{
-    A:{name:'Локальный ИИ для небольшой команды',kind:'Рабочая станция с 1 ускорителем',vram:'1×32 ГБ',eq:[1.2,1.7],asm:100000},
-    B:{name:'Бизнес-сервер начального уровня',kind:'Сервер с 1 ускорителем',vram:'1×32 ГБ ECC',eq:[2.2,3.2],asm:150000},
-    C:{name:'Универсальный бизнес-сервер',kind:'Сервер с 1 ускорителем повышенной памяти',vram:'1×48 ГБ ECC',eq:[3.2,4.8],asm:150000},
-    D:{name:'Корпоративный AI-сервер',kind:'Сервер с 1 мощным ускорителем',vram:'1×96 ГБ ECC',eq:[5,7.5],asm:150000},
-    E:{name:'Корпоративный multi-GPU сервер',kind:'Сервер с 2 мощными ускорителями',vram:'2×96 ГБ',eq:[9.5,15],asm:150000},
-    F:{name:'Высоконагруженный AI-контур',kind:'Сервер с 4 мощными ускорителями',vram:'4×96 ГБ',eq:[13,20],asm:250000},
-    G:{name:'Enterprise AI Factory',kind:'Сервер с 4 ускорителями высшего класса',vram:'4×141 ГБ HBM',eq:[25,31],asm:250000},
-    H:{name:'AI-кластер',kind:'Несколько серверов, 8+ ускорителей',vram:'8+ GPU, кластер',eq:[30,60],asm:null,manual:true}
-  },
-  speech:{
-    S1:{name:'Речевой узел',kind:'Сервер для речи',vram:'1×32 ГБ',eq:[2.2,3.2],asm:150000},
-    S2:{name:'Речевой узел ×2',kind:'Сервер для речи, 2 ускорителя',vram:'2×32 ГБ',eq:[3.4,4.8],asm:150000},
-    S4:{name:'Речевой узел ×4',kind:'Сервер для речи, 4 ускорителя',vram:'4×32 ГБ',eq:[5.5,8],asm:250000},
-    M:{name:'Речевой кластер',kind:'Отдельный речевой кластер',vram:'кластер',eq:[8,15],asm:null,manual:true}
-  },
-  baseInstall:300000,
-  svc:{rag:200000,sync:150000,crm:200000,onec:250000,sys:100000,bot:150000,botCh:75000,speech:250000,voice:350000,voiceBrand:100000,docs:200000,images:150000,imagesAdv:100000,vision:200000,video:250000,audio:150000,coding:150000,agents:300000,data:200000,dataSrc:50000,ha:250000,airgap:200000,sso:150000,audit:100000,train:100000},
-  infra:{rack:[200000,600000],ups:[300000,800000],net:[300000,1500000],ha:[1500000,4000000]},
-  storage:[[8,0,0],[30,300000,800000],[100,1200000,2500000],[300,3500000,7000000]],
-  support:{monitor:50000,work:120000,ext:250000},
-  rentPct:[0.035,0.05],
-  fromK:1.5 // для услуг «от N ₽» верхняя граница = N × fromK
+  version:'2026.09-v3', priceDate:'сентябрь 2026',
+  bitrixWebhook:'', // https://portal.bitrix24.ru/rest/1/xxxx/  (пусто = демо-режим)
+  eq:{A:[1.2,1.7],B:[2.2,3.2],C:[3.2,4.8],D:[5,7.5],E:[9.5,15],F:[13,20]}, // оборудование, млн ₽
+  asm:{A:.1,B:.15,C:.15,D:.15,E:.15,F:.25},                               // сборка и тест, млн ₽
+  speech:{S1:[2.2,3.2],S2:[3.4,4.8],S4:[5.5,8]},
+  vram:{A:'1×32 ГБ',B:'1×32 ГБ ECC',C:'1×48 ГБ ECC',D:'1×96 ГБ ECC',E:'2×96 ГБ',F:'4×96 ГБ',S1:'1×32 ГБ',S2:'2×32 ГБ',S4:'4×32 ГБ'},
+  names:{A:'Рабочая станция для небольшой команды',B:'Бизнес-сервер начального уровня',C:'Универсальный бизнес-сервер',D:'Корпоративный AI-сервер',E:'Корпоративный multi-GPU сервер',F:'Высоконагруженный AI-контур'},
+  install:.3,                  // базовая установка и настройка, млн ₽
+  integr:{crm:.2,onec:.25,tel:.1,mail:.1},
+  ha:{infra:[1.5,4],svc:.25},
+  rent:[.035,.05],             // аренда в месяц, доля от стоимости оборудования
+  support:{self:50000,help:120000,sla:250000},
+  svcSpread:1.3                // верхняя граница услуг = нижняя × 1,3
 };
+const TASKS={
+  chat:{t:'AI-чат для сотрудников',d:'Письма, тексты, идеи, ответы на рабочие вопросы',svc:0,ic:'chat'},
+  kb:{t:'База знаний',d:'Ответы по регламентам и документам компании',svc:.2,ic:'book'},
+  docs:{t:'Документы, договоры, КП',d:'Подготовка и проверка по шаблонам',svc:.2,ic:'doc'},
+  sales:{t:'Продажи и CRM',d:'Ассистент менеджеров, заполнение CRM',svc:.2,ic:'deal'},
+  bot:{t:'Бот для клиентов',d:'Сайт и мессенджеры, круглосуточно',svc:.15,ic:'bot'},
+  calls:{t:'Анализ звонков',d:'Расшифровка, резюме, контроль скрипта',svc:.25,ic:'phone'},
+  voice:{t:'Голосовой робот',d:'Сам звонит и отвечает клиентам',svc:.35,ic:'voice'},
+  media:{t:'Картинки и видео',d:'Креативы, редактирование фото, ролики',svc:.25,ic:'image'},
+  code:{t:'Помощь разработчикам',d:'Код, тесты, документация',svc:.15,ic:'code'},
+  data:{t:'Аналитика данных',d:'Вопросы к CRM, 1С и таблицам обычным языком',svc:.2,ic:'chart'}
+};
+const EMP=[5,10,20,30,50,75,100,150,200,300,500,750,1000,2000,5000];
+const OPT={
+  mode:[['work','Рабочее время','Для сотрудников в офисе'],['247','Круглосуточно','Перерыв на обслуживание допустим'],['nodown','Без остановок','Запасной сервер, простой недопустим']],
+  quality:[['std','Стандартное','Письма, ответы, простые документы'],['high','Высокое','Сложные документы, анализ, код'],['max','Максимальное','Самые мощные модели']],
+  growth:[['0','Без роста'],['.5','+50% за год'],['1','В 2 раза']],
+  calls:[['50','до 50 тыс. минут'],['250','50-250 тыс.'],['750','250-750 тыс.'],['1500','больше 750 тыс.']],
+  bot:[['100','до 100 тыс. сообщений'],['500','до 500 тыс.'],['1000','до 1 млн'],['5000','больше 1 млн']],
+  voice:[['10','до 10 линий'],['40','до 40'],['100','до 100'],['300','больше 100']],
+  media:[['low','Немного, до 5 тыс. в месяц'],['mid','Много, до 50 тыс.'],['high','Очень много или видео']],
+  integr:[['crm','Bitrix24 / amoCRM'],['onec','1С'],['tel','Телефония'],['mail','Почта']],
+  supply:[['turnkey','Подберите и поставьте','Оборудование под ключ'],['own','Уже есть сервер','Проверим и установим'],['rent','Аренда','Без покупки, помесячно']],
+  support:[['self','Справимся сами','Мониторинг по желанию'],['help','Нужна поддержка','Обновления и помощь'],['sla','24×7','Дежурство и SLA']]
+};
+const PACKS=[
+  {id:'start',n:'Старт',w:'Команда до 30 человек, пилот',s:{emp:3,tasks:['chat','kb'],mode:'work'},inc:['AI-чат и база знаний','Рабочая станция','Установка под ключ']},
+  {id:'biz',n:'Бизнес',w:'Компания 30-100 человек',s:{emp:6,tasks:['chat','kb','docs','sales'],mode:'247',integr:['crm']},inc:['Чат, база знаний, документы','Ассистент в CRM','Круглосуточно'],tag:'Чаще выбирают'},
+  {id:'corp',n:'Корпорация',w:'100-300 человек, клиентский сервис',s:{emp:9,tasks:['chat','kb','docs','sales','bot'],mode:'247',integr:['crm','onec']},inc:['Всё из «Бизнес»','Бот для клиентов','Интеграция с 1С']},
+  {id:'ent',n:'Enterprise',w:'300+ человек, без простоя',s:{emp:12,tasks:['chat','kb','docs','sales','bot','data'],mode:'nodown',quality:'high',integr:['crm','onec']},inc:['Всё из «Корпорации»','Аналитика данных','Запасной сервер 24×7']}
+];
+const ADDONS=['calls','voice','media','code','data','bot'];
+const DEF={emp:6,tasks:['chat'],mode:'work',quality:'std',growth:'.5',calls:'50',bot:'100',voice:'10',media:'low',integr:[],supply:'turnkey',support:'help'};
+let S={view:'custom',...JSON.parse(JSON.stringify(DEF))};
+let PK={i:1,add:[]};
+const EXPERT=/expert=1/.test(location.search+location.hash);
 
 /* ---------- иконки ---------- */
 const P='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
 const IC={
-  check:'<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   chat:P+'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12z"/></svg>',
-  book:P+'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/></svg>',
+  book:P+'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6"/></svg>',
   doc:P+'<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg>',
-  chart:P+'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15l3-3 2 2 5-5"/></svg>',
-  code:P+'<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></svg>',
   deal:P+'<path d="M3 7h18v12H3z"/><path d="M8 7V5h8v2M3 12h18"/></svg>',
   bot:P+'<rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 13h.01M15 13h.01"/></svg>',
-  agents:P+'<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M12 7.5v4M12 11.5l-5.5 4.5M12 11.5l5.5 4.5"/></svg>',
   phone:P+'<path d="M5 3h4l2 5-3 2a11 11 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>',
   voice:P+'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
-  music:P+'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>',
   image:P+'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 9"/></svg>',
-  wand:P+'<path d="M15 4V2M15 10V8M11 6h-2M21 6h-2M4 20L14 10"/><path d="M17.5 3.5l1 1"/></svg>',
-  eye:P+'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
-  video:P+'<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg>',
-  server:P+'<rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/><path d="M7 6.5h.01M7 17.5h.01"/></svg>',
-  warn:P+'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>',
-  info:P+'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>'
+  code:P+'<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></svg>',
+  chart:P+'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15l3-3 2 2 5-5"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
-
-/* ---------- задачи (экран 1) ---------- */
-const GROUPS=[
-  {title:'Сотрудники и знания',tasks:['employee_chat','knowledge_base','document_generation','data_analytics','coding']},
-  {title:'Продажи и клиенты',tasks:['sales_crm','external_bot','agent_platform']},
-  {title:'Звонки и голос',tasks:['speech_analytics','voice_bot','audio_music']},
-  {title:'Изображения и видео',tasks:['image_basic','image_advanced','vision_analysis','video_generation']}
-];
-const TASKS={
-  employee_chat:{ic:'chat',t:'Корпоративный AI-чат для сотрудников',d:'Как GPT, но внутри компании: письма, тексты, идеи, анализ, ответы на рабочие вопросы',can:'Сотрудники работают с корпоративным AI-чатом внутри вашего контура',q:['chat_uses']},
-  knowledge_base:{ic:'book',t:'База знаний и поиск по документам',d:'ИИ знает регламенты, договоры, продукты и отвечает с учётом прав доступа',can:'ИИ отвечает по вашей базе знаний со ссылкой на источник',q:['kb_docs','kb_volume','kb_access','kb_update']},
-  document_generation:{ic:'doc',t:'Документы, договоры, КП и презентации',d:'Создание, проверка, сравнение и оформление документов по шаблонам',can:'Готовит и проверяет договоры, КП, отчёты и презентации по шаблонам',q:['doc_types','doc_pages','doc_complexity','doc_pres']},
-  data_analytics:{ic:'chart',t:'Аналитика данных и управленческие отчёты',d:'Руководитель спрашивает обычным языком, ИИ анализирует CRM, 1С, BI и таблицы',can:'Отвечает на вопросы руководителя по данным CRM, 1С и таблиц',q:['da_users','da_q','da_sources']},
-  coding:{ic:'code',t:'Помощь разработчикам',d:'Пишет и проверяет код, понимает репозитории, делает тесты и документацию',can:'Помогает разработчикам без отправки кода во внешние сервисы',q:['cd_level','cd_devs','cd_req','cd_repo']},
-  sales_crm:{ic:'deal',t:'AI-ассистент отдела продаж и CRM',d:'Обрабатывает заявки, готовит ответы и КП, заполняет CRM, ставит задачи',can:'Помогает менеджерам: квалификация, ответы, КП, заполнение CRM',q:['leads','sales_autonomy','sales_systems']},
-  external_bot:{ic:'bot',t:'Бот для клиентов на сайте и в мессенджерах',d:'Сам консультирует, собирает данные, создаёт заявки, передаёт человеку',can:'Бот сам отвечает клиентам на сайте и в мессенджерах',q:['bot_channels','bot_messages','bot_peak','bot_skill']},
-  agent_platform:{ic:'agents',t:'Несколько AI-агентов с оркестратором',d:'Продавец, аналитик, юрист, помощник руководителя, оркестратор распределяет задачи',can:'Несколько AI-агентов выполняют роли под управлением оркестратора',q:['ag_count','ag_tasks','ag_steps','ag_rights']},
-  speech_analytics:{ic:'phone',t:'Расшифровка и аналитика звонков',d:'Транскрибация, резюме, договорённости, контроль скрипта, оценка менеджера',can:'Расшифровывает и анализирует звонки, заполняет CRM',q:['sp_minutes','sp_mode','sp_peak','sp_retention']},
-  voice_bot:{ic:'voice',t:'Голосовой робот',d:'Слышит клиента, отвечает голосом, записывает, квалифицирует, действует в CRM',can:'Голосовой робот ведёт звонки и выполняет действия в CRM',q:['vb_dir','vb_streams','vb_voice','vb_scenario']},
-  audio_music:{ic:'music',t:'Аудио, озвучка и музыка',d:'Очистка звука, озвучка, дубляж, разделение дорожек, фоновая музыка',can:'Очищает звук, озвучивает, делает дубляж и музыку',q:['au_tasks','au_minutes','au_tracks']},
-  image_basic:{ic:'image',t:'Генерация изображений',d:'Иллюстрации, баннеры, фоны, карточки товаров, варианты креативов',can:'Генерирует изображения и рекламные креативы',q:['ib_count','ib_res','ib_var']},
-  image_advanced:{ic:'wand',t:'Продвинутое редактирование фото',d:'Замена фона и предметов, одежда, интерьер, сохранение лица или товара',can:'Редактирует фото по текстовой команде с сохранением товара и стиля',q:['ia_count','ia_mode','ia_res','ia_brand']},
-  vision_analysis:{ic:'eye',t:'Анализ изображений и видео',d:'OCR, сканы, контроль производства, видеоархив, камеры, модерация',can:'Распознаёт объекты, события и текст на фото и видео',q:['va_type','va_hours','va_cams']},
-  video_generation:{ic:'video',t:'Генерация и редактирование видео',d:'Короткие ролики, анимация, варианты рекламных видео, замена фона',can:'Генерирует короткие ролики и варианты рекламных видео',q:['vg_clips','vg_dur','vg_res','vg_var']}
-};
-const INTERNAL=['employee_chat','knowledge_base','document_generation','data_analytics','coding','sales_crm','agent_platform'];
-const TEXT=['employee_chat','knowledge_base','document_generation','data_analytics','coding','sales_crm','external_bot','agent_platform'];
-
-/* ---------- вопросы ----------
-   t: choice | multi | count | num | tri; o: [значение, подпись]; u: значение при «не знаю» */
-const UNK=['unk','Не знаю'];
-const Q={
-  employees:{t:'count',l:'Сколько человек будет пользоваться системой?',h:'Укажите всех, у кого будет доступ, даже если они обращаются к ИИ не каждый день',o:[[10,'до 10'],[30,'11-30'],[100,'31-100'],[300,'101-300'],[1000,'301-1 000'],[2000,'более 1 000']],u:30},
-  usage:{t:'choice',l:'Насколько активно сотрудники будут пользоваться ИИ?',o:[['rare','Иногда · несколько раз в неделю'],['daily','Каждый рабочий день'],['active','Очень активно, ИИ в процессах'],UNK],u:'unk'},
-  peak:{t:'choice',l:'Сколько человек может обращаться к ИИ одновременно?',h:'Люди, которые пишут ИИ в одну и ту же минуту в час пик',o:[[5,'до 5'],[10,'до 10'],[25,'до 25'],[50,'до 50'],[100,'до 100'],[300,'до 300'],[600,'более 300'],UNK],u:'auto'},
-  growth:{t:'choice',l:'Какой рост нагрузки ожидается в течение года?',o:[[0,'Без роста'],[0.25,'+25%'],[0.5,'+50%'],[1,'В 2 раза'],[1.5,'Более чем в 2 раза'],UNK],u:0.5},
-
-  chat_uses:{t:'multi',l:'Для чего сотрудники будут использовать чат?',o:['Письма и тексты','Идеи и планы','Краткое содержание','Анализ информации','Таблицы','Ответы по работе','Большие документы','Цепочки действий']},
-  kb_docs:{t:'choice',l:'Сколько документов нужно подключить?',o:[[1000,'до 1 000'],[10000,'1-10 тыс.'],[100000,'10-100 тыс.'],[1000000,'100 тыс.-1 млн'],[3000000,'более 1 млн'],UNK],u:10000},
-  kb_volume:{t:'choice',l:'Общий объём этих данных',o:[[0.1,'до 100 ГБ'],[1,'100 ГБ-1 ТБ'],[10,'1-10 ТБ'],[50,'10-50 ТБ'],[100,'более 50 ТБ'],UNK],u:1},
-  kb_access:{t:'choice',l:'Нужно ли учитывать права доступа?',o:[['all','Нет, общая база'],['dept','По отделам'],['role','По ролям'],['doc','На каждый документ'],['sso','Через AD / LDAP / SSO']],u:'dept'},
-  kb_update:{t:'choice',l:'Как часто обновляются документы?',o:[['rare','Редко'],['daily','Ежедневно'],['hourly','Несколько раз в час'],['rt','В реальном времени из CRM / 1С / СЭД']],u:'daily'},
-
-  doc_types:{t:'multi',l:'Что нужно делать с документами?',o:['Пересказ и резюме','Извлечение реквизитов','Проверка комплектности','Сравнение версий','Риски в договорах','Договоры по шаблону','Коммерческие предложения','Отчёты','Презентации','Сборка PDF','Распознавание сканов','Тендерные документы']},
-  doc_pages:{t:'choice',l:'Сколько страниц обрабатывается в месяц?',o:[[1000,'до 1 000'],[10000,'1-10 тыс.'],[100000,'10-100 тыс.'],[500000,'100-500 тыс.'],[1000000,'500 тыс.-1 млн'],[2000000,'более 1 млн'],UNK],u:10000},
-  doc_complexity:{t:'choice',l:'Насколько сложная обработка?',o:[[1,'Простая: распознать, извлечь поля'],[3,'Средняя: резюме, сравнение, шаблоны'],[8,'Сложная: юридический анализ, противоречия']],u:3},
-  doc_pres:{t:'choice',l:'Сколько КП и презентаций в месяц?',o:[[0,'Не нужно'],[20,'до 20'],[100,'20-100'],[500,'100-500'],[1000,'более 500']],u:20},
-
-  da_users:{t:'choice',l:'Сколько руководителей и аналитиков будут задавать вопросы?',o:[[5,'до 5'],[20,'до 20'],[50,'до 50'],[150,'более 50']],u:20},
-  da_q:{t:'choice',l:'Сколько вопросов в день на человека?',o:[[5,'до 5'],[20,'5-20'],[50,'более 20']],u:5},
-  da_sources:{t:'multi',l:'Откуда брать данные?',o:['CRM','1С','Excel / Google Sheets','PostgreSQL / MySQL','ClickHouse','DWH','Power BI','Файлы','Собственные API']},
-
-  cd_level:{t:'choice',l:'Какой уровень задач по коду?',o:[[2,'Простой код: формулы, SQL, скрипты'],[5,'Модули, интеграции, API'],[10,'Большие репозитории и архитектура'],[20,'Автономные агенты разработки']],u:5},
-  cd_devs:{t:'num',l:'Сколько разработчиков?',ph:'например, 15',u:10},
-  cd_req:{t:'choice',l:'Сколько запросов на разработчика в день?',o:[[5,'до 10'],[20,'10-30'],[60,'30-100'],[120,'более 100']],u:20},
-  cd_repo:{t:'choice',l:'Размер репозиториев',o:[[1,'до 100 тыс. строк'],[2,'до 1 млн строк'],[3,'более 1 млн строк'],[4,'Много связанных репозиториев']],u:1},
-
-  leads:{t:'choice',l:'Сколько новых заявок в месяц?',o:[[500,'до 500'],[2000,'500-2 000'],[10000,'2-10 тыс.'],[50000,'10-50 тыс.'],[200000,'50-200 тыс.'],[400000,'более 200 тыс.'],UNK],u:2000},
-  sales_autonomy:{t:'choice',l:'Насколько самостоятельно работает ИИ?',o:[[5,'Подсказки менеджеру'],[10,'Готовит черновики'],[20,'Действует после подтверждения'],[40,'Автономный агент']],u:10},
-  sales_systems:{t:'multi',l:'С какими системами нужна интеграция?',o:['Bitrix24','amoCRM','1С','Телефония','Почта','Сайт','Telegram','ERP','СЭД','Собственная система']},
-
-  bot_channels:{t:'multi',l:'Где будет работать бот?',o:['Сайт','Telegram','MAX','WhatsApp','Личный кабинет','Мобильное приложение','Email']},
-  bot_messages:{t:'choice',l:'Сколько сообщений бот обработает в месяц?',h:'Одно сообщение, это один вопрос или ответ в диалоге',o:[[10000,'до 10 тыс.'],[100000,'10-100 тыс.'],[500000,'100-500 тыс.'],[1000000,'500 тыс.-1 млн'],[5000000,'1-5 млн'],[8000000,'более 5 млн'],UNK],u:100000},
-  bot_peak:{t:'choice',l:'Сколько диалогов может идти одновременно?',o:[[10,'до 10'],[25,'до 25'],[50,'до 50'],[100,'до 100'],[300,'до 300'],[1000,'до 1 000'],[2000,'более 1 000'],UNK],u:25},
-  bot_skill:{t:'choice',l:'Что бот должен уметь?',o:[[1,'Только отвечать'],[1.3,'Отвечать по базе знаний'],[1.5,'+ создавать заявки в CRM'],[2,'Много действий: заказы, запись, документы']],u:1.3},
-
-  ag_count:{t:'choice',l:'Сколько разных агентов планируется?',o:[[3,'1-3'],[10,'4-10'],[30,'11-30'],[50,'более 30']],u:10},
-  ag_tasks:{t:'choice',l:'Сколько задач агенты выполняют в месяц?',o:[[1000,'до 1 000'],[10000,'1-10 тыс.'],[100000,'10-100 тыс.'],[200000,'более 100 тыс.'],UNK],u:10000},
-  ag_steps:{t:'choice',l:'Сколько шагов обычно в одной задаче?',o:[[1.2,'1-2 действия'],[1.8,'3-5 действий'],[2.8,'6-15 действий'],[4,'Длинный автономный процесс']],u:1.8},
-  ag_rights:{t:'choice',l:'Может ли агент сам изменять данные?',o:[['no','Нет, только предлагает'],['confirm','После подтверждения'],['limited','В ограниченных процессах'],['full','Да, с журналом и политиками']],u:'confirm'},
-
-  sp_minutes:{t:'choice',l:'Сколько минут разговоров анализировать в месяц?',o:[[10000,'до 10 тыс.'],[50000,'10-50 тыс.'],[250000,'50-250 тыс.'],[500000,'250-500 тыс.'],[1000000,'500 тыс.-1 млн'],[2000000,'1-2 млн'],[3000000,'более 2 млн'],UNK],u:50000},
-  sp_mode:{t:'choice',l:'Когда нужен результат?',o:[['post','После разговора'],['minutes','Через несколько минут'],['during','Во время разговора'],['rt','В реальном времени с подсказками оператору']],u:'post'},
-  sp_peak:{t:'choice',l:'Сколько разговоров может идти одновременно?',o:[[5,'до 5'],[10,'до 10'],[25,'до 25'],[50,'до 50'],[100,'до 100'],[300,'до 300'],[500,'более 300'],UNK],u:25,show:()=>['during','rt'].includes(A.sp_mode)},
-  sp_retention:{t:'choice',l:'Сколько хранить аудиозаписи?',o:[[0,'Не хранить'],[1,'30 дней'],[6,'6 месяцев'],[12,'1 год'],[36,'3 года'],[60,'Бессрочно']],u:12},
-
-  vb_dir:{t:'choice',l:'Какие звонки?',o:[['in','Входящие'],['out','Исходящие'],['both','Входящие и исходящие']],u:'both'},
-  vb_streams:{t:'choice',l:'Сколько разговоров одновременно?',o:[[5,'до 5'],[10,'до 10'],[25,'до 25'],[50,'до 50'],[100,'до 100'],[300,'до 300'],[500,'более 300'],UNK],u:10},
-  vb_voice:{t:'choice',l:'Какое качество голоса?',o:[['std','Стандартный синтез'],['natural','Естественная речь'],['brand','Фирменный голос'],['multi','Несколько голосов и языков']],u:'natural'},
-  vb_scenario:{t:'choice',l:'Насколько сложный сценарий?',o:[['faq','Типовые вопросы'],['book','Квалификация и запись'],['sales','Продажи'],['support','Техподдержка'],['free','Свободный диалог и действия в системах']],u:'book'},
-
-  au_tasks:{t:'multi',l:'Что нужно делать?',o:['Очистка записей','Удаление шума','Разделение дорожек','Озвучка','Перевод и переозвучка','Фирменный голос','Фоновая музыка','Полноценные композиции']},
-  au_minutes:{t:'choice',l:'Сколько минут аудио в месяц?',o:[[1000,'до 1 000'],[10000,'1-10 тыс.'],[100000,'10-100 тыс.'],[300000,'более 100 тыс.'],UNK],u:10000},
-  au_tracks:{t:'choice',l:'Сколько музыкальных треков в месяц?',o:[[0,'Музыка не нужна'],[100,'до 100'],[1000,'100-1 000'],[3000,'более 1 000']],u:0},
-
-  ib_count:{t:'choice',l:'Сколько изображений в месяц?',o:[[1000,'до 1 000'],[5000,'1-5 тыс.'],[20000,'5-20 тыс.'],[50000,'20-50 тыс.'],[150000,'50-150 тыс.'],[250000,'более 150 тыс.'],UNK],u:5000},
-  ib_res:{t:'choice',l:'Какое качество?',o:[[1,'Для сайта и соцсетей'],[1.3,'Высокое, 2K'],[1.8,'Печать и 4K'],UNK],u:1.3},
-  ib_var:{t:'choice',l:'Сколько вариантов одного креатива?',o:[[1,'1'],[2,'2-3'],[4,'4 и больше']],u:2},
-  ia_count:{t:'choice',l:'Сколько фото редактировать в месяц?',o:[[1000,'до 1 000'],[5000,'1-5 тыс.'],[20000,'5-20 тыс.'],[50000,'20-50 тыс.'],[150000,'50-150 тыс.'],[250000,'более 150 тыс.'],UNK],u:5000},
-  ia_mode:{t:'choice',l:'Какое редактирование?',o:[[1.5,'Рекламные креативы'],[2.5,'Сложное: фон, объекты, одежда, интерьер'],[3,'С сохранением лица, товара или стиля']],u:2.5},
-  ia_res:{t:'choice',l:'Какое качество?',o:[[1,'Для сайта и соцсетей'],[1.3,'Высокое, 2K'],[1.8,'Печать и 4K'],UNK],u:1.3},
-  ia_brand:{t:'choice',l:'Нужно обучить модель фирменному стилю?',o:[['no','Нет'],['yes','Да']],u:'no'},
-
-  va_type:{t:'choice',l:'Что анализируем?',o:[['rec','Записанное видео и сканы'],['live','Прямые потоки с камер'],['both','И то, и другое']],u:'rec'},
-  va_hours:{t:'choice',l:'Сколько часов видео в месяц?',o:[[100,'до 100'],[1000,'100-1 000'],[10000,'1-10 тыс.'],[50000,'10-50 тыс.'],[80000,'более 50 тыс.'],UNK],u:1000,show:()=>A.va_type!=='live'},
-  va_cams:{t:'choice',l:'Сколько камер одновременно?',o:[[4,'до 4'],[8,'до 8'],[32,'до 32'],[100,'до 100'],[200,'более 100']],u:8,show:()=>['live','both'].includes(A.va_type)},
-
-  vg_clips:{t:'choice',l:'Сколько роликов в месяц?',o:[[20,'до 20'],[100,'20-100'],[500,'100-500'],[1000,'500-1 000'],[5000,'1-5 тыс.'],[10000,'более 5 тыс.'],UNK],u:100},
-  vg_dur:{t:'choice',l:'Средняя длительность',o:[[1,'до 5 сек'],[3,'5-15 сек'],[6,'15-30 сек'],[12,'более 30 сек']],u:3},
-  vg_res:{t:'choice',l:'Разрешение',o:[[1,'720p'],[1.8,'1080p'],[4,'4K'],UNK],u:1.8},
-  vg_var:{t:'choice',l:'Вариантов одного ролика',o:[[1,'1'],[2,'2-3'],[4,'4 и больше']],u:2},
-
-  quality:{t:'choice',l:'Какой уровень качества ответов нужен?',h:'Чем сложнее документы, код и рассуждения, тем больше памяти и мощности требуется',o:[['basic','Базовый · письма, идеи, короткие ответы'],['corporate','Корпоративный · деловые тексты, документы, инструкции'],['advanced','Продвинутый · сложный анализ, длинные документы, код'],['max','Максимальный из доступных локально']],u:'corporate'},
-  fileSize:{t:'choice',l:'Будут ли загружать файлы?',o:[['short','Нет, короткие запросы'],['p20','Файлы до 20 страниц'],['p100','Документы до 100 страниц'],['big','Большие документы и наборы файлов'],UNK],u:'p20'},
-  latency:{t:'choice',l:'Как быстро должен отвечать ИИ?',o:[['economy','Можно подождать до минуты'],['normal','Обычная скорость, 5-10 сек'],['fast','Почти мгновенно, 1-3 сек'],['realtime','Реальное время (голос, подсказки)']],u:'normal'},
-  availability:{t:'choice',l:'Когда система должна быть доступна?',o:[['work','Только в рабочее время'],['maint','Круглосуточно, перерыв на обслуживание допустим'],['nodown','Круглосуточно, простой недопустим'],UNK],u:'unk'},
-  internet:{t:'choice',l:'Можно ли подключать сервер к интернету?',o:[['yes','Да'],['updates','Только для обновлений'],['gateway','Через контролируемый шлюз'],['closed','Полностью закрытый контур']],u:'updates'},
-  dataTypes:{t:'multi',l:'Какие данные будут обрабатываться?',o:['Открытые данные','Внутренние документы','Коммерческая тайна','Персональные данные','Медицинские данные','Финансовые данные','Исходный код','Аудио и звонки','Изображения и видео']},
-  logging:{t:'choice',l:'Какое журналирование нужно?',o:[['basic','Базовые логи'],['full','Полный журнал запросов и действий'],['siem','Интеграция с SIEM'],['long','Длительное хранение логов']],u:'basic'},
-  sso:{t:'choice',l:'Нужен ли единый вход?',o:[['none','Не нужен'],['ad','Active Directory / LDAP'],['sso','SSO / корпоративный IdP'],['b24','Bitrix24 ID']],u:'none'},
-
-  location:{t:'choice',l:'Где будет стоять сервер?',o:[['office','В офисе'],['room','В своей серверной'],['cdc','В дата-центре компании'],['rent','В арендованном дата-центре'],['undecided','Ещё не решили']],u:'undecided'},
-  site_rack:{t:'tri',l:'Стойка 19"'},
-  site_power:{t:'tri',l:'Отдельное электропитание'},
-  site_ups:{t:'tri',l:'ИБП и резервное питание'},
-  site_cool:{t:'tri',l:'Охлаждение'},
-  site_net:{t:'tri',l:'Сеть 10/25/100 GbE'},
-  sysadmin:{t:'choice',l:'Есть ли системный администратор?',o:[['yes','Да, будет сопровождать сервер'],['train','Да, но нужно обучение'],['no','Нет, нужна ваша поддержка'],['onsite','Нужен выездной специалист'],['24x7','Нужно сопровождение 24×7']],u:'no'},
-  supply:{t:'choice',l:'Кто собирает и поставляет сервер?',o:[['turnkey','Подберите и поставьте под ключ'],['own','У нас уже есть оборудование'],['buy','Купим сами у своего поставщика по вашему ТЗ'],['rent','Аренда GPU-сервера / размещение в ЦОД']],u:'turnkey'}
-};
-const SITE_Q=['site_rack','site_power','site_ups','site_cool','site_net'];
-
-/* ---------- состояние ---------- */
-let A={tasks:[]};
-let STEP=1;
-const EXPERT=/expert=1/.test(location.search+location.hash);
-const has=id=>A.tasks.includes(id);
-const isUnk=id=>{const a=A[id];return a===undefined||a===null||a==='unk'||a==='';};
-function v(id){const q=Q[id];if(q.t==='num'){const n=Number(A[id]);return isFinite(n)&&n>0?n:q.u;}if(q.t==='multi')return A[id]||[];if(q.t==='count'){const n=Number(A[id]);return isFinite(n)&&n>0?n:q.u;}return isUnk(id)?q.u:A[id];}
-const anyInternal=()=>INTERNAL.some(has);
-const hasText=()=>TEXT.some(has);
-
-/* какие вопросы видны на экране */
-function visibleQ(step){
-  const out=[];
-  if(step===2){
-    if(anyInternal()){out.push('employees');if(has('employee_chat')||has('knowledge_base'))out.push('usage');out.push('peak');}
-    out.push('growth');
-    GROUPS.forEach(g=>g.tasks.forEach(t=>{if(has(t))TASKS[t].q.forEach(id=>{if(!Q[id].show||Q[id].show())out.push(id);});}));
-  }
-  if(step===3){if(hasText())out.push('quality','fileSize');out.push('latency','availability','internet','dataTypes','logging','sso');}
-  if(step===4){out.push('location');if(['office','room','cdc'].includes(A.location))out.push(...SITE_Q);out.push('sysadmin','supply');}
-  return out;
-}
 
 /* ===================== ДВИЖОК ===================== */
-const ORDER=['A','B','C','D','E','F','G','H'];
-const LEVEL=['B','C','D','E','F','H']; // 32 · 48 · 96 · 2×96 · 4×96 · кластер
-const ci=c=>ORDER.indexOf(c);
-const maxC=(a,b)=>!a?b:!b?a:(ci(a)>=ci(b)?a:b);
-const lvl=(x,th)=>{for(let i=0;i<th.length;i++)if(x<=th[i])return i;return th.length;};
-const round=x=>Math.round(x);
-
-function compute(ov={}){
-  const r={nodes:[],why:[],manual:[],soft:[],excluded:['Доставка и страхование оборудования','Командировка инженера'],svc:[],infra:[],notes:[]};
-  const gIn=v('growth');const growth=ov.growth!==undefined?ov.growth:gIn;const G=1+growth;r.growth=growth;
-  const avail=v('availability');
-  const ha=ov.ha!==undefined?ov.ha:(avail==='nodown');r.ha=ha;
-  const emp=anyInternal()?v('employees'):0;
-  const usageKey=v('usage');
-  const perUser={rare:150,daily:500,active:1250,unk:600}[usageKey]||600;
-
-  /* --- текстовые операции --- */
-  const ops={};
-  if(has('employee_chat')||has('knowledge_base'))ops.chat=emp*perUser*(has('knowledge_base')?1.3:1);
-  let extPeak=0,extMsg=0;
-  if(has('external_bot')){extMsg=v('bot_messages');ops.bot=extMsg*v('bot_skill');extPeak=v('bot_peak');}
-  if(has('sales_crm'))ops.sales=v('leads')*v('sales_autonomy');
-  if(has('document_generation'))ops.docs=v('doc_pages')*v('doc_complexity')+v('doc_pres')*60;
-  let devPeak=0;
-  if(has('coding')){ops.code=v('cd_devs')*v('cd_req')*22*v('cd_level');devPeak=Math.ceil(v('cd_devs')*0.35);}
-  if(has('agent_platform'))ops.agents=v('ag_tasks')*v('ag_steps')*8;
-  if(has('data_analytics'))ops.data=v('da_users')*v('da_q')*22*5;
-  const rawOps=Object.values(ops).reduce((s,x)=>s+x,0);
-  const quality=v('quality');
-  const qf={basic:0.8,corporate:1,advanced:1.7,max:2.8}[quality];
-  let ctx={short:1,p20:1.2,p100:1.5,big:2.2}[v('fileSize')]||1.2;
-  if((A.chat_uses||[]).includes('Большие документы'))ctx=Math.max(ctx,1.5);
-  if(has('coding')&&v('cd_repo')>=3)ctx=Math.max(ctx,2.2);
-  const lat=v('latency');const sf={economy:0.8,normal:1,fast:1.5,realtime:1.5}[lat];
-  const eff=rawOps*qf*ctx*sf*G;
-  r.rawOps=rawOps;r.eff=eff;
-
-  /* --- пиковая параллельность --- */
-  let intPeak=0;
-  if(anyInternal()){
-    const p=v('peak');
-    if(p==='auto'){const pc={rare:[0.02,2],daily:[0.05,5],active:[0.10,10],unk:[0.05,5]}[usageKey]||[0.05,5];intPeak=Math.max(pc[1],Math.ceil(emp*pc[0]));}
-    else intPeak=p;
-  }
-  const agPeak=has('agent_platform')?Math.ceil(v('ag_count')*1.5):0;
-  const peakBase=intPeak+extPeak+devPeak+agPeak;const peak=Math.ceil(peakBase*G);r.peak=peak;
-
-  /* --- текстовый класс: max(объём, параллельность, качество, код) --- */
-  let textCls=null;
-  if(hasText()){
-    const iv=lvl(eff,[5e5,1.5e6,4e6,1e7,2.5e7]);
-    const ic=lvl(peakBase,[10,25,60,150,400]);
-    const iq={basic:0,corporate:1,advanced:2,max:3}[quality];
-    let icd=0;if(has('coding')){const L=v('cd_level');icd=L<=2?0:L<=5?1:L<=10?2:(v('cd_devs')>=20?3:2);}
-    const idx=Math.max(iv,ic,iq,icd);
-    const labels=['1×32 ГБ','1×48 ГБ','1×96 ГБ','2×96 ГБ','4×96 ГБ','кластер'];
-    r.why.push('Объём: ~'+fmtN(round(eff))+' условных операций в месяц → '+labels[iv]);
-    r.why.push('Одновременность: ~'+peakBase+' сессий в пик сейчас (с ростом ~'+peak+') → '+labels[ic]);
-    r.why.push('Качество «'+{basic:'базовое',corporate:'корпоративное',advanced:'продвинутое',max:'максимальное'}[quality]+'» → минимум '+labels[iq]);
-    if(has('coding'))r.why.push('Код → минимум '+labels[icd]);
-    textCls=LEVEL[idx];
-    const small=emp<=30&&avail==='work'&&!has('external_bot')&&!ha;
-    if(idx===0&&small)textCls='A';
-    if(idx===4&&quality==='max')textCls='G';
-    if(quality==='max')r.manual.push('Выбрана максимальная модель: нужен benchmark и индивидуальная конфигурация');
-    if(textCls==='H')r.manual.push('Текстовая нагрузка требует кластера');
-    if(extMsg>5e6)r.manual.push('Более 5 млн сообщений бота в месяц');
-  }
-
-  /* --- речь --- */
-  let spBatch=null,spRT=null;const spTable=s=>s<=10?'S1':s<=40?'S2':s<=100?'S4':'M';
-  let minutes=0;
-  if(has('speech_analytics')){
-    minutes=v('sp_minutes')*G;const mode=v('sp_mode');
-    if(mode==='during'||mode==='rt'){spRT=spTable(v('sp_peak')*G);r.why.push('Речь в реальном времени: '+round(v('sp_peak')*G)+' потоков');}
-    else{spBatch=minutes<=5e4?'share':minutes<=2.5e5?'S1':minutes<=7.5e5?'S2':minutes<=1.5e6?'S4':'M';r.why.push('Звонки: ~'+fmtN(round(minutes))+' минут в месяц');}
-    if(spBatch==='M'||spRT==='M')r.manual.push('Большой объём речи: нужен отдельный речевой кластер');
-  }
-  let voice=null;
-  if(has('voice_bot')){const s=v('vb_streams')*G;voice=spTable(s*1.5);if(v('vb_streams')>300)r.manual.push('Более 300 одновременных голосовых линий');r.why.push('Голосовой робот: '+round(s)+' линий × 1,5 на задержку');}
-
-  /* --- изображения, видео, аудио --- */
-  let creative=null,creativeWhat=[];const cc=c=>{creative=creative===null?c:(c==='share'?creative:(creative==='share'?c:maxC(creative,c)));};
-  let imgEq=0;
-  if(has('image_basic'))imgEq+=v('ib_count')*v('ib_res')*v('ib_var');
-  if(has('image_advanced'))imgEq+=v('ia_count')*v('ia_mode')*v('ia_res');
-  imgEq*=G;
-  if(imgEq>0){creativeWhat.push('изображения');cc(imgEq<=2000?'share':imgEq<=1e4?'B':imgEq<=5e4?'D':imgEq<=1.5e5?'E':'F');if(imgEq>1.5e5)r.soft.push('Больше 150 тыс. эквивалентных изображений: конфигурацию подтвердим benchmark');}
-  if(has('vision_analysis')){
-    creativeWhat.push('анализ видео');const t=v('va_type');let c='share';
-    if(t!=='live'){const h=v('va_hours')*G;c=h<=100?'share':h<=1000?'B':h<=1e4?'D':h<=5e4?'E':'H';}
-    if(t!=='rec'){const cam=v('va_cams')*G;const c2=cam<=8?'B':cam<=32?'D':cam<=100?'E':'H';c=c==='share'?c2:maxC(c,c2);}
-    if(c==='H')r.manual.push('Видеоаналитика большого объёма: нужен кластер');cc(c);
-  }
-  let clips=0,vunits=0;
-  if(has('video_generation')){
-    creativeWhat.push('генерация видео');clips=v('vg_clips')*G;vunits=clips*v('vg_dur')*v('vg_res')*v('vg_var');
-    const c=vunits<=100?'B':vunits<=1000?'D':vunits<=5000?'E':vunits<=15000?'F':'H';
-    if(vunits>15000)r.manual.push('Более 15 тыс. эквивалентных роликов: кластер и benchmark');
-    else if(vunits>1000)r.soft.push('Генерация видео больше 1 000 роликов: расчёт предварительный');
-    cc(c);
-  }
-  if(has('audio_music')){
-    creativeWhat.push('аудио');const m=v('au_minutes')*G;let c=m<=1e4?'share':m<=1e5?'B':'D';if(m>1e5)r.soft.push('Большой объём аудио: уточним benchmark');
-    const tr=v('au_tracks')*G;if(tr>0){const c2=tr<=100?'share':tr<=1000?'C':'D';c=c==='share'?c2:(c2==='share'?c:maxC(c,c2));if(tr>1000)r.soft.push('Больше 1 000 треков в месяц: ручной расчёт');}
-    cc(c);
-  }
-
-  /* --- сборка узлов --- */
-  const small=emp<=30&&avail==='work'&&!ha;
-  if(textCls)r.nodes.push({role:'llm',cls:textCls,label:'Основной сервер: '+mainLabel(),crit:true});
-  if(creative){
-    if(creative==='share'&&r.nodes.length){r.notes.push('Лёгкие медиа-задачи ('+creativeWhat.join(', ')+') работают на основном сервере в фоновой очереди');}
-    else{const c=creative==='share'?(small?'A':'B'):creative;r.nodes.push({role:'creative',cls:c,label:'Медиа-контур: '+creativeWhat.join(', '),crit:false});}
-    if(creative!=='share'&&has('external_bot')&&avail!=='work')r.notes.push('Клиентский бот 24×7 и генерация медиа разнесены на разные серверы, чтобы бот не ждал очередь');
-  }
-  if(spBatch){
-    if(spBatch==='share'&&r.nodes.length)r.notes.push('Расшифровка звонков помещается на основной сервер (до 50 тыс. минут без пиков)');
-    else r.nodes.push({role:'speech',sp:spBatch==='share'?'S1':spBatch,label:'Речевой контур: расшифровка и аналитика звонков',crit:false});
-  }
-  if(spRT)r.nodes.push({role:'speech',sp:spRT,label:'Речевой контур реального времени: подсказки оператору',crit:true});
-  if(voice)r.nodes.push({role:'voice',sp:voice,label:'Голосовой контур: распознавание, ответ и синтез речи',crit:true});
-  // платформа 24×7 или несколько серверов: рабочая станция → сервер
-  r.nodes.forEach(n=>{if(n.cls==='A'&&(r.nodes.length>1||avail!=='work'))n.cls='B';});
-  r.nodes.forEach(n=>{n.qty=(ha&&n.crit)?2:1;const spec=n.sp?CFG.speech[n.sp]:CFG.classes[n.cls];n.spec=spec;if(spec.manual)r.manual.push(spec.name+': требуется индивидуальное проектирование');});
-  if(ha)r.why.push('Простой недопустим: критичные узлы дублируются (N+1)');
-
-  /* --- оборудование --- */
-  let eqLo=0,eqHi=0;r.nodes.forEach(n=>{eqLo+=n.spec.eq[0]*1e6*n.qty;eqHi+=n.spec.eq[1]*1e6*n.qty;});
-  r.eq=[eqLo,eqHi];
-
-  /* --- хранение --- */
-  const ret=has('speech_analytics')?v('sp_retention'):0;
-  let tb=2; // модели, индексы, служебные данные
-  tb+=rawOps*G*5e3*12/1e12;
-  tb+=minutes*2*ret/1e6;
-  if(has('document_generation'))tb+=v('doc_pages')*G*1*12*0.5/1e6;
-  if(has('knowledge_base'))tb+=v('kb_volume');
-  tb+=imgEq*10*12/1e6;
-  if(has('video_generation'))tb+=clips*(v('vg_dur')*5/10)*150*12/1e6;
-  if(v('logging')==='long')tb*=1.3;
-  const need=Math.max(4,tb*2.25);r.storageTB=need;
-  let stCost=null;
-  for(const [lim,lo,hi] of CFG.storage){if(need<=lim){stCost=[lo,hi];break;}}
-  if(!stCost){r.manual.push('Более 300 ТБ хранения');stCost=[7000000,7000000];}
-  r.storageCost=stCost;
-
-  /* --- поставка --- */
-  const supply=v('supply');r.supply=supply;
-  r.eqIncluded=supply==='turnkey';
-  let asm=0;if(supply==='turnkey')r.nodes.forEach(n=>{if(n.spec.asm)asm+=n.spec.asm*n.qty;});
-  r.asm=asm;
-  if(supply==='own'){r.notes.push('Аудит совместимости вашего оборудования входит в базовую установку');r.excluded.push('Модернизация оборудования, если понадобится, после аудита');}
-  if(supply==='buy')r.notes.push('Выдадим ТЗ, рекомендуемую конфигурацию, требования к питанию и сети и список допустимых аналогов. Удалённую проверку сборки делаем в рамках установки');
-  r.rent=supply==='rent'?[eqLo*CFG.rentPct[0],eqHi*CFG.rentPct[1]]:null;
-
-  /* --- площадка --- */
-  const loc=v('location');
-  if(['office','room','cdc'].includes(loc)&&supply!=='rent'){
-    const s=id=>A[id]||'unk';
-    if(s('site_rack')==='no')r.infra.push(['Стойка, PDU и базовый монтаж',...CFG.infra.rack]);
-    if(s('site_power')==='no'||s('site_ups')==='no')r.infra.push(['ИБП и резервное питание',...CFG.infra.ups]);
-    if(s('site_net')==='no'&&(r.nodes.length>1||r.nodes.some(n=>n.cls&&ci(n.cls)>=2)))r.infra.push(['Сеть 25/100 GbE',...CFG.infra.net]);
-    if(s('site_cool')==='no')r.excluded.push('Подготовка охлаждения: после обследования');
-    if(SITE_Q.some(id=>s(id)==='unk'))r.excluded.push('Подготовка площадки: требуется обследование');
-  }
-  if(loc==='undecided')r.excluded.push('Подготовка площадки: после выбора места');
-  if(loc==='rent')r.excluded.push('Размещение в дата-центре: ежемесячный платёж');
-  if(ha)r.infra.push(['Отказоустойчивая сеть и питание',...CFG.infra.ha]);
-
-  /* --- услуги --- */
-  const S=CFG.svc,add=(n,p,from)=>r.svc.push([n,p,from?p*CFG.fromK:p,!!from]);
-  add('Базовая установка и настройка системы',CFG.baseInstall);
-  if(has('knowledge_base')){add('RAG и подключение базы знаний',S.rag);if(v('kb_update')==='rt')add('Синхронизация с CRM / 1С / СЭД',S.sync);}
-  if(has('document_generation'))add('Документный конвейер',S.docs);
-  if(has('sales_crm')){
-    const sys=A.sales_systems||[];
-    if(sys.includes('Bitrix24')||sys.includes('amoCRM')||!sys.length)add('Интеграция с CRM',S.crm);
-    if(sys.includes('1С'))add('Интеграция с 1С',S.onec,true);
-    const other=sys.filter(x=>!['Bitrix24','amoCRM','1С'].includes(x)&&!(x==='Телефония'&&(has('speech_analytics')||has('voice_bot'))));
-    if(other.length)add('Интеграции: '+other.join(', ').toLowerCase(),S.sys*other.length);
-  }
-  if(has('external_bot')){const ch=Math.max(1,(A.bot_channels||[]).length);add('Бот'+(ch>1?' в '+ch+' каналах':' на сайте или в мессенджере'),S.bot+S.botCh*(ch-1));}
-  if(has('agent_platform'))add('Платформа агентов с оркестратором',S.agents,true);
-  if(has('coding'))add('Coding assistant',S.coding);
-  if(has('data_analytics')){const n=(A.da_sources||[]).length;add('Аналитика данных и подключение источников',S.data+S.dataSrc*Math.max(0,n-2));}
-  if(has('speech_analytics'))add('Речевая аналитика и телефония',S.speech);
-  if(has('voice_bot')){add('Голосовой робот',S.voice*(v('vb_scenario')==='free'?1.5:1),true);if(['brand','multi'].includes(v('vb_voice')))add('Фирменный голос / несколько голосов',S.voiceBrand);}
-  if(has('image_basic')||has('image_advanced'))add('Генерация изображений'+(has('image_advanced')?' и редактирование фото':''),S.images+(has('image_advanced')?S.imagesAdv:0));
-  if(has('vision_analysis'))add('Анализ изображений и видео',S.vision);
-  if(has('video_generation'))add('Генерация видео',S.video);
-  if(has('audio_music'))add('Аудио и озвучка',S.audio);
-  if(ha)add('Настройка отказоустойчивости',S.ha);
-  if(v('internet')==='closed'){add('Закрытый контур без интернета',S.airgap);r.soft.push('Закрытый контур: обновления моделей импортируются по регламенту');}
-  if(v('sso')!=='none'||A.kb_access==='sso')add('Интеграция с AD / LDAP / SSO',S.sso);
-  if(v('logging')==='full'||v('ag_rights')==='full'&&has('agent_platform'))add('Полный журнал запросов и действий агентов',S.audit);
-  if(v('logging')==='siem')r.excluded.push('Интеграция с SIEM: ручной расчёт');
-  if(A.ia_brand==='yes'&&has('image_advanced'))r.excluded.push('Обучение модели фирменному стилю (LoRA): от 300 тыс. ₽, ручной расчёт');
-  if(v('sysadmin')==='train')add('Обучение администратора',S.train);
-  r.excluded.push('Нестандартная интеграция и сложные агенты: после обследования');
-
-  /* --- сопровождение (в месяц, не в итоге) --- */
-  const sa=v('sysadmin');
-  if(sa==='24x7'||(ha&&sa!=='yes'))r.support={n:sa==='24x7'?'Сопровождение 24×7 с SLA':'Расширенное сопровождение',p:sa==='24x7'?null:CFG.support.ext};
-  else if(sa==='no'||sa==='onsite')r.support={n:'Рабочее сопровождение',p:CFG.support.work};
-  else r.support={n:'Базовый мониторинг (по желанию)',p:CFG.support.monitor};
-  if(sa==='onsite')r.excluded.push('Выезды инженера на площадку');
-
-  /* --- итог --- */
-  const sum=(arr,i)=>arr.reduce((s,x)=>s+x[i],0);
-  const svcLo=sum(r.svc,1),svcHi=sum(r.svc,2),infLo=sum(r.infra,1),infHi=sum(r.infra,2);
-  r.svcRange=[svcLo,svcHi];
-  r.total=[(r.eqIncluded?eqLo:0)+stCost[0]+infLo+asm+svcLo,(r.eqIncluded?eqHi:0)+stCost[1]+infHi+asm+svcHi];
-  r.manual=[...new Set(r.manual)];
-
-  /* --- производительность и название --- */
-  const cap=[];
-  if(emp)cap.push(['до '+fmtN(round(emp*G)),'сотрудников с доступом']);
-  if(peak)cap.push(['до '+fmtN(peak),'одновременных сессий']);
-  const msgs=(ops.chat||0)+extMsg;if(msgs)cap.push(['до '+fmtN(round(msgs*G)),'сообщений в месяц']);
-  if(has('sales_crm'))cap.push(['до '+fmtN(round(v('leads')*G)),'заявок в месяц']);
-  if(minutes)cap.push(['до '+fmtN(round(minutes)),'минут звонков в месяц']);
-  if(has('voice_bot'))cap.push(['до '+round(v('vb_streams')*G),'голосовых линий одновременно']);
-  if(has('document_generation'))cap.push(['до '+fmtN(round(v('doc_pages')*G)),'страниц документов в месяц']);
-  if(imgEq)cap.push(['до '+fmtN(round((has('image_basic')?v('ib_count'):0)*G+(has('image_advanced')?v('ia_count'):0)*G)),'изображений в месяц']);
-  if(clips)cap.push(['до '+fmtN(round(clips)),'роликов в месяц']);
-  r.cap=cap;
-  const top=r.nodes.reduce((m,n)=>{const c=n.cls||'B';return !m||ci(c)>ci(m)?c:m;},null)||'B';
-  r.topCls=top;
-  const n=r.nodes.reduce((s,x)=>s+x.qty,0);
-  r.title=r.nodes.some(x=>x.spec.manual)?'AI-кластер':n>1?'Корпоративный AI-контур из '+n+' '+plural(n,'сервера','серверов','серверов'):CFG.classes[top].name;
-  r.nServers=n;
-  return r;
+const LV=['B','C','D','E','F'];
+function calc(s){
+  const t=k=>s.tasks.includes(k);
+  const emp=EMP[s.emp]; const why=[]; let indiv=[];
+  let i=emp<=30?0:emp<=100?1:emp<=300?2:emp<=1000?3:4; why.push(emp+' сотрудников → уровень '+(i+1));
+  if((t('bot')||t('sales'))&&i<3){i++;why.push('Продажи или клиентский бот → +1 уровень');}
+  if(t('code')&&emp>100)i=Math.max(i,3);
+  if(t('bot')){const m=+s.bot;if(m>=1000){i=Math.max(i,3);why.push('Бот до 1 млн сообщений → минимум уровень 4');}if(m>1000){i=Math.max(i,4);indiv.push('больше 1 млн сообщений бота');}}
+  if(s.quality==='high'){i=Math.min(4,i+1);why.push('Высокое качество → +1 уровень');}
+  if(s.quality==='max'){i=Math.min(4,Math.max(i+2,3));indiv.push('максимальные модели');why.push('Максимальное качество → +2 уровня');}
+  if(s.growth==='1'&&i<4){i++;why.push('Рост в 2 раза → +1 уровень');}
+  let main=LV[i];
+  if(i===0&&s.mode==='work'&&!t('bot')&&!t('voice'))main='A';
+  const txt=['chat','kb','docs','sales','bot','code','data'].some(t);const nodes=txt?[{k:main,q:s.mode==='nodown'?2:1,l:'Основной сервер'}]:[];
+  const g=s.growth==='0'?1:s.growth==='.5'?1.5:2;
+  if(t('calls')){const m=+s.calls;const sp=m<=50?null:m<=250?'S1':m<=750?'S2':'S4';if(sp)nodes.push({k:sp,q:1,l:'Сервер для звонков',sp:1});else why.push('Звонки до 50 тыс. минут помещаются на основной сервер');if(+s.calls>=1500)indiv.push('больше 750 тыс. минут звонков');}
+  if(t('voice')){const n=+s.voice*1.5;const sp=n<=10?'S1':n<=40?'S2':'S4';nodes.push({k:sp,q:s.mode==='nodown'?2:1,l:'Голосовой сервер',sp:1});if(+s.voice>100)indiv.push('больше 100 голосовых линий');}
+  if(t('media')){let k=s.media==='low'?(emp<=100&&txt?null:'B'):s.media==='mid'?'D':'E';if(k)nodes.push({k,q:!txt&&s.mode==='nodown'?2:1,l:'Сервер для картинок и видео'});else why.push('Небольшой объём картинок идёт на основной сервер в очереди');if(s.media==='high')indiv.push('генерация видео');}
+  if(!nodes.length)nodes.push({k:main,q:s.mode==='nodown'?2:1,l:'Основной сервер'});
+  nodes.forEach(n=>{if(n.k==='A'&&(nodes.length>1||s.mode!=='work'))n.k='B';});
+  // деньги (млн ₽)
+  let eqLo=0,eqHi=0,asm=0;
+  nodes.forEach(n=>{const e=n.sp?CFG.speech[n.k]:CFG.eq[n.k];eqLo+=e[0]*n.q;eqHi+=e[1]*n.q;asm+=(n.sp?(n.k==='S4'?.25:.15):CFG.asm[n.k])*n.q;});
+  const inc=s.supply==='turnkey';
+  let svc=CFG.install+s.tasks.reduce((a,k)=>a+TASKS[k].svc,0)+s.integr.reduce((a,k)=>a+CFG.integr[k],0);
+  if(s.mode==='nodown')svc+=CFG.ha.svc;
+  const svcR=[svc,svc*CFG.svcSpread];
+  const haR=s.mode==='nodown'?CFG.ha.infra:[0,0];
+  const lo=(inc?eqLo+asm:0)+svcR[0]+haR[0], hi=(inc?eqHi+asm:0)+svcR[1]+haR[1];
+  const nq=nodes.reduce((a,n)=>a+n.q,0);
+  const title=nq>1?'AI-контур из '+nq+' серверов':(nodes[0].sp?'Речевой сервер':CFG.names[nodes[0].k]||CFG.names[main]);
+  return {lo,hi,eq:[eqLo+asm,eqHi+asm],inc,svc:svcR,ha:haR,nodes,title,indiv:[...new Set(indiv)],why,main,
+    rent:s.supply==='rent'?[eqLo*1e6*CFG.rent[0],eqHi*1e6*CFG.rent[1]]:null,support:CFG.support[s.support]};
 }
-function mainLabel(){const w=[];if(has('employee_chat'))w.push('AI-чат');if(has('knowledge_base'))w.push('база знаний');if(has('document_generation'))w.push('документы');if(has('sales_crm'))w.push('CRM');if(has('external_bot'))w.push('клиентский бот');if(has('agent_platform'))w.push('агенты');if(has('data_analytics'))w.push('аналитика');if(has('coding'))w.push('код');return w.join(', ');}
 
-/* ---------- форматирование ---------- */
-function fmtN(n){return Number(n).toLocaleString('ru-RU');}
-function plural(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c;}
-function mln(x){return (Math.round(x/1e5)/10).toString().replace('.',',');}
-function money(x){if(x>=1e6)return mln(x)+' млн ₽';if(x>=1000)return fmtN(Math.round(x/1000))+' тыс. ₽';return fmtN(Math.round(x))+' ₽';}
-function range(lo,hi){if(Math.abs(hi-lo)<1000)return money(lo);if(lo>=1e6)return mln(lo)+'-'+mln(hi)+' млн ₽';if(hi<1e6)return fmtN(Math.round(lo/1000))+'-'+fmtN(Math.round(hi/1000))+' тыс. ₽';return money(lo)+' - '+money(hi);}
+/* ---------- формат ---------- */
+const fN=n=>Number(n).toLocaleString('ru-RU');
+const m1=x=>(Math.round(x*10)/10).toString().replace('.',',');
+const mm=x=>x<1?fN(Math.round(x*1000/10)*10)+' тыс.':m1(x)+' млн';
+const rng=(a,b)=>'от '+mm(a)+' до '+mm(b)+' ₽';
+const rub=x=>x>=1e6?m1(x/1e6)+' млн ₽':fN(Math.round(x/1000))+' тыс. ₽';
 
 /* ===================== ИНТЕРФЕЙС ===================== */
-const panel=document.getElementById('stepPanel'),nav=document.getElementById('stepsNav'),rail=document.getElementById('summaryRail');
-const STEPS=[
-  ['Задачи','Для чего вашей компании нужен локальный ИИ?','можно выбрать несколько вариантов'],
-  ['Объём','Какой будет объём работы?','вопросы только по выбранным задачам'],
-  ['Требования','Качество, скорость и надёжность','без технических терминов'],
-  ['Размещение','Где будет установлен сервер?','площадка, администратор, поставка'],
-  ['Результат','Предварительный расчёт','класс решения, состав и стоимость']
-];
-function save(){try{localStorage.setItem('mb_localai_calc',JSON.stringify({A,STEP}));}catch(e){}}
-function load(){
-  try{const m=location.hash.match(/calc=([^&]+)/);if(m){A=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));STEP=5;return;}}catch(e){}
-  try{const s=JSON.parse(localStorage.getItem('mb_localai_calc')||'null');if(s&&s.A&&Array.isArray(s.A.tasks)){A=s.A;STEP=Math.min(s.STEP||1,A.tasks.length?5:1);}}catch(e){}
+const L=document.getElementById('c2Left'),R=document.getElementById('c2Right'),MB=document.getElementById('c2Bar');
+function chips(key,opts,multi,sub){
+  const cur=S[key];
+  return '<div class="chips'+(sub?' sub':'')+'">'+opts.map(o=>{const on=multi?cur.includes(o[0]):cur===o[0];return '<button type="button" class="chip'+(on?' on':'')+'" data-k="'+key+'" data-v="'+o[0]+'"'+(multi?' data-multi="1"':'')+'>'+(multi&&on?'✓ ':'')+o[1]+(o[2]?'<small>'+o[2]+'</small>':'')+'</button>';}).join('')+'</div>';
 }
-function shareLink(){const code=encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(A)))));return location.origin+location.pathname+'#calc='+code;}
-
+const row=(label,body,hint)=>'<div class="c2-row"><div class="c2-lab">'+label+(hint?'<span>'+hint+'</span>':'')+'</div>'+body+'</div>';
+function renderCustom(){
+  const e=EMP[S.emp];
+  let h=row('Сколько сотрудников будут пользоваться ИИ','<div class="emp"><b>'+(S.emp===EMP.length-1?'5 000+':fN(e))+'</b> человек</div><input type="range" min="0" max="'+(EMP.length-1)+'" value="'+S.emp+'" id="c2Emp" aria-label="Сотрудники"><div class="rng-l"><span>5</span><span>100</span><span>1 000</span><span>5 000+</span></div>');
+  h+=row('Что должен делать ИИ','<div class="tasks2">'+Object.entries(TASKS).map(([k,x])=>'<button type="button" class="t2'+(S.tasks.includes(k)?' on':'')+'" data-task="'+k+'"><span class="t2i">'+IC[x.ic]+'</span><span><b>'+x.t+'</b><small>'+x.d+'</small></span></button>').join('')+'</div>','можно несколько');
+  const sub=[];
+  if(S.tasks.includes('bot'))sub.push(row('Сколько сообщений от клиентов в месяц',chips('bot',OPT.bot)));
+  if(S.tasks.includes('calls'))sub.push(row('Сколько минут звонков в месяц',chips('calls',OPT.calls)));
+  if(S.tasks.includes('voice'))sub.push(row('Сколько разговоров робот ведёт одновременно',chips('voice',OPT.voice)));
+  if(S.tasks.includes('media'))sub.push(row('Сколько картинок и видео',chips('media',OPT.media)));
+  if(sub.length)h+='<div class="c2-sub">'+sub.join('')+'</div>';
+  h+='<div class="c2-sep">Требования</div>';
+  h+=row('Когда должна работать система',chips('mode',OPT.mode));
+  h+=row('Качество ответов',chips('quality',OPT.quality),'чем сложнее задачи, тем мощнее сервер');
+  h+=row('Рост нагрузки за год',chips('growth',OPT.growth));
+  h+=row('С чем связать',chips('integr',OPT.integr,true),'по желанию');
+  h+='<div class="c2-sep">Оборудование и поддержка</div>';
+  h+=row('Сервер',chips('supply',OPT.supply));
+  h+=row('Сопровождение',chips('support',OPT.support));
+  L.innerHTML=h;
+  L.querySelector('#c2Emp').oninput=ev=>{S.emp=+ev.target.value;L.querySelector('.emp b').textContent=S.emp===EMP.length-1?'5 000+':fN(EMP[S.emp]);renderRight();};
+}
+function renderPacks(){
+  const P0=PACKS[PK.i];const st=packState();
+  let h='<div class="packs2">'+PACKS.map((p,i)=>{const r=calc({...DEF,...p.s,integr:p.s.integr||[]});return '<button type="button" class="pk2'+(i===PK.i?' on':'')+'" data-pk="'+i+'">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<b>'+p.n+'</b><small>'+p.w+'</small><span class="pr">от '+mm(r.lo)+' ₽</span><ul>'+p.inc.map(x=>'<li>'+x+'</li>').join('')+'</ul></button>';}).join('')+'</div>';
+  const base=calc(st);
+  const adds=ADDONS.filter(k=>!P0.s.tasks.includes(k));
+  if(adds.length)h+='<div class="c2-lab" style="margin-top:22px">Добавить к пакету</div><div class="addons2">'+adds.map(k=>{const on=PK.add.includes(k);const w=on?st.tasks:[...st.tasks,k],wo=st.tasks.filter(x=>x!==k);const d=calc({...st,tasks:w}).lo-calc({...st,tasks:wo}).lo;return '<button type="button" class="ad2'+(on?' on':'')+'" data-add="'+k+'"><span>'+(on?'✓ ':'+ ')+TASKS[k].t+'</span><i>+'+mm(Math.max(d,0.05))+' ₽</i></button>';}).join('')+'</div>';
+  h+='<button type="button" class="btn btn-ghost c2-tune" data-tune="1">Настроить этот пакет под себя →</button>';
+  L.innerHTML=h;
+}
+function packState(){const p=PACKS[PK.i];return {...JSON.parse(JSON.stringify(DEF)),...JSON.parse(JSON.stringify(p.s)),integr:[...(p.s.integr||[])],tasks:[...new Set([...p.s.tasks,...PK.add])]};}
+function cur(){return S.view==='packs'?packState():S;}
+function renderRight(){
+  const s=cur(),r=calc(s);
+  const sup=OPT.support.find(o=>o[0]===s.support)[1];
+  let h='<div class="c2-res"><div class="l">'+(S.view==='packs'?'Пакет «'+PACKS[PK.i].n+'»':'Ориентировочно под ключ')+'</div>';
+  h+='<div class="p">'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</div><div class="c">'+r.title+'</div>';
+  if(r.indiv.length)h+='<div class="indiv">Нужен индивидуальный расчёт: '+r.indiv.join(', ')+'</div>';
+  h+='<table class="c2-t">';
+  h+='<tr><td>Оборудование, сборка, тест</td><td>'+(r.inc?rng(r.eq[0],r.eq[1]).replace('от ','').replace(' до ','-'):s.supply==='own'?'ваше':'в аренде')+'</td></tr>';
+  h+='<tr><td>Установка и подключение задач</td><td>'+rng(r.svc[0],r.svc[1]).replace('от ','').replace(' до ','-')+'</td></tr>';
+  if(r.ha[1])h+='<tr><td>Резервирование сети и питания</td><td>'+rng(r.ha[0],r.ha[1]).replace('от ','').replace(' до ','-')+'</td></tr>';
+  if(r.rent)h+='<tr><td>Аренда сервера в месяц</td><td>'+rub(r.rent[0])+'-'+rub(r.rent[1])+'</td></tr>';
+  h+='<tr class="mo"><td>'+sup+', в месяц</td><td>'+rub(r.support)+'</td></tr></table>';
+  h+='<div class="c2-nodes">'+r.nodes.map(n=>'<span>'+(n.q>1?n.q+'× ':'')+n.l+(EXPERT?' · '+CFG.vram[n.k]:'')+'</span>').join('')+'<span>Установка 300 000 ₽</span></div>';
+  h+='<button type="button" class="btn btn-primary btn-block" data-lead="1">Получить точный расчёт</button>';
+  h+='<div class="fine">Предварительная вилка на '+CFG.priceDate+'. Точную конфигурацию подтвердим на технической встрече. Доставка и подготовка площадки считаются отдельно</div>';
+  if(EXPERT)h+='<pre class="xp">'+r.why.join('\n')+'\n'+r.nodes.map(n=>n.q+'× '+n.k+' '+CFG.vram[n.k]).join('\n')+'</pre>';
+  R.innerHTML=h+'</div>';
+  if(MB)MB.innerHTML='<div><small>Ориентировочно</small><b>'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</b></div><button type="button" class="btn btn-primary" data-goto="1">Подробнее</button>';
+}
 function render(){
-  const s=STEPS[STEP-1];
-  document.getElementById('calcStepTitle').textContent=s[1];
-  document.getElementById('calcStepSub').textContent='Шаг '+STEP+' из 5 · '+s[2];
-  document.getElementById('calcProgLabel').textContent=Math.round((STEP-1)/4*100)+'%';
-  document.getElementById('calcProgBar').style.width=((STEP-1)/4*100||4)+'%';
-  nav.innerHTML=STEPS.map((x,i)=>{const n=i+1;const cls='step-item'+(n===STEP?' active':'')+(n<STEP?' done':'')+(n>1&&!A.tasks.length?' disabled':'');return '<div class="'+cls+'" data-go="'+n+'"><span class="num">'+(n<STEP?'✓':n)+'</span><span>'+x[0]+'</span></div>';}).join('');
-  panel.className='step-panel fade';
-  panel.innerHTML=STEP===1?step1():STEP===5?step5():stepQ(STEP);
-  renderRail();save();
-  if(STEP===5)bindResult();
+  document.querySelectorAll('#calcMode button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.view));
+  S.view==='packs'?renderPacks():renderCustom();renderRight();
+  try{localStorage.setItem('mb_localai_v3',JSON.stringify({S,PK}));}catch(e){}
 }
-function step1(){
-  let h='<h3>Для чего вашей компании нужен локальный ИИ?</h3><p class="step-desc">Отметьте всё, что нужно. Калькулятор объединит задачи в одну или несколько серверных конфигураций. Знания о видеокартах, моделях и токенах не требуются.</p>';
-  GROUPS.forEach(g=>{
-    h+='<div class="tgroup"><div class="tgroup-t">'+g.title+'</div><div class="tasks">';
-    g.tasks.forEach(id=>{const t=TASKS[id];h+='<button type="button" class="task'+(has(id)?' sel':'')+'" data-task="'+id+'"><span class="task-ic">'+IC[t.ic]+'</span><span class="task-tx"><b>'+t.t+'</b><span>'+t.d+'</span></span><span class="cb">'+IC.check+'</span></button>';});
-    h+='</div></div>';
-  });
-  return h+actions(false,A.tasks.length>0,'Указать объём →');
-}
-function stepQ(step){
-  const ids=visibleQ(step);
-  const intro={2:'Если точных цифр нет, выбирайте «Не знаю»: подставим средние значения и отметим, что уточнить на встрече.',3:'Выберите понятные требования. От них зависит запас мощности и отказоустойчивость.',4:'Эти ответы определяют сборку, монтаж и что считается отдельно.'}[step];
-  let h='<h3>'+STEPS[step-1][1]+'</h3><p class="step-desc">'+intro+'</p>';
-  let curTask=null;
-  const general=step===2?ids.filter(id=>['employees','usage','peak','growth'].includes(id)):[];
-  if(general.length)h+='<div class="qsec"><div class="qsec-h"><span class="qsec-ic">'+IC.server+'</span>Масштаб</div>'+general.map(qHTML).join('')+'</div>';
-  if(step===2){
-    GROUPS.forEach(g=>g.tasks.forEach(t=>{if(!has(t))return;const qs=ids.filter(id=>TASKS[t].q.includes(id));if(!qs.length)return;h+='<div class="qsec"><div class="qsec-h"><span class="qsec-ic">'+IC[TASKS[t].ic]+'</span>'+TASKS[t].t+'</div>'+qs.map(qHTML).join('')+'</div>';}));
-  } else if(step===4){
-    h+='<div class="qsec">'+qHTML('location');
-    if(ids.includes('site_rack'))h+='<div class="q"><label>Что уже есть на площадке?</label><div class="hint">Если не уверены, оставьте «Не знаю»: включим обследование площадки</div><div class="tri-list">'+SITE_Q.map(triHTML).join('')+'</div></div>';
-    h+=qHTML('sysadmin')+qHTML('supply')+'</div>';
-    if(A.supply==='rent')h+='<div class="callout">'+IC.info+'<div>Аренда подходит для пилота, временной нагрузки или когда площадка не готова. Покажем ориентир ежемесячного платежа, точную цену рассчитает менеджер.</div></div>';
-  } else h+='<div class="qsec">'+ids.map(qHTML).join('')+'</div>';
-  if(step===3)h+='<div class="callout">'+IC.info+'<div>Локальная инфраструктура позволяет обрабатывать данные внутри контролируемого контура. Архитектура, хранение, права доступа и юридические требования определяются вместе с вами.</div></div>';
-  return h+actions(true,true,step===4?'Получить расчёт →':'Далее →');
-}
-function qHTML(id){
-  const q=Q[id];let h='<div class="q" data-qid="'+id+'"><label>'+q.l+'</label>'+(q.h?'<div class="hint">'+q.h+'</div>':'');
-  if(q.t==='choice'||q.t==='count'){
-    h+='<div class="opts">'+q.o.map((o,i)=>{const sel=String(A[id])===String(o[0])||(q.t==='count'&&Number(A[id])===o[0]);return '<button type="button" class="opt'+(sel?' sel':'')+(o[0]==='unk'?' unk':'')+'" data-q="'+id+'" data-i="'+i+'">'+o[1]+'</button>';}).join('')+'</div>';
-    if(q.t==='count'){const known=q.o.some(o=>Number(A[id])===o[0]);h+='<div class="exact"><span>или точно:</span><input type="number" min="1" data-num="'+id+'" value="'+(A[id]&&!known?A[id]:'')+'" placeholder="число"></div>';}
-  } else if(q.t==='multi'){
-    const cur=A[id]||[];h+='<div class="opts">'+q.o.map((o,i)=>'<button type="button" class="opt multi'+(cur.includes(o)?' sel':'')+'" data-m="'+id+'" data-i="'+i+'">'+o+'</button>').join('')+'</div>';
-  } else if(q.t==='num'){
-    h+='<input type="number" min="1" class="num-in" data-num="'+id+'" value="'+(A[id]||'')+'" placeholder="'+(q.ph||'')+'">';
-  }
-  return h+'</div>';
-}
-function triHTML(id){const cur=A[id]||'unk';return '<div class="tri"><span>'+Q[id].l+'</span><div class="tri-o">'+[['yes','Есть'],['no','Нет'],['unk','Не знаю']].map(o=>'<button type="button" class="opt sm'+(cur===o[0]?' sel':'')+'" data-tri="'+id+'" data-v="'+o[0]+'">'+o[1]+'</button>').join('')+'</div></div>';}
-function actions(back,can,label){return '<div class="step-actions">'+(back?'<button class="btn btn-ghost" data-act="back">← Назад</button>':'<span></span>')+'<button class="btn btn-primary" data-act="next"'+(can?'':' disabled')+'>'+label+'</button></div>';}
-
-/* события (делегирование) */
-panel.addEventListener('click',e=>{
+document.getElementById('calcMode').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;S.view=b.dataset.mode;render();});
+L.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.task){const id=b.dataset.task;A.tasks=has(id)?A.tasks.filter(x=>x!==id):[...A.tasks,id];return render();}
-  if(b.dataset.q){const q=Q[b.dataset.q];const val=q.o[+b.dataset.i][0];A[b.dataset.q]=String(A[b.dataset.q])===String(val)?undefined:val;return rerender();}
-  if(b.dataset.m){const id=b.dataset.m,o=Q[id].o[+b.dataset.i];const cur=A[id]||[];A[id]=cur.includes(o)?cur.filter(x=>x!==o):[...cur,o];return rerender();}
-  if(b.dataset.tri){A[b.dataset.tri]=b.dataset.v;return rerender();}
-  if(b.dataset.act==='next'){if(STEP<5){STEP++;render();scrollCalc();}return;}
-  if(b.dataset.act==='back'){if(STEP>1){STEP--;render();scrollCalc();}return;}
+  if(b.dataset.task){const k=b.dataset.task;S.tasks=S.tasks.includes(k)?(S.tasks.length>1?S.tasks.filter(x=>x!==k):S.tasks):[...S.tasks,k];return render();}
+  if(b.dataset.k){const k=b.dataset.k,v=b.dataset.v;if(b.dataset.multi)S[k]=S[k].includes(v)?S[k].filter(x=>x!==v):[...S[k],v];else S[k]=v;return render();}
+  if(b.dataset.pk){PK={i:+b.dataset.pk,add:[]};return render();}
+  if(b.dataset.add){const k=b.dataset.add;PK.add=PK.add.includes(k)?PK.add.filter(x=>x!==k):[...PK.add,k];return render();}
+  if(b.dataset.tune){S={view:'custom',...packState()};return render();}
 });
-panel.addEventListener('input',e=>{const el=e.target;if(el.dataset.num){A[el.dataset.num]=el.value;if(Q[el.dataset.num].t==='count')el.closest('.q').querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));renderRail();save();}});
-nav.addEventListener('click',e=>{const it=e.target.closest('[data-go]');if(!it)return;const n=+it.dataset.go;if(n===1||A.tasks.length){STEP=n;render();}});
-function rerender(){const y=window.scrollY;render();window.scrollTo(0,y);}
-function scrollCalc(){const el=document.getElementById('calc');window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-70,behavior:'smooth'});}
-
-/* правый блок */
-function renderRail(){
-  if(!A.tasks.length){rail.innerHTML='<div class="st">Предварительный итог</div><div class="summary-hint">Отметьте задачи, и здесь появится подбор класса и ориентир стоимости.</div>';return;}
-  const r=compute();
-  let h='<div class="st">Предварительный итог</div><div class="sum-block"><div class="l">Задачи</div><div class="sum-chips">'+A.tasks.map(t=>'<span class="sum-chip">'+TASKS[t].t+'</span>').join('')+'</div></div>';
-  if(STEP>=2){
-    h+='<div class="sum-block"><div class="l">Подходящий класс</div><div class="v">'+r.title+'</div></div>';
-    h+='<div class="sum-block"><div class="l">Одновременных сессий</div><div class="v">~'+(r.peak||'-')+'</div></div>';
-  }
-  if(STEP>=3){
-    h+='<div class="sum-block hl-block"><div class="l">Ориентир '+(r.eqIncluded?'с оборудованием':'без оборудования')+'</div><div class="v big">'+(r.manual.length?'от '+money(r.total[0]):range(r.total[0],r.total[1]))+'</div></div>';
-  } else h+='<div class="summary-hint">Стоимость появится после вопросов об объёме и требованиях.</div>';
-  rail.innerHTML=h;
-}
-
-/* ---------- результат ---------- */
-function step5(){
-  if(!A.tasks.length)return '<p>Сначала выберите задачи.</p>'+actions(false,false,'');
-  const r=compute();
-  const opt=compute({growth:0,ha:false});
-  const prod=compute({growth:Math.max(r.growth,0.5),ha:v('availability')!=='work'});
-  const unknown=[1,2,3,4].flatMap(s=>s===1?[]:visibleQ(s)).filter(id=>Q[id].t!=='multi'&&Q[id].t!=='tri'&&isUnk(id)&&Q[id].t!=='num').map(id=>Q[id].l.replace(/\?$/,''));
-  const eqTxt=r.eqIncluded?range(r.eq[0],r.eq[1]):r.supply==='own'?'ваше оборудование':'ориентир '+range(r.eq[0],r.eq[1])+', в итог не входит';
-  let h='<div class="res" id="calcResult">';
-  h+='<div class="print-only"><b>MakeBiz · Предварительный расчёт локального ИИ</b><br>'+new Date().toLocaleDateString('ru-RU')+' · прайс: '+CFG.priceDate+' · версия '+CFG.version+'</div>';
-  h+='<div class="res-hero"><div class="res-badge">Рекомендуем</div><h3>'+r.title+'</h3><p>'+(r.nodes.length===1?r.nodes[0].spec.kind+'. ':'')+'Подходит для ваших задач с запасом роста '+Math.round(r.growth*100)+'%'+(r.ha?' и дублированием критичных узлов':'')+'.</p><div class="res-tags">'+A.tasks.map(t=>'<span>'+TASKS[t].t+'</span>').join('')+'</div></div>';
-  if(r.manual.length)h+='<div class="manual">'+IC.warn+'<div><b>Нужен индивидуальный расчёт.</b> '+r.manual.join('; ')+'. Ниже показан нижний ориентир, точную конфигурацию подтвердим на технической встрече и benchmark.</div></div>';
-
-  h+='<div class="res-grid">';
-  h+='<div class="rbox"><div class="rl">Состав решения</div>'+r.nodes.map(n=>'<div class="node-i"><span class="node-q">'+(n.qty>1?n.qty+'×':'1×')+'</span><div><b>'+n.label+'</b><span>'+n.spec.kind+(EXPERT?' · '+n.spec.vram:'')+'</span></div></div>').join('')+(r.notes.length?'<ul class="notes">'+r.notes.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'')+'<div class="node-i st"><span class="node-q">'+IC.server+'</span><div><b>Хранилище ~'+Math.ceil(r.storageTB)+' ТБ</b><span>модели, индексы, логи, данные и резервный запас</span></div></div></div>';
-  h+='<div class="rbox"><div class="rl">Производительность · ориентировочно</div><div class="cap">'+r.cap.map(c=>'<div><b>'+c[0]+'</b><span>'+c[1]+'</span></div>').join('')+'</div><div class="rl" style="margin-top:18px">Что сможет система</div><ul class="can">'+A.tasks.map(t=>'<li>'+TASKS[t].can+'</li>').join('')+'</ul></div>';
-  h+='</div>';
-
-  // стоимость
-  h+='<div class="cost"><div class="rl">Стоимость</div><table>';
-  h+='<tr><td>Оборудование</td><td>'+eqTxt+'</td></tr>';
-  if(r.storageCost[1]>0)h+='<tr><td>Дополнительное хранилище</td><td>'+range(r.storageCost[0],r.storageCost[1])+'</td></tr>';
-  r.infra.forEach(x=>h+='<tr><td>'+x[0]+'</td><td>'+range(x[1],x[2])+'</td></tr>');
-  if(r.asm)h+='<tr><td>Сборка и нагрузочное тестирование</td><td>'+money(r.asm)+'</td></tr>';
-  r.svc.forEach((x,i)=>h+='<tr'+(i===0?' class="base"':'')+'><td>'+x[0]+(i===0?'<small>ОС, драйверы, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли, первичный benchmark, документация, обучение администратора</small>':'')+'</td><td>'+(x[3]?'от '+money(x[1]):money(x[1]))+'</td></tr>');
-  h+='<tr class="total"><td>Предварительный итог</td><td>'+(r.manual.length?'от '+money(r.total[0]):range(r.total[0],r.total[1]))+'</td></tr>';
-  if(r.rent)h+='<tr><td>Аренда сервера, в месяц</td><td>~'+range(r.rent[0],r.rent[1])+'</td></tr>';
-  h+='<tr class="month"><td>'+r.support.n+', в месяц</td><td>'+(r.support.p?money(r.support.p):'ручной расчёт')+'</td></tr>';
-  h+='</table><div class="excl"><div class="rl">Считается отдельно</div><ul>'+[...new Set(r.excluded)].map(x=>'<li>'+x+'</li>').join('')+'</ul></div></div>';
-
-  // два варианта
-  const vc=(t,x,items,pro)=>'<div class="variant'+(pro?' pro':'')+'"><div class="vt">'+t+'</div><div class="vs">'+x.title+'</div><div class="vp">'+(x.manual.length?'от '+money(x.total[0]):range(x.total[0],x.total[1]))+'</div><ul>'+items.map(i=>'<li>'+i+'</li>').join('')+'</ul></div>';
-  h+='<div class="rl" style="margin:26px 0 10px">Два варианта старта</div><div class="variants">'+vc('Оптимальный старт',opt,['Минимально достаточная конфигурация','Без запаса на рост, допустима очередь','Один комплект без дублирования'])+vc('Production с запасом',prod,['Запас на рост '+Math.round(Math.max(r.growth,0.5)*100)+'%','Больше одновременных пользователей',prod.ha?'Дублирование критичных узлов':'Серверная платформа с запасом'],true)+'</div>';
-
-  if(r.soft.length)h+='<div class="softw">'+IC.info+'<div>'+r.soft.join('. ')+'.</div></div>';
-  if(unknown.length)h+='<div class="unk-box"><div class="rl">Уточним на встрече ('+unknown.length+')</div><div class="unk-l">'+unknown.map(x=>'<span>'+x+'</span>').join('')+'</div></div>';
-  h+='<details class="why"><summary>Как посчитали</summary><ul>'+r.why.map(x=>'<li>'+x+'</li>').join('')+'<li>Хранилище: ~'+Math.ceil(r.storageTB)+' ТБ с учётом резервного запаса ×2,25</li><li>Версия расчёта '+CFG.version+', цены: '+CFG.priceDate+'</li></ul></details>';
-  if(EXPERT)h+='<div class="expert"><div class="rl">Режим эксперта</div><pre>'+escapeHtml(JSON.stringify({rawOps:round(r.rawOps),effOps:round(r.eff),peak:r.peak,nodes:r.nodes.map(n=>({role:n.role,cls:n.cls||n.sp,vram:n.spec.vram,qty:n.qty,eq:n.spec.eq})),storageTB:+r.storageTB.toFixed(1),total:r.total.map(round),manual:r.manual},null,2))+'</pre></div>';
-  h+='<p class="disclaimer">Расчёт предварительный и не является коммерческим предложением. Диапазон до benchmark ±30-50%: цена зависит от поставщика, наличия, гарантии, НДС и шасси. Перед поставкой проверим модели, реальные сценарии, пиковую нагрузку, электропитание, охлаждение и требования к безопасности. Локально работающая модель не требует оплаты внешнего API за каждый запрос, при этом остаются расходы на оборудование, электроэнергию, поддержку и обновления.</p>';
-  h+='<div class="res-actions no-print"><button class="btn btn-ghost" data-r="pdf">Скачать PDF</button><button class="btn btn-ghost" data-r="share">Скопировать ссылку на расчёт</button><button class="btn btn-ghost" data-r="edit">Изменить ответы</button></div>';
-  h+='</div>';
-  h+='<div class="lead-form no-print" id="leadForm"><h3>Получить точную конфигурацию</h3><p>Инженер проверит расчёт, подберёт модели и оборудование, и мы назначим техническую встречу. Ответы калькулятора придут вместе с заявкой, заново ничего заполнять не нужно.</p>'+
-    '<div class="two-col"><div class="field"><label>Имя</label><input type="text" id="lfName" placeholder="Как к вам обращаться"></div><div class="field"><label>Компания</label><input type="text" id="lfCompany" placeholder="Название компании"></div></div>'+
-    '<div class="two-col"><div class="field"><label>Телефон</label><input type="tel" id="lfPhone" placeholder="+7 ..."></div><div class="field"><label>Рабочий email</label><input type="email" id="lfEmail" placeholder="you@company.ru"></div></div>'+
-    '<div class="two-col"><div class="field"><label>Отрасль</label><input type="text" id="lfIndustry" placeholder="Например, логистика"></div><div class="field"><label>Город</label><input type="text" id="lfCity" placeholder="Город установки"></div></div>'+
-    '<label class="consent"><input type="checkbox" id="lfConsent"> Согласен на обработку персональных данных. Расчёт предварительный и не является офертой.</label>'+
-    '<div class="lf-row"><button class="btn btn-primary btn-lg" id="lfSubmit">Назначить техническую встречу</button><span id="lfErr"></span></div></div>';
-  h+='<div class="step-actions no-print"><button class="btn btn-ghost" data-act="back">← Назад</button><button class="btn btn-navy" data-r="reset">Начать заново</button></div>';
-  return h;
-}
-function escapeHtml(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-function bindResult(){
-  panel.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{
-    const a=b.dataset.r;
-    if(a==='pdf')window.print();
-    if(a==='share'){const url=shareLink();(navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(()=>{b.textContent='Ссылка скопирована';}).catch(()=>{prompt('Ссылка на расчёт',url);});}
-    if(a==='edit'){STEP=2;render();scrollCalc();}
-    if(a==='reset'){A={tasks:[]};STEP=1;history.replaceState(null,'',location.pathname);render();scrollCalc();}
-  });
-  const s=document.getElementById('lfSubmit');if(s)s.onclick=submitLead;
-}
+function goLead(){const f=document.getElementById('leadForm');f.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{const n=document.getElementById('lfName');n&&n.focus({preventScroll:true});},500);}
+R.addEventListener('click',e=>{if(e.target.closest('[data-lead]'))goLead();});
+if(MB){MB.addEventListener('click',e=>{if(e.target.closest('[data-goto]'))R.scrollIntoView({behavior:'smooth',block:'start'});});
+  const calcEl=document.getElementById('calc');
+  if('IntersectionObserver' in window)new IntersectionObserver(en=>{MB.classList.toggle('show',en[0].isIntersecting&&innerWidth<=900);},{threshold:.05}).observe(calcEl);}
 
 /* ---------- заявка → Bitrix24 ---------- */
-function utm(){const p=new URLSearchParams(location.search);const o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(p.get(k))o[k]=p.get(k);});return o;}
+function utm(){const p=new URLSearchParams(location.search);const o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(p.get(k))o[k.toUpperCase()]=p.get(k);});return o;}
 async function submitLead(){
-  const g=id=>(document.getElementById(id)||{}).value?.trim()||'';
+  const g=id=>((document.getElementById(id)||{}).value||'').trim();
   const err=document.getElementById('lfErr');err.textContent='';
-  const name=g('lfName'),company=g('lfCompany'),phone=g('lfPhone'),email=g('lfEmail');
+  const name=g('lfName'),phone=g('lfPhone'),company=g('lfCompany'),email=g('lfEmail');
   if(!name||!(phone||email)){err.textContent='Укажите имя и телефон или email';return;}
   if(!document.getElementById('lfConsent').checked){err.textContent='Нужно согласие на обработку данных';return;}
-  const r=compute();
-  const summary=['Задачи: '+A.tasks.map(t=>TASKS[t].t).join('; '),'Рекомендация: '+r.title+' ('+r.nodes.map(n=>n.qty+'× '+(n.cls||n.sp)+' '+n.spec.vram).join(', ')+')','Итог: '+(r.manual.length?'ИНДИВИДУАЛЬНЫЙ РАСЧЁТ, от '+money(r.total[0]):range(r.total[0],r.total[1])),'Оборудование: '+range(r.eq[0],r.eq[1])+(r.eqIncluded?'':' (не в итоге)'),'Поставка: '+v('supply')+', площадка: '+v('location')+', админ: '+v('sysadmin')+', доступность: '+v('availability'),r.manual.length?'Ручная проверка: '+r.manual.join('; '):'','Ссылка на расчёт: '+shareLink(),'Версия: '+CFG.version].filter(Boolean).join('\n');
-  const payload={fields:{TITLE:'Калькулятор локального ИИ: '+(company||name),NAME:name,COMPANY_TITLE:company,ADDRESS_CITY:g('lfCity'),SOURCE_ID:'WEB',SOURCE_DESCRIPTION:'Калькулятор локального ИИ',COMMENTS:summary+'\nОтрасль: '+g('lfIndustry'),OPPORTUNITY:Math.round(r.total[0]),CURRENCY_ID:'RUB',PHONE:phone?[{VALUE:phone,VALUE_TYPE:'WORK'}]:[],EMAIL:email?[{VALUE:email,VALUE_TYPE:'WORK'}]:[],...Object.fromEntries(Object.entries(utm()).map(([k,x])=>[k.toUpperCase(),x]))},answers:A};
+  const s=cur(),r=calc(s);
+  const opt=(k,v)=>((OPT[k]||[]).find(o=>o[0]===v)||[,v])[1];
+  const lines=[
+    'Режим: '+(S.view==='packs'?'пакет «'+PACKS[PK.i].n+'»':'индивидуально'),
+    'Сотрудников: '+EMP[s.emp],'Задачи: '+s.tasks.map(k=>TASKS[k].t).join('; '),
+    'Работа: '+opt('mode',s.mode)+', качество: '+opt('quality',s.quality)+', рост: '+opt('growth',s.growth),
+    s.tasks.includes('bot')?'Бот: '+opt('bot',s.bot):'',s.tasks.includes('calls')?'Звонки: '+opt('calls',s.calls):'',s.tasks.includes('voice')?'Голос: '+opt('voice',s.voice):'',s.tasks.includes('media')?'Медиа: '+opt('media',s.media):'',
+    'Интеграции: '+(s.integr.map(k=>opt('integr',k)).join(', ')||'нет'),'Сервер: '+opt('supply',s.supply)+', сопровождение: '+opt('support',s.support),
+    'Вилка: '+rng(r.lo,r.hi)+(r.indiv.length?' (ИНДИВИДУАЛЬНО: '+r.indiv.join(', ')+')':''),
+    'Состав: '+r.nodes.map(n=>n.q+'× '+n.k+' '+CFG.vram[n.k]).join(', '),'Версия: '+CFG.version
+  ].filter(Boolean).join('\n');
+  const fields={TITLE:'Калькулятор локального ИИ: '+(company||name),NAME:name,COMPANY_TITLE:company,SOURCE_ID:'WEB',SOURCE_DESCRIPTION:'Калькулятор локального ИИ',COMMENTS:lines,OPPORTUNITY:Math.round(r.lo*1e6),CURRENCY_ID:'RUB',PHONE:phone?[{VALUE:phone,VALUE_TYPE:'WORK'}]:[],EMAIL:email?[{VALUE:email,VALUE_TYPE:'WORK'}]:[],...utm()};
   const btn=document.getElementById('lfSubmit');btn.disabled=true;btn.textContent='Отправляем...';
   try{
-    if(CFG.bitrixWebhook){const res=await fetch(CFG.bitrixWebhook.replace(/\/?$/,'/')+'crm.lead.add.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:payload.fields})});if(!res.ok)throw new Error('b24');}
-    else console.log('[MakeBiz] Заявка (демо-режим, вебхук Bitrix24 не задан):',payload);
-    try{if(window.ym)ym(0,'reachGoal','calc_lead');}catch(e){}
-    document.getElementById('leadForm').innerHTML='<div class="form-ok"><div class="ic">'+IC.check+'</div><h3>Заявка принята</h3><p>Инженер проверит расчёт и свяжется с вами, чтобы назначить техническую встречу. Ссылка на ваш расчёт сохранена в заявке.</p></div>';
-  }catch(e){btn.disabled=false;btn.textContent='Назначить техническую встречу';err.textContent='Не получилось отправить. Позвоните нам или попробуйте ещё раз';}
+    if(CFG.bitrixWebhook){const res=await fetch(CFG.bitrixWebhook.replace(/\/?$/,'/')+'crm.lead.add.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields})});if(!res.ok)throw 0;}
+    else console.log('[MakeBiz] Заявка (демо, вебхук не задан):',fields);
+    document.getElementById('leadForm').innerHTML='<div class="form-ok"><div class="ic">'+IC.check+'</div><h3>Заявка принята</h3><p>Инженер проверит расчёт и свяжется с вами, чтобы назначить техническую встречу.</p></div>';
+  }catch(e){btn.disabled=false;btn.textContent='Получить точный расчёт';err.textContent='Не получилось отправить, попробуйте ещё раз или позвоните нам';}
 }
+document.getElementById('lfSubmit').onclick=submitLead;
 
-/* ===================== СТАТИЧЕСКИЕ БЛОКИ СТРАНИЦЫ ===================== */
+/* ===================== СТАТИЧЕСКИЕ БЛОКИ ===================== */
 const CATS=[
-  {ic:'chat',t:'Помогать сотрудникам',d:'AI-чат, база знаний, документы и КП',tasks:['employee_chat','knowledge_base','document_generation']},
-  {ic:'deal',t:'Продавать и общаться с клиентами',d:'Ассистент в CRM, клиентский бот, агенты',tasks:['sales_crm','external_bot']},
-  {ic:'phone',t:'Анализировать звонки',d:'Расшифровка, аналитика, голосовой робот',tasks:['speech_analytics']},
-  {ic:'code',t:'Писать код',d:'Coding assistant без отправки кода вовне',tasks:['coding']},
-  {ic:'image',t:'Создавать изображения и видео',d:'Креативы, редактирование фото, ролики',tasks:['image_basic','image_advanced']},
-  {ic:'chart',t:'Анализировать данные',d:'Вопросы к CRM, 1С и BI обычным языком',tasks:['data_analytics']}
+  {ic:'chat',t:'Помогать сотрудникам',d:'AI-чат, база знаний, документы и КП',tasks:['chat','kb','docs']},
+  {ic:'deal',t:'Продавать и общаться с клиентами',d:'Ассистент в CRM и клиентский бот',tasks:['sales','bot']},
+  {ic:'phone',t:'Анализировать звонки',d:'Расшифровка, аналитика, голосовой робот',tasks:['calls']},
+  {ic:'code',t:'Писать код',d:'Помощник разработчиков без отправки кода вовне',tasks:['code']},
+  {ic:'image',t:'Создавать изображения и видео',d:'Креативы, редактирование фото, ролики',tasks:['media']},
+  {ic:'chart',t:'Анализировать данные',d:'Вопросы к CRM, 1С и BI обычным языком',tasks:['data']}
 ];
 function renderCatGrid(){
   const grid=document.getElementById('catGrid');
   grid.innerHTML=CATS.map((c,i)=>'<a class="cat" href="#calc" data-c="'+i+'"><span class="ci">'+IC[c.ic]+'</span><h3>'+c.t+'</h3><p>'+c.d+'</p><span class="go">Посчитать в калькуляторе →</span></a>').join('');
-  grid.querySelectorAll('.cat').forEach(el=>el.addEventListener('click',()=>{CATS[+el.dataset.c].tasks.forEach(t=>{if(!has(t))A.tasks.push(t);});STEP=1;render();}));
+  grid.querySelectorAll('.cat').forEach(el=>el.addEventListener('click',()=>{S.view='custom';CATS[+el.dataset.c].tasks.forEach(t=>{if(!S.tasks.includes(t))S.tasks.push(t);});render();}));
 }
 const FAQ=[
-  ['Как понять, какой сервер нужен, если я не разбираюсь в видеокартах?','Отметьте в калькуляторе, чем занимаются ваши сотрудники, сколько у вас людей, заявок, звонков и документов. Калькулятор сам переведёт это в класс решения и состав серверов. Названия моделей и ускорителей знать не нужно, их подберёт инженер после технической встречи.'],
-  ['Мы правда перестанем платить за токены?','Локально работающая модель не требует оплаты внешнего API за каждый запрос. Остаются понятные расходы: оборудование или аренда, электроэнергия, сопровождение и обновления. Для каждого проекта сравниваем это с внешним API и арендой.'],
-  ['Сколько стоит установка?','Базовая установка и настройка системы стоит 300 000 ₽: ОС, драйверы, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, первичный benchmark, документация и обучение администратора. Сборка и тестирование сервера (100-250 тыс. ₽) и интеграции с CRM, 1С, телефонией считаются отдельно, калькулятор показывает всё построчно.'],
-  ['Сколько стоит оборудование?','Ориентиры на сентябрь 2026: рабочая станция для небольшой команды 1,2-1,7 млн ₽, бизнес-сервер 2,2-4,8 млн ₽, корпоративный AI-сервер 5-7,5 млн ₽, multi-GPU сервер 9,5-15 млн ₽, высоконагруженный контур от 13 млн ₽. Цена зависит от курса, наличия, гарантии и НДС, поэтому показываем диапазон.'],
-  ['Можно поставить на наше оборудование или купить у своего поставщика?','Да. Если сервер уже есть, проведём аудит совместимости и установим систему. Если закупаете сами, выдадим ТЗ, рекомендуемую конфигурацию и требования к питанию, охлаждению и сети. Для пилота можно арендовать GPU-сервер.'],
-  ['А если появится модель лучше?','Бизнес-логика, данные, права и интеграции отделены от конкретной модели. Новую модель проверяем на тестовом наборе и заменяем после регрессионных испытаний.'],
-  ['Это законно и безопасно?','Локальная инфраструктура позволяет обрабатывать данные внутри контролируемого контура. Соответствие требованиям обеспечивается всей архитектурой: права доступа, журналирование, изоляция, регламенты, а не только фактом локальной установки.']
+  ['Я не разбираюсь в видеокартах. Как понять, что нам нужно?','Выберите в калькуляторе, чем занимаются сотрудники и сколько их. Калькулятор сразу покажет вилку цены и из каких серверов состоит решение. Модели и оборудование подберёт инженер на технической встрече.'],
+  ['Мы правда перестанем платить за токены?','Локально работающая модель не требует оплаты внешнего API за каждый запрос. Остаются понятные расходы: оборудование или аренда, электроэнергия, сопровождение и обновления.'],
+  ['Сколько стоит установка?','Базовая установка и настройка системы стоит 300 000 ₽: ОС, драйверы, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, первичный benchmark, документация и обучение администратора. Сборка сервера и подключение CRM, 1С, телефонии считаются отдельно, калькулятор уже учитывает это в вилке.'],
+  ['Почему вилка, а не точная цена?','Цена оборудования зависит от курса, наличия, гарантии и НДС, а мощность подтверждается тестом на ваших задачах. Поэтому до технической встречи показываем честный диапазон, а точную сумму фиксируем в коммерческом предложении.'],
+  ['Можно поставить на наше оборудование или взять в аренду?','Да. Если сервер уже есть, проверим совместимость и установим систему. Для пилота или если площадка не готова можно арендовать сервер помесячно.'],
+  ['А если появится модель лучше?','Бизнес-логика, данные, права и интеграции отделены от конкретной модели. Новую модель проверяем на ваших задачах и заменяем без перестройки системы.'],
+  ['Это законно и безопасно?','Локальная инфраструктура позволяет обрабатывать данные внутри контролируемого контура. Соответствие требованиям обеспечивается всей архитектурой: права доступа, журналирование, изоляция, регламенты.']
 ];
 function renderFAQ(){
   const list=document.getElementById('faqList');
@@ -1637,7 +1287,8 @@ function renderFAQ(){
 document.getElementById('burger').onclick=()=>document.getElementById('mobileMenu').classList.toggle('open');
 document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>document.getElementById('mobileMenu').classList.remove('open'));
 
-load();renderCatGrid();renderFAQ();render();
+try{const sv=JSON.parse(localStorage.getItem('mb_localai_v3')||'null');if(sv&&sv.S&&Array.isArray(sv.S.tasks)){S={...S,...sv.S};PK=sv.PK||PK;}}catch(e){}
+renderCatGrid();renderFAQ();render();
 
 </script>
 </body>
