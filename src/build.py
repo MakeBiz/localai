@@ -139,6 +139,7 @@ def packs_html():
 # ---------------------------------------------------------------- ГЛАВНАЯ
 def home():
     econ_rows = ''.join(f'<tr><td>{nr(e["emp"])} сотрудников</td><td>{e["year"]}</td><td>{e["yearTime"]}</td><td>{e["short"]}</td><td><b>{months(e["m"]) or "не окупается"}</b></td></tr>' for e in F['econ'])
+    econ_cards = ''.join(f'<div class="em"><div class="em-h"><b>{nr(e["emp"])} сотрудников</b><span>окупится за <b>{months(e["m"]) or "&gt;10 лет"}</b></span></div><div class="em-r"><span>Подписки в год</span><b>{e["year"]}</b></div><div class="em-r"><span>Время сотрудников в год</span><b>{e["yearTime"]}</b></div><div class="em-r"><span>Свой ИИ под ключ</span><b>{e["short"]}</b></div></div>' for e in F['econ'])
     ld = [ORG, faq_ld(FAQ_HOME), {"@context": "https://schema.org", "@type": "Service", "name": "Корпоративный ИИ на серверах компании под ключ", "provider": {"@type": "Organization", "name": "MakeBiz"}, "areaServed": "RU", "offers": {"@type": "Offer", "price": "300000", "priceCurrency": "RUB", "description": "Базовая установка и настройка системы"}}]
     return head('Корпоративный ИИ на ваших серверах: данные внутри компании · MakeBiz',
                 'Свой аналог ChatGPT на сервере компании: данные не уходят во внешние сервисы, нет оплаты за каждый запрос, проще соблюдать 152-ФЗ. Установка от 300 000 ₽, расчёт стоимости и окупаемости за 30 секунд.', '/', ld) + header('/') + f'''
@@ -147,12 +148,13 @@ def home():
     <div class="hero-copy">
       <span class="eyebrow">Корпоративный ИИ под ключ</span>
       <h1>ИИ для компании, который не выносит данные наружу</h1>
-      <p class="lead">Сотрудники уже копируют договоры, базы клиентов и переписку в зарубежные нейросети. Мы ставим такой же ИИ на ваш сервер: работает как ChatGPT, данные остаются внутри компании, а за каждый запрос и подписку на человека платить не нужно.</p>
+      <p class="lead hide-m">Сотрудники уже копируют договоры, базы клиентов и переписку в зарубежные нейросети. Мы ставим такой же ИИ на ваш сервер: работает как ChatGPT, данные остаются внутри компании, а за каждый запрос и подписку на человека платить не нужно.</p>
+      <p class="lead show-m">Работает как ChatGPT, но на вашем сервере: данные остаются внутри компании, а платить за каждый запрос и подписку не нужно.</p>
       <div class="hero-cta">
         <a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость и окупаемость</a>
-        <a href="#problemy" class="btn btn-ghost btn-lg">Зачем это бизнесу</a>
+        <a href="#problemy" class="btn btn-ghost btn-lg hide-m">Зачем это бизнесу</a>
       </div>
-      <div class="hero-points"><span>Данные внутри компании</span><span>Проще соблюдать 152-ФЗ</span><span>Без оплаты за каждый запрос</span></div>
+      <div class="hero-points hide-m"><span>Данные внутри компании</span><span>Проще соблюдать 152-ФЗ</span><span>Без оплаты за каждый запрос</span></div>
     </div>
     <div class="hero-calc" id="heroPay"></div>
   </div>
@@ -196,7 +198,7 @@ def home():
       <div><span class="sol-k">Закон</span><h3>Проще соблюдать 152-ФЗ</h3><p>Нет передачи персональных данных во внешние ИИ-сервисы. Права, журналы и регламенты выстраиваем вместе с вашим юристом.</p></div>
       <div><span class="sol-k">Деньги</span><h3>Фиксированная стоимость</h3><p>Платите один раз за сервер и установку, дальше только сопровождение. Никаких токенов и подписок на каждого.</p></div>
       <div><span class="sol-k">Контроль</span><h3>Независимость от поставщика</h3><p>Открытые модели работают без внешних API. Появится модель лучше, заменим без перестройки системы.</p></div>
-    </div>
+    </div><div class="swipe">Листайте →</div>
   </div>
 </section>
 
@@ -230,6 +232,7 @@ def home():
       <thead><tr><th>Компания</th><th>Подписки в год</th><th>Время сотрудников в год</th><th>Свой ИИ под ключ</th><th>Окупаемость</th></tr></thead>
       <tbody>{econ_rows}</tbody>
     </table></div>
+    <div class="econ-m">{econ_cards}</div>
     <p class="note-s">Пример для задач «чат, база знаний, документы». Окупаемость сценарная: подставьте свои цифры в калькуляторе. Если считать только подписки, небольшим командам сервер окупается дольше, основной эффект даёт время сотрудников и безопасность данных.</p>
     <a href="/raschet" class="btn btn-primary btn-lg" style="margin-top:24px">Посчитать свою окупаемость</a>
   </div>
@@ -260,7 +263,7 @@ def home():
       <h2>Выберите пакет под размер компании</h2>
       <p>Цены под ключ, вместе с сервером, установкой и подключением задач. Любой пакет можно донастроить в калькуляторе.</p>
     </div>
-    <div class="pps">{packs_html()}</div>
+    <div class="pps">{packs_html()}</div><div class="swipe">Листайте →</div>
   </div>
 </section>
 
@@ -347,8 +350,8 @@ def keysy():
     <div><h4>Что ставим</h4><ul>{''.join(f'<li>{x}</li>' for x in what)}<li>Состав: {esc(nodes)}</li></ul></div>
   </div>
   <div class="case-n">
-    <div><small>Бюджет под ключ</small><b>{c['range']}</b></div>
-    <div><small>Подписки и API сейчас</small><b>{c['now']} в мес</b></div>
+    <div><small>Бюджет под ключ</small><b>{c['short']}</b></div>
+    <div><small>Подписки и API в месяц</small><b>{c['now']}</b></div>
     <div><small>Окупаемость с учётом времени</small><b>{months(c['m']) or 'дольше 10 лет'}</b></div>
     <div><small>Эффект за 3 года</small><b>{('до ' + c['y3']) if c['y3'] else 'в ноль'}</b></div>
   </div>

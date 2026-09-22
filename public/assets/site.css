@@ -852,3 +852,96 @@ footer{background:#070F1E}
 footer p{color:#8E9AAF}
 .hero-grid>*{min-width:0}
 @media(max-width:640px){.hero-cta .btn,.cta-box .btn,.sec-dark .btn{white-space:normal;text-align:center}}
+
+/* ================= МОБИЛЬНАЯ ВЕРСИЯ ================= */
+.show-m,.econ-m,.swipe{display:none}
+.c2-body>*{min-width:0}
+.em{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.em-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.em-h>b{font-size:17px;color:var(--ink);font-weight:600}.em-h span{font-size:13px;color:var(--muted);text-align:right}.em-h span b{display:block;font-size:17px;color:var(--navy);font-weight:600}
+.em-r{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:5px 0}.em-r span{color:var(--muted)}.em-r b{font-weight:600;color:var(--ink);white-space:nowrap}
+@media(max-width:640px){
+  .hide-m{display:none!important}.show-m{display:block}
+  body{font-size:16px}
+  .wrap{padding-left:18px;padding-right:18px}
+  .section{padding:52px 0}
+  .section-head{margin-bottom:26px}.section-head h2{margin:12px 0 10px}.section-head p{font-size:16px}
+  h2{font-size:27px;line-height:1.15}
+  .eyebrow{font-size:11.5px}
+  .btn-lg{padding:15px 18px;font-size:16px}
+  /* hero */
+  .hero{padding:34px 0 40px}
+  .hero h1{font-size:31px;line-height:1.12;margin:14px 0 12px}
+  .hero .lead{font-size:16.5px;margin-bottom:20px}
+  .hero-cta{gap:10px}.hero-cta .btn{width:100%}
+  .hero-grid{gap:26px}
+  .hero-calc{padding:18px 16px;border-radius:18px}
+  .hc-o button{padding:11px 4px;font-size:14px}
+  .hc-res b{font-size:24px}
+  /* полоса цифр */
+  .strip-grid{grid-template-columns:1fr 1fr;gap:0}
+  .strip-grid>div{padding:16px 10px 16px 0}.strip-grid b{font-size:19px}.strip-grid span{font-size:12.5px;line-height:1.4}
+  /* боли */
+  .pain{padding:22px 20px}.pain h3{font-size:19px}.pain p{font-size:15px}.pn{margin-bottom:8px}
+  /* карусели: решение, возможности, пакеты */
+  .sol,.pps{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -18px;padding:4px 18px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .sol::-webkit-scrollbar,.pps::-webkit-scrollbar{display:none}
+  .abil{grid-template-columns:1fr 1fr!important;gap:10px}.abil .card{padding:16px 14px}.abil .card h3{font-size:15.5px;margin-bottom:6px}.abil .card p{font-size:13.5px;line-height:1.45}
+  .sol>*,.pps>*{flex:0 0 80%;scroll-snap-align:start;scroll-margin-left:18px}
+  .pps{padding-top:14px}
+  .swipe{display:block;font-size:12.5px;color:var(--muted-2);margin:-2px 0 0;text-align:right}
+  /* безопасность */
+  .sec-list li{padding:16px 18px}.sec-dark .lead{margin:12px 0 22px}.sec-dark .btn{width:100%}
+  /* эффект: карточки вместо таблицы */
+  #effekt .tbl-wrap{display:none}
+  .econ-m{display:grid;gap:10px}
+  #effekt .btn{width:100%}
+  /* как внедряем */
+  .timeline{grid-template-columns:1fr;gap:0}
+  .tl-step{display:grid;grid-template-columns:36px 1fr;column-gap:14px;padding:0 0 18px}
+  .tl-step .dot{grid-row:1/3}
+  .tl-step h4{margin:6px 0 4px}
+  .tl-step ul{display:block}.tl-step li{display:inline;font-size:13.5px}.tl-step li:not(:last-child)::after{content:" · "}
+  .tl-step::before{display:block!important;left:17px;right:auto;top:36px;bottom:0;width:2px;height:auto}
+  .tl-step:first-child::before{left:17px}.tl-step:last-child::before{display:none!important}
+  /* вопросы и финал */
+  .faq-q{font-size:16px;padding:16px 2px}
+  .final-cta{padding:32px 20px;border-radius:20px}.final-cta p{font-size:16px;margin:12px auto 22px}
+  .final-cta .hero-cta .btn{width:100%}
+  /* внутренние страницы */
+  .phero{padding:26px 0 30px}
+  .phero h1{font-size:27px;margin:10px 0 8px}
+  .phero .lead{font-size:15.5px}
+  .crumbs{margin-bottom:14px;font-size:12.5px}
+  /* калькулятор */
+  .calc-section{padding:16px 0 40px}
+  .calc-section .wrap{padding-left:10px;padding-right:10px}
+  .calc2{border-radius:18px}
+  #c2Left{padding:18px 14px}
+  .c2-right{padding:18px 14px}
+  .tasks2{grid-template-columns:1fr 1fr!important;gap:8px}
+  .t2{flex-direction:column;gap:8px;padding:11px 10px}.t2 small{display:none}.t2 b{font-size:13.5px}
+  .t2i{width:28px;height:28px}.t2i svg{width:15px;height:15px}
+  .chips:has(small){display:grid;grid-template-columns:1fr;gap:6px}
+  .chips:has(small) .chip{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 12px}
+  .chips:has(small) .chip small{text-align:right;font-size:11.5px;max-width:52%}
+  .chip{padding:9px 12px}
+  .pay-in{grid-template-columns:1fr 1fr;gap:10px 8px}
+  .pay-in label{font-size:12px;justify-content:space-between}
+  .addons2{grid-template-columns:1fr}
+  .c2-tune{width:100%;white-space:normal}
+  .c2-lead{margin-top:16px}
+  .lead-form .two-col{grid-template-columns:1fr;gap:0}
+  .lead-form .btn{width:100%}
+  .c2bar{padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+  .c2bar b{font-size:17px}
+  /* кейсы */
+  .case{padding:22px 18px;border-radius:18px}
+  .case-n b{font-size:15.5px}
+  /* статьи */
+  .article h2{font-size:22px;margin:30px 0 10px}
+  /* подвал */
+  footer{padding:40px 0 calc(90px + env(safe-area-inset-bottom))}
+  .foot-links{gap:8px 18px}.foot-links a{margin-bottom:0}
+  .float-cta{padding:14px 18px;bottom:calc(14px + env(safe-area-inset-bottom))}
+}

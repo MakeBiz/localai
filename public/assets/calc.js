@@ -8,11 +8,11 @@ const row=(label,body,hint)=>'<div class="c2-row"><div class="c2-lab">'+label+(h
 function payInputs(){
   const st=cur();
   return '<div class="c2-sep">Окупаемость: сколько тратите сейчас</div><p class="c2-note">Если подписок пока нет, оставьте как есть: посчитаем, сколько стоили бы подписки на эту команду. Часы и стоимость часа это допущения, поменяйте под себя</p>'+
-   '<div class="pay-in"><label>Платных подписок<input type="number" min="0" data-pay="seats" value="'+(S.seats||'')+'" placeholder="'+seatsAuto(st)+'"></label>'+
-   '<label>Подписка, ₽ в месяц<input type="number" min="0" data-pay="price" value="'+(S.price||'')+'" placeholder="'+fN(CFG.seatPrice)+'"></label>'+
-   '<label>API и боты, ₽ в месяц<input type="number" min="0" data-pay="api" value="'+(S.api||'')+'" placeholder="0"></label>'+
-   '<label>Экономия времени, часов в неделю<input type="number" min="0" step="0.5" data-pay="hrs" value="'+(S.hrs||'')+'" placeholder="'+CFG.hrsDefault+'"></label>'+
-   '<label>Стоимость часа сотрудника, ₽<input type="number" min="0" data-pay="rate" value="'+(S.rate||'')+'" placeholder="'+CFG.rateDefault+'"></label></div>';
+   '<div class="pay-in"><label>Платных подписок<input type="number" inputmode="decimal" min="0" data-pay="seats" value="'+(S.seats||'')+'" placeholder="'+seatsAuto(st)+'"></label>'+
+   '<label>Подписка, ₽ в месяц<input type="number" inputmode="decimal" min="0" data-pay="price" value="'+(S.price||'')+'" placeholder="'+fN(CFG.seatPrice)+'"></label>'+
+   '<label>API и боты, ₽ в месяц<input type="number" inputmode="decimal" min="0" data-pay="api" value="'+(S.api||'')+'" placeholder="0"></label>'+
+   '<label>Экономия времени, часов в неделю<input type="number" inputmode="decimal" min="0" step="0.5" data-pay="hrs" value="'+(S.hrs||'')+'" placeholder="'+CFG.hrsDefault+'"></label>'+
+   '<label>Стоимость часа сотрудника, ₽<input type="number" inputmode="decimal" min="0" data-pay="rate" value="'+(S.rate||'')+'" placeholder="'+CFG.rateDefault+'"></label></div>';
 }
 function renderCustom(){
   const e=EMP[S.emp];
@@ -75,7 +75,7 @@ function renderRight(){
   h+='<div class="fine">Предварительная вилка на '+CFG.priceDate+'. Окупаемость сценарная и зависит от допущений по часам и стоимости часа. Доставка и подготовка площадки считаются отдельно</div>';
   if(EXPERT)h+='<pre class="xp">'+r.why.join('\n')+'\n'+r.nodes.map(n=>n.q+'× '+n.k+' '+CFG.vram[n.k]).join('\n')+'</pre>';
   R.innerHTML=h+'</div>';
-  if(MB)MB.innerHTML='<div><small>Ориентировочно'+(pb.m?' · окупится за '+pb.m[0]+'-'+pb.m[1]+' мес':'')+'</small><b>'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</b></div><button type="button" class="btn btn-primary" data-goto="1">Подробнее</button>';
+  if(MB)MB.innerHTML='<div><small>'+(pb.m?'Окупится за '+(pb.m[0]===pb.m[1]?pb.m[0]:pb.m[0]+'-'+pb.m[1])+' мес':'Ориентировочно под ключ')+'</small><b>'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rngS(r.lo,r.hi))+'</b></div><button type="button" class="btn btn-primary" data-goto="1">Итог ↓</button>';
 }
 function plural(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c;}
 function render(){
@@ -97,7 +97,9 @@ function goLead(){const f=document.getElementById('leadForm');f.scrollIntoView({
 R.addEventListener('click',e=>{if(e.target.closest('[data-lead]'))goLead();});
 if(MB){MB.addEventListener('click',e=>{if(e.target.closest('[data-goto]'))R.scrollIntoView({behavior:'smooth',block:'start'});});
   const calcEl=document.getElementById('calc');
-  if('IntersectionObserver' in window)new IntersectionObserver(en=>{MB.classList.toggle('show',en[0].isIntersecting&&innerWidth<=900);},{threshold:.05}).observe(calcEl);}
+  if('IntersectionObserver' in window){const v={c:false,r:false,f:false};const upd=()=>MB.classList.toggle('show',v.c&&!v.r&&!v.f&&innerWidth<=900);
+    new IntersectionObserver(en=>{en.forEach(x=>{v.c=x.isIntersecting;});upd();},{threshold:[0,.05]}).observe(calcEl);
+    const LF=document.getElementById('leadForm');const io2=new IntersectionObserver(en=>{en.forEach(x=>{v[x.target===R?'r':'f']=x.isIntersecting;});upd();},{rootMargin:'0px 0px -35% 0px'});io2.observe(R);if(LF)io2.observe(LF);}}
 
 /* ---------- заявка → Bitrix24 ---------- */
 function utm(){const p=new URLSearchParams(location.search);const o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(p.get(k))o[k.toUpperCase()]=p.get(k);});return o;}
