@@ -634,6 +634,133 @@ footer a:hover{color:#fff}
 
 .fade{animation:fade .3s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ================= PREMIUM THEME v4 ================= */
+:root{--navy:#0A1F44;--navy-2:#12306A;--navy-ink:#070F1E;--accent:#1D4ED8;--accent-600:#1E40AF;--accent-soft:#EEF2FB;
+ --ink:#0E1726;--muted:#5C6677;--muted-2:#8B93A1;--line:#E6E2D9;--line-2:#EFECE5;--bg:#FFFFFF;--bg-soft:#F6F3EC;--gold:#B08D57;
+ --radius:18px;--radius-lg:24px;--shadow:0 1px 2px rgba(14,23,38,.04),0 18px 44px rgba(14,23,38,.07);--shadow-sm:0 1px 2px rgba(14,23,38,.04);--shadow-lg:0 30px 80px rgba(7,15,30,.14)}
+body{background:#FBFAF7;color:var(--ink);letter-spacing:-.003em}
+h1,h2,h3,h4{font-weight:600;letter-spacing:-.025em;color:var(--ink)}
+h2{font-size:clamp(30px,3.4vw,46px);font-weight:600;line-height:1.1}
+h3{font-weight:600}
+.eyebrow{background:none;padding:0;border-radius:0;color:var(--gold);letter-spacing:.16em;font-size:12px;font-weight:600;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor;display:inline-block}
+.section{padding:112px 0}
+.section--soft{background:var(--bg-soft)}
+.section-head{margin-bottom:52px}
+.section-head p,.lead{color:var(--muted)}
+.btn{border-radius:10px;font-weight:600;letter-spacing:-.005em}
+.btn-primary{background:var(--navy);box-shadow:none}
+.btn-primary:hover{background:var(--accent);box-shadow:0 10px 24px rgba(29,78,216,.22);transform:none}
+.btn-ghost{background:transparent;border-color:#CFC8BA;color:var(--navy)}
+.btn-ghost:hover{border-color:var(--navy);color:var(--navy);background:transparent}
+.btn-navy{background:var(--navy)}
+header{background:rgba(251,250,247,.9);border-bottom:1px solid var(--line-2)}
+.logo{font-weight:700}.logo .mark{background:var(--navy);border-radius:8px}
+.nav-links a{color:#3A4456;font-weight:500}
+.card{box-shadow:none;border-color:var(--line);border-radius:var(--radius)}
+.card:hover{transform:none;box-shadow:var(--shadow);border-color:#D8D2C4}
+.card .ci{background:transparent;border:1px solid var(--line);color:var(--navy);border-radius:12px}
+.sec-cta{display:inline-flex;margin-top:22px;font-weight:600;color:var(--accent);border-bottom:1px solid rgba(29,78,216,.3);padding-bottom:2px}
+.sec-cta:hover{border-color:var(--accent)}
+/* hero */
+.hero{background:radial-gradient(900px 520px at 88% 0%,rgba(29,78,216,.28),transparent 60%),radial-gradient(700px 400px at 0% 100%,rgba(176,141,87,.10),transparent 60%),linear-gradient(180deg,#070F1E 0%,#0A1730 100%);padding:104px 0 96px;border-bottom:none;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 75%);pointer-events:none}
+.hero .wrap{position:relative}
+.hero-grid{grid-template-columns:1.1fr .9fr;gap:64px}
+.hero .eyebrow{color:#C9A96E}
+.hero h1{color:#fff;font-size:clamp(38px,5.2vw,66px);font-weight:600;line-height:1.04;letter-spacing:-.035em;margin:22px 0 22px}
+.hero .lead{color:#A9B4C6;font-size:18.5px;max-width:560px;margin-bottom:34px}
+.hero .btn-primary{background:#fff;color:var(--navy)}
+.hero .btn-primary:hover{background:#E8EDF7;color:var(--navy);box-shadow:none}
+.hero .btn-ghost{border-color:rgba(255,255,255,.25);color:#fff}
+.hero .btn-ghost:hover{border-color:#fff;color:#fff}
+.hero-points{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:30px}
+.hero-points span{font-size:14px;color:#8E9AAF;display:flex;align-items:center;gap:9px}
+.hero-points span::before{content:"";width:5px;height:5px;border-radius:50%;background:#C9A96E}
+.hero-calc{background:#fff;border-radius:22px;padding:26px;box-shadow:0 40px 100px rgba(0,0,0,.45);color:var(--ink)}
+.hc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line-2)}
+.hc-top b{font-size:17px;font-weight:600;color:var(--ink)}.hc-top i{font-style:normal;font-size:12.5px;color:var(--muted-2)}
+.hc-q{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:4px 0 9px}
+.hc-o{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px}
+.hc-o.t{grid-template-columns:repeat(3,1fr)}
+.hc-o button{font-family:inherit;font-size:13.5px;font-weight:500;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 6px;cursor:pointer;transition:.12s;line-height:1.25}
+.hc-o button:hover{border-color:#BDB5A6}
+.hc-o button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.hc-res{background:var(--bg-soft);border-radius:14px;padding:16px 18px;margin:6px 0 14px}
+.hc-res small{display:block;font-size:12px;color:var(--muted)}
+.hc-res b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin:3px 0 2px}
+.hc-res span{font-size:13px;color:var(--muted)}
+.hero-calc .btn{width:100%}
+.hc-fine{font-size:11.5px;color:var(--muted-2);margin-top:10px;text-align:center}
+/* strip */
+.strip{background:#fff;border-bottom:1px solid var(--line-2)}
+.strip-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.strip-grid>div{padding:30px 24px;border-left:1px solid var(--line-2)}
+.strip-grid>div:first-child{border-left:none;padding-left:0}
+.strip b{display:block;font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--navy)}
+.strip span{font-size:14px;color:var(--muted)}
+/* calc */
+.calc-section{background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EC 100%);padding:104px 0}
+.calc2{border-color:var(--line);box-shadow:0 30px 80px rgba(14,23,38,.08);border-radius:24px}
+.seg{background:#F6F3EC;border-bottom-color:var(--line-2);padding:8px}
+.seg button{font-weight:600;border-radius:10px}
+.seg button.on{border-color:transparent;background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(14,23,38,.1)}
+.c2-right{background:#FBFAF7}
+.emp b{font-weight:600;color:var(--navy)}
+.c2-res .p{font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.t2{border-width:1px;border-radius:12px}.t2i{background:transparent;border:1px solid var(--line);color:var(--navy)}
+.t2.on{background:#F3F6FC;border-color:var(--navy)}.t2.on .t2i{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip{border-width:1px}.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}.chip.on small{color:#B9C3D6}
+.pk2{border-width:1px}.pk2.on{border-color:var(--navy);background:#F3F6FC}.pk2 .pr{font-weight:600;color:var(--navy)}.pk2 .tag{background:var(--gold)}
+.ad2{border-width:1px}.ad2.on{border-color:var(--navy);background:#F3F6FC}
+.lead-form{background:#0A1730;border-radius:24px}
+.lead-form h3{font-weight:600}
+/* other blocks */
+.problem-box{background:#0A1730;border-radius:24px}
+.problem-box::after{background:radial-gradient(circle,rgba(176,141,87,.22),transparent 70%)}
+.setup-section{background:#fff;border-color:var(--line)}
+.setup-price{background:#0A1730}.sp-num{font-weight:600}
+.setup-list li::before{background:var(--navy)}
+table.cmp thead th{background:#0A1730}
+table.cmp .hl-col{background:#F3F6FC}
+.layer .ln{background:transparent;border:1px solid var(--line);color:var(--navy)}
+.layer{border-color:var(--line)}.layer:hover{transform:none;border-color:#CFC8BA}
+.tl-step .dot{background:var(--navy);box-shadow:0 0 0 5px #FBFAF7,0 0 0 6px var(--line)}
+.tco-card{background:#0A1730}
+.stat .n{font-weight:600;color:var(--navy)}
+.stat{border-color:var(--line)}
+.econ-item{border-color:var(--line)}.econ-item .d{background:var(--gold)}
+.final-cta{background:radial-gradient(700px 360px at 80% 0%,rgba(29,78,216,.3),transparent 60%),#070F1E;border-radius:28px;padding:80px 52px}
+.final-cta .eyebrow{color:#C9A96E;justify-content:center}
+.final-cta h2{margin-top:16px}
+.final-cta .btn-primary{background:#fff;color:var(--navy)}
+.final-cta .btn-primary:hover{background:#E8EDF7}
+.faq-q{font-weight:600}.faq-q .fx{background:transparent;border:1px solid var(--line);color:var(--navy)}
+footer{background:#070F1E}
+.hero-calc .btn-primary{background:var(--navy);color:#fff}
+.hero-calc .btn-primary:hover{background:var(--accent);color:#fff}
+.hero h1{font-size:clamp(36px,4.3vw,58px)}
+.c2-res .p{font-size:23px}
+.lead-form .btn-primary{background:#fff;color:var(--navy)}
+.lead-form .btn-primary:hover{background:#E8EDF7;color:var(--navy)}
+.problem-box .eyebrow,.setup-price .eyebrow{color:#C9A96E}
+/* floating CTA */
+.float-cta{position:fixed;right:24px;bottom:24px;z-index:65;background:var(--navy);color:#fff;font-weight:600;padding:15px 22px;border-radius:12px;box-shadow:0 16px 40px rgba(7,15,30,.28);opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s}
+.float-cta.show{opacity:1;transform:none;pointer-events:auto}
+.float-cta:hover{background:var(--accent)}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}.hero{padding:72px 0 64px}
+  .strip-grid{grid-template-columns:1fr 1fr}.strip-grid>div{border-left:none;padding:20px 0;border-top:1px solid var(--line-2)}
+  .strip-grid>div:nth-child(-n+2){border-top:none}
+}
+@media(max-width:640px){
+  .section{padding:72px 0}.hc-o{grid-template-columns:1fr 1fr}.hc-o.t{grid-template-columns:1fr 1fr}
+  .hero-calc{padding:20px}.float-cta{left:16px;right:16px;bottom:16px;text-align:center}
+  .final-cta{padding:48px 22px}.strip b{font-size:22px}
+  .hero-cta .btn{width:100%}.hero .lead{font-size:16.5px}
+}
+
 </style>
 </head>
 <body>
@@ -646,98 +773,53 @@ footer a:hover{color:#fff}
       <span>MakeBiz<small>Локальный ИИ</small></span>
     </a>
     <nav class="nav-links">
-      <a href="#vozmozhnosti">Возможности</a>
       <a href="#calc">Калькулятор</a>
-      <a href="#security">Безопасность</a>
+      <a href="#calc" data-open-packs>Пакеты</a>
+      <a href="#scenarii">Что входит</a>
       <a href="#kak">Как внедряем</a>
-      <a href="#scenarii">Сценарии</a>
+      <a href="#security">Безопасность</a>
       <a href="#faq">Вопросы</a>
     </nav>
     <div class="nav-cta">
       <span class="nav-phone">+7 495 000-00-00</span>
-      <a href="#calc" class="btn btn-primary">Рассчитать конфигурацию</a>
+      <a href="#calc" class="btn btn-primary">Рассчитать стоимость</a>
       <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#vozmozhnosti">Возможности</a>
   <a href="#calc">Калькулятор</a>
-  <a href="#security">Безопасность</a>
+  <a href="#calc" data-open-packs>Готовые пакеты</a>
+  <a href="#scenarii">Что входит</a>
   <a href="#kak">Как внедряем</a>
-  <a href="#scenarii">Сценарии</a>
+  <a href="#security">Безопасность</a>
   <a href="#faq">Вопросы</a>
-  <a href="#calc" class="btn btn-primary">Рассчитать конфигурацию</a>
+  <a href="#calc" class="btn btn-primary">Рассчитать стоимость</a>
 </div>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Локальная LLM и AI-инфраструктура под ключ</span>
-      <h1>Корпоративный ИИ на ваших серверах</h1>
-      <p class="lead">Разворачиваем локальные LLM и AI-сервисы для сотрудников, клиентов, звонков, документов, изображений и видео. Рассчитываем инфраструктуру под реальную нагрузку, интегрируем с вашими системами и сопровождаем в production.</p>
+    <div class="hero-copy">
+      <span class="eyebrow">Локальный ИИ для бизнеса · под ключ</span>
+      <h1>Корпоративный ИИ<br>на ваших серверах</h1>
+      <p class="lead">Собственный аналог ChatGPT для сотрудников, клиентов, звонков и документов. Данные остаются внутри компании, а внешнему сервису не нужно платить за каждый запрос. Подберём сервер, установим систему и возьмём на сопровождение.</p>
       <div class="hero-cta">
-        <a href="#calc" class="btn btn-primary btn-lg">Рассчитать конфигурацию</a>
-        <a href="#final" class="btn btn-ghost btn-lg">Обсудить пилот</a>
+        <a href="#calc" class="btn btn-primary btn-lg">Рассчитать стоимость</a>
+        <a href="#calc" class="btn btn-ghost btn-lg" data-open-packs>Готовые пакеты</a>
       </div>
-      <div class="hero-note">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        Расчёт за 30 секунд. Названия оборудования не требуются
-      </div>
-      <ul class="markers">
-        <li><span class="ic">✓</span> Данные в выбранном контуре, внешние вызовы можно ограничить</li>
-        <li><span class="ic">✓</span> Без внешней тарификации за каждый токен</li>
-        <li><span class="ic">✓</span> Несколько моделей в одной платформе, замена без перестройки</li>
-        <li><span class="ic">✓</span> Интеграция с CRM, 1С, телефонией и документами</li>
-        <li><span class="ic">✓</span> Установка и настройка системы от 300 000 ₽ (без учёта железа)</li>
-      </ul>
+      <div class="hero-points"><span>Данные внутри компании</span><span>Без оплаты за каждый запрос</span><span>Модели можно менять</span></div>
     </div>
-    <div class="hero-visual">
-      <div class="panel-card">
-        <div class="pc-head">
-          <div class="pc-title"><span class="pc-dot"></span> AI-контур компании</div>
-          <span class="pc-tag">ON-PREM</span>
-        </div>
-        <div class="node-row">
-          <div class="node"><div class="nl">Текстовый пул</div><div class="nv">2 узла</div><div class="bar"><i style="width:72%"></i></div></div>
-          <div class="node"><div class="nl">Речь / real-time</div><div class="nv">1 узел</div><div class="bar"><i style="width:54%"></i></div></div>
-        </div>
-        <div class="node-row">
-          <div class="node"><div class="nl">Данные и RAG</div><div class="nv">Индекс + поиск</div><div class="bar"><i style="width:63%"></i></div></div>
-          <div class="node"><div class="nl">Резерв</div><div class="nv">N+1</div><div class="bar"><i style="width:40%"></i></div></div>
-        </div>
-        <div class="flow">
-          <div class="f">Запрос<b>SSO + роли</b></div>
-          <span class="arw">→</span>
-          <div class="f">Контур<b>LLM + RAG</b></div>
-          <span class="arw">→</span>
-          <div class="f">Действие<b>CRM · 1С</b></div>
-        </div>
-      </div>
-    </div>
+    <div class="hero-calc" id="heroCalc"></div>
   </div>
 </section>
 
-<!-- ============ PROBLEM ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="problem-box">
-      <h2>Публичный AI удобен для экспериментов. Корпоративным процессам нужен управляемый контур.</h2>
-      <p>В рабочих запросах могут находиться договоры, персональные данные, код, звонки клиентов, финансовая информация и коммерческая тайна. При большой постоянной нагрузке также важно контролировать стоимость, скорость, доступность и версии моделей. Локальная AI-платформа позволяет собрать эти требования в одной архитектуре.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CATEGORIES / process-first ============ -->
-<section class="section section--soft" id="vozmozhnosti">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Начните не с модели, а с процесса</span>
-      <h2>Выберите, что должен делать ИИ</h2>
-      <p>Укажите, что вы хотите автоматизировать. Калькулятор сам определит, какие типы вычислений, хранения, резервирования и интеграций потребуются.</p>
-    </div>
-    <div class="cat-grid" id="catGrid"><!-- rendered by JS --></div>
+<section class="strip">
+  <div class="wrap strip-grid">
+    <div><b>30 сек</b><span>расчёт стоимости без технических вопросов</span></div>
+    <div><b>300 000 ₽</b><span>установка и настройка системы</span></div>
+    <div><b>от 1,8 млн ₽</b><span>решение под ключ вместе с оборудованием</span></div>
+    <div><b>0 ₽</b><span>внешнему сервису за каждый запрос</span></div>
   </div>
 </section>
 
@@ -745,7 +827,7 @@ footer a:hover{color:#fff}
 <section class="calc-section" id="calc">
   <div class="wrap">
     <div class="section-head" style="text-align:center;margin:0 auto 30px">
-      <span class="eyebrow">Калькулятор локального ИИ</span>
+      <span class="eyebrow">Калькулятор</span>
       <h2>Сколько стоит ИИ на ваших серверах</h2>
       <p style="margin:0 auto">Выберите размер компании и задачи, цена меняется сразу. Или посмотрите готовые пакеты. Знания о видеокартах и моделях не нужны.</p>
     </div>
@@ -766,6 +848,16 @@ footer a:hover{color:#fff}
 </section>
 <div class="c2bar" id="c2Bar"></div>
 
+<!-- ============ PROBLEM ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="problem-box">
+      <h2>Публичный AI удобен для экспериментов. Корпоративным процессам нужен управляемый контур.</h2>
+      <p>В рабочих запросах могут находиться договоры, персональные данные, код, звонки клиентов, финансовая информация и коммерческая тайна. При большой постоянной нагрузке также важно контролировать стоимость, скорость, доступность и версии моделей. Локальная AI-платформа позволяет собрать эти требования в одной архитектуре.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ WHAT'S INCLUDED ============ -->
 <section class="section" id="scenarii">
   <div class="wrap">
@@ -773,6 +865,7 @@ footer a:hover{color:#fff}
       <span class="eyebrow">Полный контур, а не одна модель</span>
       <h2>Что входит в решение</h2>
       <p>Локальная модель без интеграций остаётся демонстрацией. Мы соединяем её с реальными процессами, данными и системами компании, а затем сопровождаем результат.</p>
+      <a href="#calc" class="sec-cta">Рассчитать для своей компании →</a>
     </div>
     <div class="grid g3">
       <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3 8 4-16 3 8h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Нагрузочный расчёт</h3><p>Пики, параллельность, скорость, рост и резерв. Считаем не абстрактную мощность, а реальные операции.</p></div>
@@ -822,6 +915,7 @@ footer a:hover{color:#fff}
       <span class="eyebrow">Мы не навязываем покупку</span>
       <h2>Публичный API, российский cloud или локальный контур</h2>
       <p>В результате расчёта покажем, где рациональнее собственный контур, выделенная аренда или гибрид.</p>
+      <a href="#calc" class="sec-cta">Рассчитать для своей компании →</a>
     </div>
     <div class="tbl-wrap">
       <table class="cmp">
@@ -925,6 +1019,7 @@ footer a:hover{color:#fff}
       <span class="eyebrow">Экономика</span>
       <h2>Считаем не цену сервера, а стоимость владения</h2>
       <p>После запуска собственного контура расходы становятся прогнозируемыми. Для каждого проекта мы сравниваем покупку, выделенную аренду и гибрид на горизонте 36 месяцев.</p>
+      <a href="#calc" class="sec-cta">Рассчитать для своей компании →</a>
     </div>
     <div class="econ-grid">
       <div class="econ-list">
@@ -983,15 +1078,18 @@ footer a:hover{color:#fff}
 <section class="section" id="final">
   <div class="wrap">
     <div class="final-cta">
-      <h2>Получите предварительную архитектуру под вашу нагрузку</h2>
-      <p>Выберите процессы и объёмы. Калькулятор сформирует класс решения, диапазон бюджета и список вопросов для технической команды.</p>
+      <span class="eyebrow">Следующий шаг</span>
+      <h2>Узнайте стоимость для своей компании за 30 секунд</h2>
+      <p>Выберите размер компании и задачи, калькулятор сразу покажет вилку «от и до». Точную конфигурацию подтвердим на технической встрече.</p>
       <div class="hero-cta">
-        <a href="#calc" class="btn btn-primary btn-lg">Начать расчёт</a>
-        <a href="#calc" class="btn btn-ghost btn-lg">Отправить техническое задание</a>
+        <a href="#calc" class="btn btn-primary btn-lg">Рассчитать стоимость</a>
+        <a href="#calc" class="btn btn-ghost btn-lg" data-open-packs>Готовые пакеты</a>
       </div>
     </div>
   </div>
 </section>
+
+<a href="#calc" class="float-cta" id="floatCta">Рассчитать стоимость</a>
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -1209,7 +1307,7 @@ function renderRight(){
 }
 function render(){
   document.querySelectorAll('#calcMode button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.view));
-  S.view==='packs'?renderPacks():renderCustom();renderRight();
+  S.view==='packs'?renderPacks():renderCustom();renderRight();renderHero();
   try{localStorage.setItem('mb_localai_v3',JSON.stringify({S,PK}));}catch(e){}
 }
 document.getElementById('calcMode').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;S.view=b.dataset.mode;render();});
@@ -1266,7 +1364,7 @@ const CATS=[
   {ic:'chart',t:'Анализировать данные',d:'Вопросы к CRM, 1С и BI обычным языком',tasks:['data']}
 ];
 function renderCatGrid(){
-  const grid=document.getElementById('catGrid');
+  const grid=document.getElementById('catGrid');if(!grid)return;
   grid.innerHTML=CATS.map((c,i)=>'<a class="cat" href="#calc" data-c="'+i+'"><span class="ci">'+IC[c.ic]+'</span><h3>'+c.t+'</h3><p>'+c.d+'</p><span class="go">Посчитать в калькуляторе →</span></a>').join('');
   grid.querySelectorAll('.cat').forEach(el=>el.addEventListener('click',()=>{S.view='custom';CATS[+el.dataset.c].tasks.forEach(t=>{if(!S.tasks.includes(t))S.tasks.push(t);});render();}));
 }
@@ -1287,6 +1385,27 @@ function renderFAQ(){
 document.getElementById('burger').onclick=()=>document.getElementById('mobileMenu').classList.toggle('open');
 document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>document.getElementById('mobileMenu').classList.remove('open'));
 
+
+/* ---------- мини-калькулятор в первом экране ---------- */
+const HC_EMP=[[3,'до 30'],[6,'30-100'],[9,'100-300'],[12,'300+']];
+const HC_T=[['chat','Сотрудникам'],['docs','Документы'],['sales','Продажи и CRM'],['bot','Бот для клиентов'],['calls','Звонки'],['media','Картинки и видео']];
+function renderHero(){
+  const el=document.getElementById('heroCalc');if(!el)return;
+  const r=calc(S);const near=HC_EMP.reduce((b,x)=>Math.abs(x[0]-S.emp)<Math.abs(b[0]-S.emp)?x:b);
+  el.innerHTML='<div class="hc-top"><b>Расчёт в 2 клика</b><i>цена обновляется сразу</i></div>'+
+   '<div class="hc-q">1. Сколько сотрудников</div><div class="hc-o">'+HC_EMP.map(x=>'<button type="button" data-he="'+x[0]+'" class="'+(x===near?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
+   '<div class="hc-q">2. Для чего нужен ИИ</div><div class="hc-o t">'+HC_T.map(x=>'<button type="button" data-ht="'+x[0]+'" class="'+(S.tasks.includes(x[0])?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
+   '<div class="hc-res"><small>Под ключ, вместе с оборудованием</small><b>'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</b><span>'+r.title+'</span></div>'+
+   '<a href="#calc" class="btn btn-primary btn-lg">Уточнить расчёт →</a><div class="hc-fine">Предварительная вилка. Без регистрации и звонков</div>';
+}
+document.getElementById('heroCalc').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.he){S.emp=+b.dataset.he;}
+  if(b.dataset.ht){const k=b.dataset.ht;S.tasks=S.tasks.includes(k)?(S.tasks.length>1?S.tasks.filter(x=>x!==k):S.tasks):[...S.tasks,k];}
+  S.view='custom';render();});
+document.addEventListener('click',e=>{if(e.target.closest('[data-open-packs]')){S.view='packs';render();document.getElementById('mobileMenu').classList.remove('open');}});
+(function(){const fc=document.getElementById('floatCta');if(!fc||!('IntersectionObserver' in window))return;const vis=new Set();
+  const io=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?vis.add(x.target.id):vis.delete(x.target.id));fc.classList.toggle('show',vis.size===0);},{threshold:.02});
+  ['top','calc','final'].forEach(id=>{const el=document.getElementById(id);el&&io.observe(el);});})();
 try{const sv=JSON.parse(localStorage.getItem('mb_localai_v3')||'null');if(sv&&sv.S&&Array.isArray(sv.S.tasks)){S={...S,...sv.S};PK=sv.PK||PK;}}catch(e){}
 renderCatGrid();renderFAQ();render();
 
