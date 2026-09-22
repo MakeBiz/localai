@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Калькулятор: три варианта · MakeBiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#03235F;--ink2:#061A44;--acc:#074EE8;--accs:#EAF0FE;--ink:#0B1B33;--mut:#5B6B85;--line:#E4EAF3;--soft:#F5F8FD;--ok:#12855B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--soft);line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+h1{color:var(--navy);font-size:28px;font-weight:900}
+.sub{color:var(--mut);margin:6px 0 20px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.tab{font-family:inherit;text-align:left;border:2px solid var(--line);background:#fff;border-radius:14px;padding:14px;cursor:pointer}
+.tab b{display:block;color:var(--navy);font-size:16px}.tab span{font-size:13px;color:var(--mut)}
+.tab.on{border-color:var(--acc);background:var(--accs)}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 12px 34px rgba(6,26,68,.07)}
+.q{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.qh{color:var(--mut);font-size:14.5px;margin-bottom:18px}
+.big{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.b{font-family:inherit;text-align:left;border:2px solid var(--line);background:#fff;border-radius:14px;padding:16px;cursor:pointer;font-size:15px;color:var(--ink)}
+.b:hover{border-color:#B9CBEC}.b.on{border-color:var(--acc);background:var(--accs)}
+.b b{display:block;color:var(--navy);font-size:16px;margin-bottom:2px}.b span{font-size:13px;color:var(--mut)}
+.prog{display:flex;gap:6px;margin-bottom:20px}.prog i{flex:1;height:6px;border-radius:4px;background:var(--line)}.prog i.on{background:var(--acc)}
+.nav{display:flex;justify-content:space-between;margin-top:22px}
+.btn{font-family:inherit;font-weight:700;font-size:15px;border-radius:12px;padding:13px 22px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}.btn:disabled{opacity:.4;cursor:default}
+.res{background:linear-gradient(135deg,var(--navy),var(--ink2));color:#fff;border-radius:18px;padding:24px;margin-top:18px}
+.res .l{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#9DB4DC;font-weight:700}
+.res .p{font-size:34px;font-weight:900;margin:4px 0 6px}
+.res .c{color:#C7D3EA;font-size:14.5px}
+.res ul{list-style:none;margin-top:12px;display:grid;gap:5px;font-size:14px;color:#DCE6F7}
+.res li::before{content:"✓ ";color:#7FB2FF}
+.res .cta{margin-top:16px;background:var(--acc);color:#fff;border:none}
+.fine{font-size:12px;color:#9DB4DC;margin-top:10px}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}
+.row{margin-bottom:22px}.row>label{display:block;font-weight:700;color:var(--navy);margin-bottom:8px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.rv{font-size:26px;font-weight:900;color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:inherit;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:9px 13px;font-size:14px;cursor:pointer;color:var(--ink)}
+.chip.on{border-color:var(--acc);background:var(--accs);color:var(--navy);font-weight:600}
+.sticky{position:sticky;top:16px}.sticky .res{margin-top:0}
+.packs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pk{font-family:inherit;text-align:left;border:2px solid var(--line);background:#fff;border-radius:16px;padding:18px 16px;cursor:pointer;color:var(--ink);position:relative}
+.pk.on{border-color:var(--acc);background:var(--accs)}
+.pk .n{font-weight:800;color:var(--navy);font-size:17px}.pk .w{font-size:13px;color:var(--mut);margin:4px 0 10px;min-height:38px}
+.pk .pr{font-weight:900;color:var(--acc);font-size:18px}.pk .tag{position:absolute;top:-10px;left:14px;background:var(--acc);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.pk ul{list-style:none;margin-top:10px;font-size:12.5px;color:var(--mut);display:grid;gap:3px}
+.addons{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px}
+.ad{display:flex;justify-content:space-between;gap:10px;align-items:center;font-family:inherit;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font-size:14px;text-align:left;color:var(--ink)}
+.ad.on{border-color:var(--acc);background:var(--accs)}.ad i{font-style:normal;color:var(--mut);font-size:12.5px;white-space:nowrap}
+.note{background:#FBF3E3;border:1px solid #F0E2C4;border-radius:12px;padding:12px 14px;font-size:13.5px;color:#6B5316;margin-bottom:18px}
+@media(max-width:760px){.tabs,.two,.packs,.addons,.big{grid-template-columns:1fr}.res .p{font-size:28px}.card{padding:20px}}
+</style></head><body><div class="wrap">
+<h1>Калькулятор: три варианта упрощения</h1>
+<p class="sub">Все три без техники, 30 секунд на прохождение, результат это вилка «от и до». Цены считаются тем же движком, что и сейчас (классы серверов, установка 300 000 ₽, сборка, интеграции). Прокликай и скажи, какой ставим</p>
+<div class="tabs">
+ <button class="tab on" data-t="1"><b>1. Мастер «3 вопроса»</b><span>Один вопрос на экран, большие кнопки</span></button>
+ <button class="tab" data-t="2"><b>2. Одна страница</b><span>Ползунок + галочки, цена меняется сразу</span></button>
+ <button class="tab" data-t="3"><b>3. Готовые пакеты</b><span>Как прайс: выбрал пакет, добавил опции</span></button>
+</div>
+<div id="v"></div>
+</div>
+<script>
+/* ===== общий упрощённый движок (цены из CFG основного калькулятора) ===== */
+const EQ={A:[1.2,1.7],B:[2.2,3.2],C:[3.2,4.8],D:[5,7.5],E:[9.5,15],F:[13,20]};
+const ASM={A:.1,B:.15,C:.15,D:.15,E:.15,F:.25};
+const NAMES={A:'Рабочая станция для небольшой команды',B:'Бизнес-сервер начального уровня',C:'Универсальный бизнес-сервер',D:'Корпоративный AI-сервер',E:'Корпоративный multi-GPU сервер',F:'Высоконагруженный AI-контур'};
+const TASKS={
+ chat:{t:'Помогать сотрудникам',d:'AI-чат, база знаний, ответы по регламентам',svc:.2},
+ docs:{t:'Документы, договоры, КП',d:'Подготовка и проверка по шаблонам',svc:.2},
+ sales:{t:'Продажи и CRM',d:'Ассистент менеджеров, заполнение CRM',svc:.2},
+ bot:{t:'Бот для клиентов',d:'Сайт и мессенджеры, круглосуточно',svc:.15},
+ calls:{t:'Звонки',d:'Расшифровка и анализ разговоров',svc:.25},
+ media:{t:'Картинки и видео',d:'Креативы, редактирование фото, ролики',svc:.25},
+ code:{t:'Код',d:'Помощник разработчиков',svc:.15}
+};
+const SIZES=[[30,'до 30 человек'],[100,'30-100 человек'],[300,'100-300 человек'],[1000,'300-1 000 человек'],[3000,'более 1 000']];
+function calc(emp,tasks,mode){ // mode: work | 247 | nodown
+ const heavy=['bot','sales'].filter(t=>tasks.includes(t)).length;
+ let i=emp<=30?0:emp<=100?1:emp<=300?2:emp<=1000?3:4;
+ if(tasks.includes('code')&&emp>100)i=Math.max(i,3);
+ if(heavy&&i<3)i++;
+ let main=['B','C','D','E','F'][i];
+ if(i===0&&mode==='work'&&!tasks.includes('bot'))main='A';
+ const nodes=[{c:main,q:mode==='nodown'?2:1,l:'основной сервер'}];
+ if(tasks.includes('calls'))nodes.push({c:emp<=100?'B':emp<=300?'C':'D',q:1,l:'сервер для звонков'});
+ if(tasks.includes('media'))nodes.push({c:emp<=100?'B':'D',q:1,l:'сервер для картинок и видео'});
+ let lo=0,hi=0;
+ nodes.forEach(n=>{if(n.c==='A'&&nodes.length>1)n.c='B';lo+=(EQ[n.c][0]+ASM[n.c])*n.q;hi+=(EQ[n.c][1]+ASM[n.c])*n.q;});
+ const svc=.3+tasks.reduce((s,t)=>s+TASKS[t].svc,0);lo+=svc;hi+=svc*1.3;
+ if(mode==='nodown'){lo+=1.75;hi+=4.25;}
+ const n=nodes.reduce((s,x)=>s+x.q,0);
+ return {lo,hi,nodes,title:n>1?'AI-контур из '+n+' '+(n<5?'серверов':'серверов'):NAMES[main]};
+}
+const f=x=>(Math.round(x*10)/10).toString().replace('.',',');
+const nice=x=>x<1?Math.round(x*1000/50)*50+' тыс.':f(x)+' млн';
+function resHTML(r,btn){return '<div class="res"><div class="l">Ориентировочная стоимость под ключ</div><div class="p">от '+nice(r.lo)+' до '+nice(r.hi)+' ₽</div><div class="c">'+r.title+'</div><ul><li>Оборудование, сборка и тестирование</li><li>Установка и настройка системы: 300 000 ₽</li><li>Подключение выбранных задач</li></ul><button class="btn cta">'+(btn||'Получить точный расчёт')+'</button><div class="fine">Предварительная вилка. Точную конфигурацию подтвердим на технической встрече. Доставка и подготовка площадки считаются отдельно</div></div>';}
+
+/* ===== Вариант 1: мастер «3 вопроса» ===== */
+const s1={step:0,emp:null,tasks:[],mode:null};
+function v1(){
+ const E=document.getElementById('v');let h='<div class="card"><div class="prog">'+[0,1,2,3].map(i=>'<i class="'+(i<=s1.step?'on':'')+'"></i>').join('')+'</div>';
+ if(s1.step===0)h+='<div class="q">Сколько сотрудников будут пользоваться ИИ?</div><div class="qh">Примерно, точность не важна</div><div class="big">'+SIZES.map(s=>'<button class="b'+(s1.emp===s[0]?' on':'')+'" data-e="'+s[0]+'"><b>'+s[1]+'</b></button>').join('')+'</div>';
+ if(s1.step===1)h+='<div class="q">Что должен делать ИИ?</div><div class="qh">Можно выбрать несколько</div><div class="big">'+Object.entries(TASKS).map(([k,t])=>'<button class="b'+(s1.tasks.includes(k)?' on':'')+'" data-k="'+k+'"><b>'+t.t+'</b><span>'+t.d+'</span></button>').join('')+'</div>';
+ if(s1.step===2)h+='<div class="q">Насколько важна бесперебойность?</div><div class="qh">От этого зависит, нужен ли запасной сервер</div><div class="big">'+[['work','Работает в рабочее время','Для сотрудников в офисе'],['247','Круглосуточно','Небольшой перерыв на обслуживание допустим'],['nodown','Без остановок','Клиенты и звонки, простой недопустим']].map(m=>'<button class="b'+(s1.mode===m[0]?' on':'')+'" data-m="'+m[0]+'"><b>'+m[1]+'</b><span>'+m[2]+'</span></button>').join('')+'</div>';
+ if(s1.step===3)h+='<div class="q">Ваш предварительный расчёт</div>'+resHTML(calc(s1.emp,s1.tasks,s1.mode),'Получить точный расчёт на встрече');
+ const can=[s1.emp,s1.tasks.length,s1.mode][s1.step];
+ h+='<div class="nav">'+(s1.step?'<button class="btn" data-a="b">← Назад</button>':'<span></span>')+(s1.step<3?'<button class="btn p" data-a="n"'+(can?'':' disabled')+'>'+(s1.step===2?'Показать цену':'Далее')+' →</button>':'<button class="btn" data-a="r">Заново</button>')+'</div></div>';
+ E.innerHTML=h;
+ E.onclick=e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.e){s1.emp=+b.dataset.e;s1.step=1;}
+  else if(b.dataset.k){const k=b.dataset.k;s1.tasks=s1.tasks.includes(k)?s1.tasks.filter(x=>x!==k):[...s1.tasks,k];}
+  else if(b.dataset.m){s1.mode=b.dataset.m;s1.step=3;}
+  else if(b.dataset.a==='n')s1.step++;else if(b.dataset.a==='b')s1.step--;else if(b.dataset.a==='r'){s1.step=0;s1.emp=null;s1.tasks=[];s1.mode=null;}
+  v1();};
+}
+
+/* ===== Вариант 2: одна страница ===== */
+const s2={i:1,tasks:['chat'],mode:'work'};
+const STEPS2=[10,30,50,100,200,300,500,1000,2000];
+function v2(){
+ const E=document.getElementById('v');const emp=STEPS2[s2.i];
+ E.innerHTML='<div class="card"><div class="two"><div>'+
+  '<div class="row"><label>Сколько сотрудников будут пользоваться ИИ</label><div class="rv">'+(s2.i===STEPS2.length-1?'2 000+':emp)+' человек</div><input type="range" min="0" max="'+(STEPS2.length-1)+'" value="'+s2.i+'" id="rg"></div>'+
+  '<div class="row"><label>Что должен делать ИИ</label><div class="chips">'+Object.entries(TASKS).map(([k,t])=>'<button class="chip'+(s2.tasks.includes(k)?' on':'')+'" data-k="'+k+'">'+t.t+'</button>').join('')+'</div></div>'+
+  '<div class="row"><label>Режим работы</label><div class="chips">'+[['work','Рабочее время'],['247','Круглосуточно'],['nodown','Без остановок']].map(m=>'<button class="chip'+(s2.mode===m[0]?' on':'')+'" data-m="'+m[0]+'">'+m[1]+'</button>').join('')+'</div></div>'+
+  '</div><div class="sticky">'+resHTML(calc(emp,s2.tasks,s2.mode))+'</div></div></div>';
+ E.querySelector('#rg').oninput=e=>{s2.i=+e.target.value;v2();};
+ E.onclick=e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.k){const k=b.dataset.k;s2.tasks=s2.tasks.includes(k)?(s2.tasks.length>1?s2.tasks.filter(x=>x!==k):s2.tasks):[...s2.tasks,k];v2();}
+  if(b.dataset.m){s2.mode=b.dataset.m;v2();}};
+}
+
+/* ===== Вариант 3: готовые пакеты ===== */
+const PACKS=[
+ {n:'Старт',w:'Команда до 30 человек, пилот',emp:30,tasks:['chat','docs'],mode:'work',inc:['AI-чат и документы','Работа в рабочее время']},
+ {n:'Бизнес',w:'Компания 30-100 человек',emp:100,tasks:['chat','docs','sales'],mode:'247',inc:['Чат, документы, CRM','Круглосуточно'],tag:'Чаще выбирают'},
+ {n:'Корпорация',w:'100-300 человек, клиентский сервис',emp:300,tasks:['chat','docs','sales','bot'],mode:'247',inc:['Всё из «Бизнес»','Бот для клиентов']},
+ {n:'Enterprise',w:'300+ человек, без простоя',emp:1000,tasks:['chat','docs','sales','bot'],mode:'nodown',inc:['Всё из «Корпорации»','Запасной сервер']}
+];
+const ADDONS=[['calls','Анализ звонков'],['media','Картинки и видео'],['code','Помощник разработчиков'],['bot','Бот для клиентов']];
+const s3={p:1,add:[]};
+function v3(){
+ const E=document.getElementById('v');const P=PACKS[s3.p];
+ const tasks=[...new Set([...P.tasks,...s3.add])];
+ E.innerHTML='<div class="card"><div class="q">Выберите пакет под размер компании</div><div class="qh">Цены «от» уже с оборудованием и установкой</div><div class="packs">'+
+  PACKS.map((p,i)=>{const r=calc(p.emp,p.tasks,p.mode);return '<button class="pk'+(i===s3.p?' on':'')+'" data-p="'+i+'">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<div class="n">'+p.n+'</div><div class="w">'+p.w+'</div><div class="pr">от '+nice(r.lo)+' ₽</div><ul>'+p.inc.map(x=>'<li>✓ '+x+'</li>').join('')+'</ul></button>';}).join('')+
+  '</div><div class="q" style="font-size:18px;margin-top:24px">Добавить к пакету</div><div class="addons">'+
+  ADDONS.filter(a=>!P.tasks.includes(a[0])).map(a=>{const d=calc(P.emp,[...tasks.filter(t=>t!==a[0]),a[0]],P.mode).lo-calc(P.emp,tasks.filter(t=>t!==a[0]),P.mode).lo;return '<button class="ad'+(s3.add.includes(a[0])?' on':'')+'" data-a="'+a[0]+'"><span>'+(s3.add.includes(a[0])?'✓ ':'+ ')+a[1]+'</span><i>+ '+nice(d)+' ₽</i></button>';}).join('')+
+  '</div>'+resHTML(calc(P.emp,tasks,P.mode),'Обсудить пакет «'+P.n+'»')+'</div>';
+ E.onclick=e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.p){s3.p=+b.dataset.p;s3.add=[];v3();}
+  if(b.dataset.a){const k=b.dataset.a;s3.add=s3.add.includes(k)?s3.add.filter(x=>x!==k):[...s3.add,k];v3();}};
+}
+const V={1:v1,2:v2,3:v3};
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));V[t.dataset.t]();});
+v1();
+</script></body></html>
