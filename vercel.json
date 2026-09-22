@@ -1,7 +1,7 @@
 {
   "outputDirectory": "public",
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "cleanUrls": false,
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",

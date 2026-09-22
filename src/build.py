@@ -7,7 +7,7 @@ import json, subprocess, pathlib, html, datetime
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC, OUT = ROOT / 'src', ROOT / 'public'
-BASE = 'https://localai-dusky.vercel.app'   # поменять при переезде на свой домен
+BASE = 'https://makebizllm.com'   # поменять при переезде на свой домен
 PHONE, PHONE_HREF, EMAIL = '+7 495 000-00-00', 'tel:+74950000000', 'ai@makebiz.ru'
 TODAY = datetime.date.today().isoformat()
 F = json.loads(subprocess.check_output(['node', str(SRC / 'figures.mjs')]))
@@ -21,7 +21,7 @@ def months(m):
     return (f'{a}' if a == b else f'{a}-{b}') + ' ' + w
 
 # ---------------------------------------------------------------- каркас
-NAV = [('/', 'Главная'), ('/#problemy', 'Почему локально'), ('/#bezopasnost', 'Безопасность'), ('/keysy', 'Кейсы'), ('/novosti', 'Новости'), ('/#faq', 'Вопросы')]
+NAV = [('/', 'Главная'), ('/#problemy', 'Почему локально'), ('/#bezopasnost', 'Безопасность'), ('/keysy/', 'Кейсы'), ('/novosti/', 'Новости'), ('/#faq', 'Вопросы')]
 
 def head(title, desc, path, ld=None, noindex=False):
     lds = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in (ld or []))
@@ -52,12 +52,12 @@ def header(active):
     <nav class="nav-links">{links}</nav>
     <div class="nav-cta">
       <a class="nav-phone" href="{PHONE_HREF}">{PHONE}</a>
-      <a href="/raschet" class="btn btn-primary">Рассчитать стоимость</a>
+      <a href="/raschet/" class="btn btn-primary">Рассчитать стоимость</a>
       <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
-<div class="mobile-menu" id="mobileMenu">{links}<a href="/raschet" class="btn btn-primary">Рассчитать стоимость</a></div>
+<div class="mobile-menu" id="mobileMenu">{links}<a href="/raschet/" class="btn btn-primary">Рассчитать стоимость</a></div>
 '''
 
 def footer(scripts=('site',)):
@@ -71,17 +71,17 @@ def footer(scripts=('site',)):
       </div>
       <div>
         <h5>Разделы</h5>
-        <a href="/raschet">Расчёт стоимости</a>
-        <a href="/raschet?packs">Готовые пакеты</a>
-        <a href="/keysy">Кейсы</a>
-        <a href="/novosti">Новости</a>
+        <a href="/raschet/">Расчёт стоимости</a>
+        <a href="/raschet/?packs">Готовые пакеты</a>
+        <a href="/keysy/">Кейсы</a>
+        <a href="/novosti/">Новости</a>
         <a href="/#faq">Вопросы</a>
       </div>
       <div>
         <h5>Контакты</h5>
         <a href="{PHONE_HREF}">{PHONE}</a>
         <a href="mailto:{EMAIL}">{EMAIL}</a>
-        <a href="/raschet#leadForm">Оставить заявку</a>
+        <a href="/raschet/#leadForm">Оставить заявку</a>
       </div>
     </div>
     <div class="foot-legal">
@@ -91,7 +91,7 @@ def footer(scripts=('site',)):
     </div>
   </div>
 </footer>
-<a href="/raschet" class="float-cta" id="floatCta">Рассчитать стоимость</a>
+<a href="/raschet/" class="float-cta" id="floatCta">Рассчитать стоимость</a>
 {sc}
 </body>
 </html>
@@ -133,7 +133,7 @@ def packs_html():
     for p in F['packs']:
         tag = f'<span class="tag">{esc(p["tag"])}</span>' if p['tag'] else ''
         inc = ''.join(f'<li>{esc(x)}</li>' for x in p['inc'])
-        out.append(f'<a class="pp" href="/raschet?pack={p["id"]}">{tag}<b>{esc(p["n"])}</b><small>{esc(p["w"])}</small><span class="pr">{p["from"]}</span><ul>{inc}</ul><span class="go">Посчитать →</span></a>')
+        out.append(f'<a class="pp" href="/raschet/?pack={p["id"]}">{tag}<b>{esc(p["n"])}</b><small>{esc(p["w"])}</small><span class="pr">{p["from"]}</span><ul>{inc}</ul><span class="go">Посчитать →</span></a>')
     return ''.join(out)
 
 # ---------------------------------------------------------------- ГЛАВНАЯ
@@ -151,7 +151,7 @@ def home():
       <p class="lead hide-m">Сотрудники уже копируют договоры, базы клиентов и переписку в зарубежные нейросети. Мы ставим такой же ИИ на ваш сервер: работает как ChatGPT, данные остаются внутри компании, а за каждый запрос и подписку на человека платить не нужно.</p>
       <p class="lead show-m">Работает как ChatGPT, но на вашем сервере: данные остаются внутри компании, а платить за каждый запрос и подписку не нужно.</p>
       <div class="hero-cta">
-        <a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость и окупаемость</a>
+        <a href="/raschet/" class="btn btn-primary btn-lg">Рассчитать стоимость и окупаемость</a>
         <a href="#problemy" class="btn btn-ghost btn-lg hide-m">Зачем это бизнесу</a>
       </div>
       <div class="hero-points hide-m"><span>Данные внутри компании</span><span>Проще соблюдать 152-ФЗ</span><span>Без оплаты за каждый запрос</span></div>
@@ -208,7 +208,7 @@ def home():
       <span class="eyebrow">Безопасность</span>
       <h2>Сотрудник не унесёт то, к чему у него нет доступа</h2>
       <p class="lead">В публичном чате сотрудник сам решает, что туда вставить, и никто этого не видит. В своём ИИ всё наоборот: доступы, журналы и правила настраивает компания.</p>
-      <a href="/raschet" class="btn btn-primary btn-lg">Рассчитать для своей компании</a>
+      <a href="/raschet/" class="btn btn-primary btn-lg">Рассчитать для своей компании</a>
     </div>
     <ul class="sec-list">
       <li><b>Доступ по ролям</b><span>Менеджер видит только свои сделки и документы, бухгалтерия свои, руководитель всё</span></li>
@@ -234,7 +234,7 @@ def home():
     </table></div>
     <div class="econ-m">{econ_cards}</div>
     <p class="note-s">Пример для задач «чат, база знаний, документы». Окупаемость сценарная: подставьте свои цифры в калькуляторе. Если считать только подписки, небольшим командам сервер окупается дольше, основной эффект даёт время сотрудников и безопасность данных.</p>
-    <a href="/raschet" class="btn btn-primary btn-lg" style="margin-top:24px">Посчитать свою окупаемость</a>
+    <a href="/raschet/" class="btn btn-primary btn-lg" style="margin-top:24px">Посчитать свою окупаемость</a>
   </div>
 </section>
 
@@ -297,7 +297,7 @@ def home():
       <span class="eyebrow">Следующий шаг</span>
       <h2>Узнайте стоимость и окупаемость для своей компании</h2>
       <p>30 секунд в калькуляторе, без регистрации. Точную конфигурацию подтвердим на технической встрече.</p>
-      <div class="hero-cta"><a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость</a><a href="/raschet?packs" class="btn btn-ghost btn-lg">Готовые пакеты</a></div>
+      <div class="hero-cta"><a href="/raschet/" class="btn btn-primary btn-lg">Рассчитать стоимость</a><a href="/raschet/?packs" class="btn btn-ghost btn-lg">Готовые пакеты</a></div>
     </div>
   </div>
 </section>
@@ -306,9 +306,9 @@ def home():
 # ---------------------------------------------------------------- РАСЧЁТ
 def raschet():
     faq = [FAQ_HOME[3], ('Что входит в цену?', 'Сервер под ваши задачи, его сборка и тестирование, базовая установка и настройка системы за 300 000 ₽ (ОС, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, документация, обучение администратора) и подключение выбранных задач и интеграций. Доставка и подготовка площадки считаются отдельно.'), ('Почему вилка, а не точная цена?', 'Цена оборудования зависит от курса, наличия, гарантии и НДС, а мощность подтверждается тестом на ваших задачах. Поэтому до технической встречи показываем честный диапазон, а точную сумму фиксируем в коммерческом предложении.'), FAQ_HOME[5]]
-    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/raschet', 'Расчёт стоимости')]), faq_ld(faq)]
+    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/raschet/', 'Расчёт стоимости')]), faq_ld(faq)]
     return head('Калькулятор стоимости и окупаемости корпоративного ИИ · MakeBiz',
-                'Рассчитайте стоимость своего ИИ на сервере компании и срок окупаемости за 30 секунд: выберите размер компании и задачи или готовый пакет. Установка от 300 000 ₽.', '/raschet', ld) + header('/raschet') + page_hero(
+                'Рассчитайте стоимость своего ИИ на сервере компании и срок окупаемости за 30 секунд: выберите размер компании и задачи или готовый пакет. Установка от 300 000 ₽.', '/raschet/', ld) + header('/raschet/') + page_hero(
         'Калькулятор', 'Стоимость и окупаемость вашего ИИ', 'Выберите размер компании и задачи или готовый пакет. Цена и срок окупаемости пересчитываются сразу, без регистрации.', [('/', 'Главная'), (None, 'Расчёт стоимости')]) + '''
 <section class="calc-section" id="calc">
   <div class="wrap">
@@ -362,12 +362,12 @@ def keysy():
                 ['300 сотрудников, 100 подписок', 'До 750 тыс. минут звонков в месяц', 'Облачная речевая аналитика и боты: 150 тыс. ₽ в месяц', 'Без остановок, запасной сервер'], ['Расшифровка и аналитика всех звонков', 'Подсказки и база знаний для операторов', 'Интеграция с CRM и телефонией']) + \
            case('prod', 'Производство', 'Производственная компания, 500 сотрудников: закрытый контур', 'Техническая документация и код не должны покидать компанию, часть сотрудников работает в закрытой сети.',
                 ['500 сотрудников, 150 подписок', 'Высокое качество: сложные документы и код', 'Интеграция с 1С'], ['Чат и база знаний по техдокументации', 'Помощник разработчиков', 'Аналитика данных из 1С'])
-    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/keysy', 'Кейсы')])]
-    return head('Кейсы и расчётные примеры внедрения корпоративного ИИ · MakeBiz', 'Расчётные примеры внедрения своего ИИ на сервере компании: дистрибуция, контакт-центр, производство. Бюджет, состав решения и окупаемость.', '/keysy', ld) + header('/keysy') + page_hero(
+    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/keysy/', 'Кейсы')])]
+    return head('Кейсы и расчётные примеры внедрения корпоративного ИИ · MakeBiz', 'Расчётные примеры внедрения своего ИИ на сервере компании: дистрибуция, контакт-центр, производство. Бюджет, состав решения и окупаемость.', '/keysy/', ld) + header('/keysy/') + page_hero(
         'Кейсы', 'Как это выглядит в цифрах', 'Три расчётных примера для типовых компаний: что ставим, сколько стоит и когда окупается. Реальные кейсы клиентов публикуем здесь после согласования с ними.', [('/', 'Главная'), (None, 'Кейсы')]) + f'''
 <section class="section"><div class="wrap cases">{body}
 <p class="note-s">Расчётные примеры, не клиентские кейсы. Цифры посчитаны тем же калькулятором, что на сайте: сотрудник экономит 2 часа в неделю, час стоит 700 ₽, подписка {nr(F['seatPrice'])} ₽ в месяц.</p>
-<div class="cta-box"><div><h3>Посчитайте для своей компании</h3><p>Выберите размер и задачи, окупаемость пересчитается сразу</p></div><a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость</a></div>
+<div class="cta-box"><div><h3>Посчитайте для своей компании</h3><p>Выберите размер и задачи, окупаемость пересчитается сразу</p></div><a href="/raschet/" class="btn btn-primary btn-lg">Рассчитать стоимость</a></div>
 </div></section>
 ''' + footer()
 
@@ -405,22 +405,22 @@ ARTICLES = [
 <h2>Пример: компания на 100 человек</h2>
 <p>Задачи: чат, база знаний и документы, работа круглосуточно. Решение под ключ стоит {A['range']}. Подписки обходятся примерно в {A['now']} в месяц, время сотрудников ещё около {A['time']}. С учётом сопровождения система окупается примерно за {months(A['m'])}.</p>
 <p>Если считать только подписки, срок заметно дольше: небольшим командам сервер за счёт одних подписок не окупается. Поэтому окупаемость стоит считать вместе со временем сотрудников и ценой риска утечки.</p>
-<p>Посчитать под свою компанию можно в <a href="/raschet">калькуляторе</a>: там можно поменять число подписок, цену, часы экономии и стоимость часа.</p>''')
+<p>Посчитать под свою компанию можно в <a href="/raschet/">калькуляторе</a>: там можно поменять число подписок, цену, часы экономии и стоимость часа.</p>''')
 ]
 
 def news_index():
-    cards = ''.join(f'<a class="news-c" href="/novosti/{a["slug"]}"><span class="news-t">{a["tag"]} · {datetime.date.fromisoformat(a["date"]).strftime("%d.%m.%Y")}</span><h3>{esc(a["title"])}</h3><p>{esc(a["desc"])}</p><span class="go">Читать →</span></a>' for a in ARTICLES)
-    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/novosti', 'Новости')])]
-    return head('Новости и статьи о корпоративном ИИ и локальных LLM · MakeBiz', 'Новости о локальных нейросетях, законодательстве о данных и экономике корпоративного ИИ.', '/novosti', ld) + header('/novosti') + page_hero(
+    cards = ''.join(f'<a class="news-c" href="/novosti/{a["slug"]}/"><span class="news-t">{a["tag"]} · {datetime.date.fromisoformat(a["date"]).strftime("%d.%m.%Y")}</span><h3>{esc(a["title"])}</h3><p>{esc(a["desc"])}</p><span class="go">Читать →</span></a>' for a in ARTICLES)
+    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/novosti/', 'Новости')])]
+    return head('Новости и статьи о корпоративном ИИ и локальных LLM · MakeBiz', 'Новости о локальных нейросетях, законодательстве о данных и экономике корпоративного ИИ.', '/novosti/', ld) + header('/novosti/') + page_hero(
         'Новости', 'Новости и статьи', 'Локальные модели, законы о данных, экономика корпоративного ИИ. Пишем коротко и по делу.', [('/', 'Главная'), (None, 'Новости')]) + f'<section class="section"><div class="wrap"><div class="news-g">{cards}</div></div></section>' + footer()
 
 def article(a):
-    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/novosti', 'Новости'), (f'/novosti/{a["slug"]}', a['title'])]),
-          {"@context": "https://schema.org", "@type": "Article", "headline": a['title'], "description": a['desc'], "datePublished": a['date'], "dateModified": a['date'], "author": {"@type": "Organization", "name": "MakeBiz"}, "publisher": {"@type": "Organization", "name": "MakeBiz"}, "mainEntityOfPage": f'{BASE}/novosti/{a["slug"]}'}]
-    return head(a['title'] + ' · MakeBiz', a['desc'], f'/novosti/{a["slug"]}', ld) + header('/novosti') + page_hero(
-        a['tag'], esc(a['title']), esc(a['desc']), [('/', 'Главная'), ('/novosti', 'Новости'), (None, a['tag'])]) + f'''
+    ld = [ORG, crumbs_ld([('/', 'Главная'), ('/novosti/', 'Новости'), (f'/novosti/{a["slug"]}/', a['title'])]),
+          {"@context": "https://schema.org", "@type": "Article", "headline": a['title'], "description": a['desc'], "datePublished": a['date'], "dateModified": a['date'], "author": {"@type": "Organization", "name": "MakeBiz"}, "publisher": {"@type": "Organization", "name": "MakeBiz"}, "mainEntityOfPage": f'{BASE}/novosti/{a["slug"]}/'}]
+    return head(a['title'] + ' · MakeBiz', a['desc'], f'/novosti/{a["slug"]}/', ld) + header('/novosti/') + page_hero(
+        a['tag'], esc(a['title']), esc(a['desc']), [('/', 'Главная'), ('/novosti/', 'Новости'), (None, a['tag'])]) + f'''
 <section class="section"><div class="wrap"><article class="article">{a["body"]}
-<div class="cta-box"><div><h3>Посчитайте свой ИИ</h3><p>Стоимость и окупаемость для вашей компании за 30 секунд</p></div><a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость</a></div>
+<div class="cta-box"><div><h3>Посчитайте свой ИИ</h3><p>Стоимость и окупаемость для вашей компании за 30 секунд</p></div><a href="/raschet/" class="btn btn-primary btn-lg">Рассчитать стоимость</a></div>
 </article></div></section>
 ''' + footer()
 
@@ -428,13 +428,18 @@ def article(a):
 def w(path, text):
     p = OUT / path; p.parent.mkdir(parents=True, exist_ok=True); p.write_text(text, encoding='utf-8')
 
-w('index.html', home()); w('raschet.html', raschet()); w('keysy.html', keysy()); w('novosti/index.html', news_index())
-for a in ARTICLES: w(f'novosti/{a["slug"]}.html', article(a))
+w('index.html', home()); w('raschet/index.html', raschet()); w('keysy/index.html', keysy()); w('novosti/index.html', news_index())
+for a in ARTICLES: w(f'novosti/{a["slug"]}/index.html', article(a))
+# старые адреса *.html (с прошлой версии) -> редирект на новые
+def stub(to):
+    return f'<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="robots" content="noindex"><link rel="canonical" href="{BASE}{to}"><meta http-equiv="refresh" content="0; url={to}"><script>location.replace("{to}"+location.search+location.hash)</script><title>MakeBiz</title></head><body><a href="{to}">{BASE}{to}</a></body></html>'
+w('raschet.html', stub('/raschet/')); w('keysy.html', stub('/keysy/'))
+for a in ARTICLES: w(f'novosti/{a["slug"]}.html', stub(f'/novosti/{a["slug"]}/'))
 w('assets/site.css', (SRC / 'base.css').read_text(encoding='utf-8') + (SRC / 'pages.css').read_text(encoding='utf-8'))
 w('assets/engine.js', (SRC / 'engine.js').read_text(encoding='utf-8'))
 w('assets/calc.js', (SRC / 'calc.js').read_text(encoding='utf-8'))
 w('assets/site.js', (SRC / 'site.js').read_text(encoding='utf-8'))
-urls = ['/', '/raschet', '/keysy', '/novosti'] + [f'/novosti/{a["slug"]}' for a in ARTICLES]
+urls = ['/', '/raschet/', '/keysy/', '/novosti/'] + [f'/novosti/{a["slug"]}/' for a in ARTICLES]
 w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod></url>' for u in urls) + '</urlset>\n')
 w('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /variants\nClean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid\nSitemap: {BASE}/sitemap.xml\n')
 print('built', len(urls), 'pages')

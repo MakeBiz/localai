@@ -23,7 +23,7 @@
     const emp=EMP[hp.e];
     const s={...JSON.parse(JSON.stringify(DEF)),emp:hp.e,tasks:['chat','kb','docs'],mode:hp.e>=6?'247':'work',seats:String(emp),price:String(hp.price)};
     const r=calc(s),pb=payback(r,s);
-    const link='/raschet?emp='+hp.e+'&tasks=chat,kb,docs&seats='+emp+'&price='+hp.price;
+    const link='/raschet/?emp='+hp.e+'&tasks=chat,kb,docs&seats='+emp+'&price='+hp.price;
     el.innerHTML='<div class="hc-top"><b>Сколько вы сэкономите</b><i>считается сразу</i></div>'+
       '<div class="hc-q">Сотрудников в компании</div><div class="hc-o">'+E.map(x=>'<button type="button" data-e="'+x[0]+'" class="'+(x[0]===hp.e?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
       '<div class="hc-q">Подписка на ИИ на человека в месяц</div><div class="hc-o t3">'+PR.map(x=>'<button type="button" data-p="'+x[0]+'" class="'+(x[0]===hp.price?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+

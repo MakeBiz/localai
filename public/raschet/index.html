@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор стоимости и окупаемости корпоративного ИИ · MakeBiz</title>
+<meta name="description" content="Рассчитайте стоимость своего ИИ на сервере компании и срок окупаемости за 30 секунд: выберите размер компании и задачи или готовый пакет. Установка от 300 000 ₽.">
+<link rel="canonical" href="https://makebizllm.com/raschet/">
+
+<meta property="og:type" content="website"><meta property="og:title" content="Калькулятор стоимости и окупаемости корпоративного ИИ · MakeBiz"><meta property="og:description" content="Рассчитайте стоимость своего ИИ на сервере компании и срок окупаемости за 30 секунд: выберите размер компании и задачи или готовый пакет. Установка от 300 000 ₽."><meta property="og:url" content="https://makebizllm.com/raschet/"><meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "MakeBiz", "url": "https://makebizllm.com", "email": "ai@makebiz.ru", "telephone": "+7 495 000-00-00"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://makebizllm.com/"}, {"@type": "ListItem", "position": 2, "name": "Расчёт стоимости", "item": "https://makebizllm.com/raschet/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Сколько стоит и когда окупится?", "acceptedAnswer": {"@type": "Answer", "text": "Установка и настройка системы стоит 300 000 ₽, решение под ключ вместе с сервером начинается от 1,8 млн ₽. Окупаемость зависит от числа сотрудников: за счёт подписок и сэкономленного времени компания на 100 человек окупает систему примерно за 6-8 месяцев. Точно посчитать под себя можно в калькуляторе."}}, {"@type": "Question", "name": "Что входит в цену?", "acceptedAnswer": {"@type": "Answer", "text": "Сервер под ваши задачи, его сборка и тестирование, базовая установка и настройка системы за 300 000 ₽ (ОС, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, документация, обучение администратора) и подключение выбранных задач и интеграций. Доставка и подготовка площадки считаются отдельно."}}, {"@type": "Question", "name": "Почему вилка, а не точная цена?", "acceptedAnswer": {"@type": "Answer", "text": "Цена оборудования зависит от курса, наличия, гарантии и НДС, а мощность подтверждается тестом на ваших задачах. Поэтому до технической встречи показываем честный диапазон, а точную сумму фиксируем в коммерческом предложении."}}, {"@type": "Question", "name": "Можно без покупки сервера?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Если сервер уже есть, проверим совместимость и установим систему. Для пилота можно арендовать сервер помесячно в российском дата-центре."}}]}</script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="/" class="logo"><span class="mark">M</span><span>MakeBiz<small>Локальный ИИ</small></span></a>
+    <nav class="nav-links"><a href="/">Главная</a><a href="/#problemy">Почему локально</a><a href="/#bezopasnost">Безопасность</a><a href="/keysy/">Кейсы</a><a href="/novosti/">Новости</a><a href="/#faq">Вопросы</a></nav>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+74950000000">+7 495 000-00-00</a>
+      <a href="/raschet/" class="btn btn-primary">Рассчитать стоимость</a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu"><a href="/">Главная</a><a href="/#problemy">Почему локально</a><a href="/#bezopasnost">Безопасность</a><a href="/keysy/">Кейсы</a><a href="/novosti/">Новости</a><a href="/#faq">Вопросы</a><a href="/raschet/" class="btn btn-primary">Рассчитать стоимость</a></div>
+<section class="phero" data-nofloat>
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Главная</a> <span>/</span> <span>Расчёт стоимости</span></div>
+    <span class="eyebrow">Калькулятор</span>
+    <h1>Стоимость и окупаемость вашего ИИ</h1>
+    <p class="lead">Выберите размер компании и задачи или готовый пакет. Цена и срок окупаемости пересчитываются сразу, без регистрации.</p>
+  </div>
+</section>
+
+<section class="calc-section" id="calc">
+  <div class="wrap">
+    <div class="calc2">
+      <div class="seg" id="calcMode"><button type="button" data-mode="custom" class="on">Собрать под себя</button><button type="button" data-mode="packs">Готовые пакеты</button></div>
+      <div class="c2-body"><div id="c2Left"></div><aside class="c2-right" id="c2Right"></aside></div>
+    </div>
+    <div class="lead-form c2-lead" id="leadForm">
+      <h3>Получить точный расчёт</h3>
+      <p>Инженер проверит вашу конфигурацию, подберёт модели и оборудование и назначит техническую встречу. Выбранные параметры придут вместе с заявкой.</p>
+      <div class="two-col"><div class="field"><label>Имя</label><input type="text" id="lfName" placeholder="Как к вам обращаться"></div><div class="field"><label>Телефон</label><input type="tel" id="lfPhone" placeholder="+7 ..."></div></div>
+      <div class="two-col"><div class="field"><label>Компания</label><input type="text" id="lfCompany" placeholder="Название компании"></div><div class="field"><label>Email</label><input type="email" id="lfEmail" placeholder="you@company.ru"></div></div>
+      <label class="consent"><input type="checkbox" id="lfConsent"> Согласен на обработку персональных данных. Расчёт предварительный и не является офертой.</label>
+      <div class="lf-row"><button class="btn btn-primary btn-lg" id="lfSubmit" type="button">Получить точный расчёт</button><span id="lfErr"></span></div>
+    </div>
+  </div>
+</section>
+<div class="c2bar" id="c2Bar"></div>
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center"><span class="eyebrow">Вопросы</span><h2>Про стоимость</h2></div>
+    <div class="faq"><div class="faq-item"><div class="faq-q">Сколько стоит и когда окупится?<span class="fx">+</span></div><div class="faq-a"><p>Установка и настройка системы стоит 300 000 ₽, решение под ключ вместе с сервером начинается от 1,8 млн ₽. Окупаемость зависит от числа сотрудников: за счёт подписок и сэкономленного времени компания на 100 человек окупает систему примерно за 6-8 месяцев. Точно посчитать под себя можно в калькуляторе.</p></div></div><div class="faq-item"><div class="faq-q">Что входит в цену?<span class="fx">+</span></div><div class="faq-a"><p>Сервер под ваши задачи, его сборка и тестирование, базовая установка и настройка системы за 300 000 ₽ (ОС, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, документация, обучение администратора) и подключение выбранных задач и интеграций. Доставка и подготовка площадки считаются отдельно.</p></div></div><div class="faq-item"><div class="faq-q">Почему вилка, а не точная цена?<span class="fx">+</span></div><div class="faq-a"><p>Цена оборудования зависит от курса, наличия, гарантии и НДС, а мощность подтверждается тестом на ваших задачах. Поэтому до технической встречи показываем честный диапазон, а точную сумму фиксируем в коммерческом предложении.</p></div></div><div class="faq-item"><div class="faq-q">Можно без покупки сервера?<span class="fx">+</span></div><div class="faq-a"><p>Да. Если сервер уже есть, проверим совместимость и установим систему. Для пилота можно арендовать сервер помесячно в российском дата-центре.</p></div></div></div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="/" class="logo"><span class="mark">M</span><span>MakeBiz<small>Локальный ИИ</small></span></a>
+        <p style="margin-top:16px;max-width:340px">Внедряем корпоративный ИИ на серверах компании: подбираем оборудование, устанавливаем модели, подключаем CRM и 1С, сопровождаем.</p>
+      </div>
+      <div>
+        <h5>Разделы</h5>
+        <a href="/raschet/">Расчёт стоимости</a>
+        <a href="/raschet/?packs">Готовые пакеты</a>
+        <a href="/keysy/">Кейсы</a>
+        <a href="/novosti/">Новости</a>
+        <a href="/#faq">Вопросы</a>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <a href="tel:+74950000000">+7 495 000-00-00</a>
+        <a href="mailto:ai@makebiz.ru">ai@makebiz.ru</a>
+        <a href="/raschet/#leadForm">Оставить заявку</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      ООО «МейкБиз» (демо-реквизиты) · ИНН 0000000000 · ОГРН 0000000000000 · Москва
+      <div class="disc">Стоимость и окупаемость на сайте предварительные и не являются офертой. Локальное размещение помогает контролировать обработку данных, но само по себе не гарантирует соответствие требованиям закона: оно обеспечивается архитектурой, регламентами и документами. Информация о законодательстве носит справочный характер и не является юридической консультацией.</div>
+      <div class="foot-links"><a href="#">Политика обработки персональных данных</a><a href="#">Согласие на обработку</a><a href="#">Политика cookie</a></div>
+    </div>
+  </div>
+</footer>
+<a href="/raschet/" class="float-cta" id="floatCta">Рассчитать стоимость</a>
+<script src="/assets/engine.js"></script><script src="/assets/calc.js"></script><script src="/assets/site.js"></script>
+</body>
+</html>

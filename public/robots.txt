@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /variants
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid
-Sitemap: https://localai-dusky.vercel.app/sitemap.xml
+Sitemap: https://makebizllm.com/sitemap.xml
