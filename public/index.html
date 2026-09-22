@@ -3,1412 +3,216 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Корпоративный ИИ на ваших серверах · MakeBiz</title>
-<meta name="description" content="Разворачиваем локальные LLM и AI-сервисы в контролируемом контуре компании. Рассчитываем инфраструктуру под реальную нагрузку, интегрируем и сопровождаем.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root{
-  --navy:#03235F; --navy-2:#0A2E6E; --navy-ink:#061A44;
-  --accent:#074EE8; --accent-600:#0642C4; --accent-soft:#EAF0FE;
-  --ink:#0B1B33; --muted:#5B6B85; --muted-2:#8595AD;
-  --line:#E4EAF3; --line-2:#EEF2F9;
-  --bg:#FFFFFF; --bg-soft:#F5F8FD; --bg-soft2:#EDF2FB;
-  --ok:#12855B; --ok-soft:#E7F5EF; --warn:#B7791F; --warn-soft:#FBF3E3; --danger:#C0392B; --danger-soft:#FBECEA;
-  --radius:16px; --radius-sm:11px; --radius-lg:22px;
-  --shadow:0 1px 2px rgba(6,26,68,.04), 0 12px 34px rgba(6,26,68,.07);
-  --shadow-sm:0 1px 2px rgba(6,26,68,.05), 0 6px 18px rgba(6,26,68,.06);
-  --shadow-lg:0 20px 60px rgba(6,26,68,.14);
-  --maxw:1200px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  color:var(--ink); background:var(--bg); line-height:1.55;
-  -webkit-font-smoothing:antialiased; font-size:17px;
-}
-a{color:inherit;text-decoration:none}
-img{max-width:100%}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
-  color:var(--accent);background:var(--accent-soft);
-  padding:7px 14px;border-radius:100px;
-}
-h1,h2,h3,h4{color:var(--navy);line-height:1.14;letter-spacing:-.01em;font-weight:800}
-h2{font-size:clamp(28px,3.6vw,44px);font-weight:800}
-h3{font-size:22px;font-weight:700}
-p{color:var(--ink)}
-.lead{color:var(--muted);font-size:19px}
-.section{padding:88px 0}
-.section--soft{background:var(--bg-soft)}
-.section-head{max-width:760px;margin-bottom:44px}
-.section-head h2{margin:16px 0 14px}
-.section-head p{color:var(--muted);font-size:19px}
+<title>Корпоративный ИИ на ваших серверах: данные внутри компании · MakeBiz</title>
+<meta name="description" content="Свой аналог ChatGPT на сервере компании: данные не уходят во внешние сервисы, нет оплаты за каждый запрос, проще соблюдать 152-ФЗ. Установка от 300 000 ₽, расчёт стоимости и окупаемости за 30 секунд.">
+<link rel="canonical" href="https://localai-dusky.vercel.app/">
 
-/* Buttons */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;
-  padding:15px 26px;border-radius:12px;border:1px solid transparent;
-  transition:.18s ease;white-space:nowrap;
-}
-.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 22px rgba(7,78,232,.24)}
-.btn-primary:hover{background:var(--accent-600);transform:translateY(-1px);box-shadow:0 12px 28px rgba(7,78,232,.3)}
-.btn-ghost{background:#fff;color:var(--navy);border-color:var(--line)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:#fff}
-.btn-navy{background:var(--navy);color:#fff}
-.btn-navy:hover{background:var(--navy-2);transform:translateY(-1px)}
-.btn-lg{padding:17px 32px;font-size:17px}
-.btn-block{width:100%}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none}
-
-/* Header */
-header{
-  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);
-  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line-2);
-}
-.nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
-.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;color:var(--navy);letter-spacing:-.02em}
-.logo .mark{
-  width:34px;height:34px;border-radius:9px;
-  background:linear-gradient(135deg,var(--accent),var(--navy));
-  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;
-}
-.logo small{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.02em;text-transform:uppercase}
-.nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{font-size:15px;font-weight:500;color:var(--ink);transition:.15s}
-.nav-links a:hover{color:var(--accent)}
-.nav-cta{display:flex;align-items:center;gap:14px}
-.nav-phone{font-weight:600;font-size:15px;color:var(--navy);white-space:nowrap}
-.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
-.burger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.2s}
-
-/* Hero */
-.hero{position:relative;overflow:hidden;background:
-   radial-gradient(1100px 520px at 78% -10%, #EAF0FE 0%, rgba(234,240,254,0) 60%),
-   linear-gradient(180deg,#fff 0%, var(--bg-soft) 100%);
-   padding:76px 0 70px;border-bottom:1px solid var(--line-2)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.hero h1{font-size:clamp(34px,4.6vw,56px);font-weight:900;margin:20px 0 20px}
-.hero .lead{max-width:560px;margin-bottom:30px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
-.hero-note{font-size:14px;color:var(--muted-2);display:flex;align-items:center;gap:8px}
-.markers{list-style:none;display:grid;gap:12px;margin-top:30px}
-.markers li{display:flex;align-items:flex-start;gap:11px;font-size:15.5px;font-weight:500;color:var(--ink)}
-.markers .ic{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
-
-/* Hero visual: infra panel */
-.hero-visual{position:relative}
-.panel-card{
-  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-lg);padding:22px;position:relative;overflow:hidden;
-}
-.panel-card::before{content:"";position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(7,78,232,.03),transparent 40%);pointer-events:none}
-.pc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.pc-title{font-weight:700;color:var(--navy);font-size:15px;display:flex;align-items:center;gap:9px}
-.pc-dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
-.pc-tag{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:4px 9px;border-radius:6px;letter-spacing:.03em}
-.node-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px}
-.node{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:var(--bg-soft)}
-.node .nl{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
-.node .nv{font-size:15px;font-weight:700;color:var(--navy);margin-top:3px;display:flex;align-items:center;gap:7px}
-.node .bar{height:5px;border-radius:4px;background:var(--line-2);margin-top:9px;overflow:hidden}
-.node .bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),#3D77F0)}
-.flow{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:14px;padding-top:15px;border-top:1px dashed var(--line)}
-.flow .f{flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--muted)}
-.flow .f b{display:block;color:var(--navy);font-size:13px;margin-top:2px}
-.flow .arw{color:var(--accent);font-weight:800}
-
-/* generic cards */
-.grid{display:grid;gap:22px}
-.g2{grid-template-columns:repeat(2,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g4{grid-template-columns:repeat(4,1fr)}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:.18s}
-.card:hover{border-color:#C9D6EE;box-shadow:var(--shadow);transform:translateY(-2px)}
-.card .ci{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.card h3{font-size:19px;margin-bottom:9px}
-.card p{color:var(--muted);font-size:15.5px}
-.card svg{width:23px;height:23px}
-
-/* problem */
-.problem-box{background:linear-gradient(135deg,var(--navy),var(--navy-ink));color:#fff;border-radius:var(--radius-lg);padding:52px;position:relative;overflow:hidden}
-.problem-box::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(7,78,232,.35),transparent 70%)}
-.problem-box h2{color:#fff;position:relative;max-width:780px}
-.problem-box p{color:#C7D3EA;font-size:18px;margin-top:18px;position:relative;max-width:820px}
-
-/* categories */
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.cat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;cursor:pointer;transition:.18s;position:relative}
-.cat:hover{border-color:var(--accent);box-shadow:var(--shadow)}
-.cat .ci{width:44px;height:44px;border-radius:11px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.cat h3{font-size:18px;margin-bottom:7px}
-.cat p{color:var(--muted);font-size:14.5px}
-.cat .go{margin-top:14px;font-size:14px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:6px}
-
-/* ============ CALCULATOR ============ */
-.calc-section{background:linear-gradient(180deg,var(--bg-soft) 0%, #fff 100%);padding:84px 0}
-.calc-shell{
-  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-lg);overflow:hidden;
-}
-.calc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 28px;border-bottom:1px solid var(--line-2);background:var(--bg-soft)}
-.calc-top .ct-l{display:flex;align-items:center;gap:13px}
-.calc-top h3{font-size:19px}
-.calc-top .sub{font-size:13.5px;color:var(--muted);margin-top:2px}
-.calc-progress{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--muted)}
-.pbar{width:150px;height:7px;border-radius:5px;background:var(--line-2);overflow:hidden}
-.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#3D77F0);border-radius:5px;transition:.4s;width:0}
-
-.calc-body{display:grid;grid-template-columns:210px 1fr 320px;min-height:520px}
-.steps-nav{border-right:1px solid var(--line-2);padding:24px 16px;background:#fff}
-.step-item{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:11px;margin-bottom:4px;cursor:pointer;transition:.15s;color:var(--muted);font-weight:600;font-size:14.5px}
-.step-item .num{width:26px;height:26px;border-radius:50%;background:var(--line-2);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:.15s}
-.step-item.active{background:var(--accent-soft);color:var(--navy)}
-.step-item.active .num{background:var(--accent);color:#fff}
-.step-item.done .num{background:var(--ok);color:#fff}
-.step-item.done{color:var(--ink)}
-.step-item.disabled{opacity:.5;pointer-events:none}
-
-.step-panel{padding:30px 34px;min-width:0}
-.step-panel h3{font-size:22px;margin-bottom:6px}
-.step-panel .step-desc{color:var(--muted);font-size:15px;margin-bottom:24px}
-.step-actions{display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:22px;border-top:1px solid var(--line-2)}
-
-/* summary rail */
-.summary{border-left:1px solid var(--line-2);padding:24px 22px;background:var(--bg-soft);position:relative}
-.summary .st{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.sum-block{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-bottom:12px}
-.sum-block .l{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
-.sum-block .v{font-size:15px;font-weight:700;color:var(--navy);margin-top:3px}
-.sum-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.sum-chip{font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:4px 9px;border-radius:6px}
-.profile-meter{display:flex;gap:5px;margin-top:9px}
-.profile-meter i{flex:1;height:7px;border-radius:3px;background:var(--line-2)}
-.profile-meter i.on{background:var(--accent)}
-.conf-ring{display:flex;align-items:center;gap:12px;margin-top:8px}
-.conf-ring .num{font-size:26px;font-weight:800;color:var(--navy)}
-.summary-hint{font-size:12.5px;color:var(--muted);background:var(--warn-soft);border:1px solid #F0E2C4;border-radius:10px;padding:11px 12px;margin-top:6px;line-height:1.45}
-
-/* form fields */
-.field{margin-bottom:18px}
-.field > label{display:block;font-size:14.5px;font-weight:600;color:var(--navy);margin-bottom:7px}
-.field .hint{font-size:12.5px;color:var(--muted-2);margin-top:6px}
-.field .unit{font-size:12px;color:var(--muted);font-weight:600}
-input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
-  width:100%;font-family:inherit;font-size:15px;color:var(--ink);
-  padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;transition:.15s;
-}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(7,78,232,.12)}
-textarea{resize:vertical;min-height:80px}
-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235B6B85' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-
-/* choice cards (chips) */
-.choices{display:grid;gap:10px}
-.choices.c2{grid-template-columns:1fr 1fr}
-.choice{
-  display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:12px;
-  padding:13px 15px;cursor:pointer;transition:.15s;background:#fff;
-}
-.choice:hover{border-color:#B9CBEC;background:var(--bg-soft)}
-.choice.sel{border-color:var(--accent);background:var(--accent-soft)}
-.choice .cb{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.15s;background:#fff}
-.choice.sel .cb{background:var(--accent);border-color:var(--accent)}
-.choice .cb svg{width:12px;height:12px;color:#fff;opacity:0}
-.choice.sel .cb svg{opacity:1}
-.choice .cc .tt{font-weight:600;font-size:15px;color:var(--navy)}
-.choice .cc .dd{font-size:13px;color:var(--muted);margin-top:2px}
-.choice.radio .cb{border-radius:50%}
-
-/* category group in step 1 */
-.catgroup{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
-.catgroup-head{display:flex;align-items:center;gap:13px;padding:15px 17px;cursor:pointer;background:#fff;transition:.15s}
-.catgroup-head:hover{background:var(--bg-soft)}
-.catgroup-head .ci{width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.catgroup-head .tt{font-weight:700;font-size:16px;color:var(--navy)}
-.catgroup-head .dd{font-size:13px;color:var(--muted);margin-top:1px}
-.catgroup-head .cnt{margin-left:auto;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:20px;opacity:0;transition:.15s}
-.catgroup-head .cnt.on{opacity:1}
-.catgroup-head .chev{margin-left:6px;color:var(--muted);transition:.25s}
-.catgroup.open .chev{transform:rotate(180deg)}
-.catgroup-body{display:none;padding:6px 15px 15px;border-top:1px solid var(--line-2);background:var(--bg-soft)}
-.catgroup.open .catgroup-body{display:block}
-.scenario{display:flex;align-items:flex-start;gap:11px;padding:11px 12px;border-radius:10px;cursor:pointer;transition:.12s}
-.scenario:hover{background:#fff}
-.scenario .cb{width:19px;height:19px;border-radius:6px;border:2px solid var(--line);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff}
-.scenario.sel .cb{background:var(--accent);border-color:var(--accent)}
-.scenario .cb svg{width:11px;height:11px;color:#fff;opacity:0}
-.scenario.sel .cb svg{opacity:1}
-.scenario .nm{font-weight:600;font-size:14.5px;color:var(--navy)}
-.scenario .ds{font-size:12.5px;color:var(--muted)}
-.pool-tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);background:var(--line-2);padding:2px 7px;border-radius:5px;margin-left:6px}
-
-.callout{display:flex;gap:11px;background:var(--accent-soft);border:1px solid #CFDDFB;border-radius:12px;padding:14px 16px;font-size:14px;color:var(--navy-ink);margin-top:6px}
-.callout svg{flex-shrink:0;color:var(--accent);margin-top:1px}
-.warnbox{display:flex;gap:11px;background:var(--warn-soft);border:1px solid #F0E2C4;border-radius:12px;padding:13px 15px;font-size:13.5px;color:#6B5316;margin-top:14px}
-.warnbox svg{flex-shrink:0;color:var(--warn);margin-top:1px}
-
-/* result screen */
-.result-head{text-align:center;max-width:640px;margin:0 auto 6px}
-.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
-.rcard{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
-.rcard .rl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
-.rcard.hl{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border:none;color:#fff;grid-column:span 2}
-.rcard.setup-card{background:linear-gradient(135deg,var(--accent-600),var(--accent));border:none}
-.rcard.setup-card .rl span{cursor:help}
-.rcard.hl .rl{color:#9DB4DC}
-.class-badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:700;background:rgba(255,255,255,.14);padding:6px 13px;border-radius:8px;margin-bottom:12px}
-.rcard.hl h3{color:#fff;font-size:26px;margin-bottom:8px}
-.rcard.hl p{color:#C7D3EA;font-size:15px}
-.budget-num{font-size:28px;font-weight:900;color:var(--navy);letter-spacing:-.02em;white-space:nowrap}
-.budget-sub{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
-.proc-tags{display:flex;flex-wrap:wrap;gap:8px}
-.proc-tag{font-size:13px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:8px;display:flex;align-items:center;gap:6px}
-.node-list{list-style:none;display:grid;gap:9px}
-.node-list li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink);font-weight:500}
-.node-list .nd{width:8px;height:8px;border-radius:2px;background:var(--accent);flex-shrink:0}
-.scale-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.scale-list .s{font-size:14px}
-.scale-list .s b{display:block;color:var(--navy);font-size:16px;font-weight:700}
-.scale-list .s span{color:var(--muted);font-size:12.5px}
-.conf-wrap{display:flex;align-items:center;gap:18px}
-.conf-donut{width:74px;height:74px;flex-shrink:0}
-.conf-reasons{font-size:13px;color:var(--muted);line-height:1.5}
-.conf-reasons b{color:var(--navy)}
-.variants{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.variant{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--bg-soft)}
-.variant.pro{border-color:var(--accent);background:var(--accent-soft)}
-.variant .vt{font-weight:700;color:var(--navy);font-size:16px;display:flex;align-items:center;justify-content:space-between}
-.variant .vp{font-size:22px;font-weight:800;color:var(--navy);margin:8px 0}
-.variant ul{list-style:none;display:grid;gap:6px;margin-top:8px}
-.variant li{font-size:13.5px;color:var(--muted);display:flex;gap:8px}
-.variant li::before{content:"-";color:var(--accent)}
-.placement-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
-.p-opt{border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);background:#fff}
-.p-opt.rec{border-color:var(--accent);background:var(--accent-soft);color:var(--navy)}
-.p-opt .pi{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-
-/* lead form */
-.lead-form{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border-radius:var(--radius-lg);padding:34px;margin-top:26px;color:#fff}
-.lead-form h3{color:#fff;font-size:24px;margin-bottom:6px}
-.lead-form p{color:#C7D3EA;font-size:15px;margin-bottom:22px}
-.lead-form label{color:#DCE6F7;font-size:13.5px}
-.lead-form input,.lead-form select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#fff}
-.lead-form input::placeholder{color:#8DA2C6}
-.lead-form input:focus,.lead-form select:focus{border-color:#5B8DF5;box-shadow:0 0 0 3px rgba(91,141,245,.25);background:rgba(255,255,255,.12)}
-.lead-form select option{color:var(--ink)}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#A9BBDA;margin:6px 0 18px}
-.consent input{width:auto;margin-top:2px;accent-color:var(--accent)}
-.form-ok{background:var(--ok-soft);border:1px solid #B8E2CD;border-radius:14px;padding:24px;text-align:center}
-.form-ok .ic{width:52px;height:52px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-.form-ok h3{color:var(--ok);font-size:21px;margin-bottom:8px}
-.form-ok p{color:#2C6A4F;font-size:15px}
-
-/* comparison table */
-.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
-table.cmp{width:100%;border-collapse:collapse;min-width:640px}
-table.cmp th,table.cmp td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line-2);font-size:14.5px}
-table.cmp thead th{background:var(--navy);color:#fff;font-weight:600;font-size:14px;position:sticky;top:0}
-table.cmp thead th:first-child{border-top-left-radius:0}
-table.cmp tbody td:first-child{font-weight:600;color:var(--navy)}
-table.cmp .hl-col{background:var(--accent-soft)}
-table.cmp tbody tr:hover td{background:var(--bg-soft)}
-table.cmp tbody tr:hover td.hl-col{background:#DFE9FE}
-
-/* when local / when early */
-.two-panels{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.panel-good,.panel-early{border-radius:var(--radius);padding:30px}
-.panel-good{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
-.panel-early{background:var(--bg-soft);border:1px dashed #C3D0E6}
-.panel-good h3,.panel-early h3{margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.panel-good ul,.panel-early ul{list-style:none;display:grid;gap:11px}
-.panel-good li,.panel-early li{display:flex;gap:11px;font-size:15px;color:var(--ink)}
-.panel-good li .mk{color:var(--ok);flex-shrink:0;font-weight:800}
-.panel-early li .mk{color:var(--muted-2);flex-shrink:0;font-weight:800}
-
-/* security layers */
-.layers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:layer}
-.layer{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 18px;transition:.15s}
-.layer:hover{border-color:var(--accent);transform:translateX(3px)}
-.layer .ln{counter-increment:layer;width:30px;height:30px;border-radius:8px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
-.layer .ln::before{content:counter(layer)}
-.layer .lt{font-weight:600;font-size:15px;color:var(--navy)}
-
-/* steps timeline */
-.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-top:20px}
-.tl-step{position:relative;padding:0 14px}
-.tl-step .dot{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;position:relative;z-index:2;box-shadow:0 0 0 5px #fff, 0 0 0 6px var(--line)}
-.tl-step::before{content:"";position:absolute;top:18px;left:0;right:0;height:2px;background:var(--line);z-index:1}
-.tl-step:first-child::before{left:50%}
-.tl-step:last-child::before{right:50%}
-.tl-step h4{font-size:16px;color:var(--navy);margin:16px 0 8px}
-.tl-step ul{list-style:none;display:grid;gap:5px}
-.tl-step li{font-size:13px;color:var(--muted)}
-
-/* economics */
-.econ-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
-.econ-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.econ-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 15px;font-size:14px;font-weight:500;color:var(--ink)}
-.econ-item .d{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.tco-card{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border-radius:var(--radius);padding:28px;color:#fff}
-.tco-card h3{color:#fff;margin-bottom:16px}
-.tco-opt{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:15px}
-.tco-opt:last-child{border-bottom:none}
-.tco-opt .badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.14)}
-
-/* turnkey setup */
-.setup-section{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-lg);padding:44px}
-.setup-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
-.setup-list li{position:relative;padding-left:28px;font-size:15px;color:var(--ink);font-weight:500}
-.setup-list li::before{content:"✓";position:absolute;left:0;top:0;width:19px;height:19px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
-.setup-price{background:linear-gradient(135deg,var(--navy),var(--navy-ink));border-radius:var(--radius);padding:32px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
-.setup-price::after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(7,78,232,.4),transparent 70%)}
-.sp-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#9DB4DC;position:relative}
-.sp-num{font-size:42px;font-weight:900;color:#fff;letter-spacing:-.02em;margin:8px 0 12px;position:relative}
-.sp-sub{font-size:15px;color:#DCE6F7;margin-bottom:14px;position:relative}
-.sp-note{font-size:13px;color:#A9BBDA;line-height:1.5;margin-bottom:22px;position:relative}
-.setup-price .btn{position:relative}
-/* why us */
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px}
-.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
-.stat .n{font-size:34px;font-weight:900;color:var(--accent);letter-spacing:-.02em}
-.stat .l{font-size:14px;color:var(--muted);margin-top:6px;font-weight:500}
-
-/* FAQ */
-.faq{max-width:840px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--line);padding:6px 0}
-.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;cursor:pointer;font-weight:600;font-size:17px;color:var(--navy)}
-.faq-q .fx{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;transition:.2s}
-.faq-item.open .fx{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:.28s ease;color:var(--muted);font-size:15.5px}
-.faq-item.open .faq-a{max-height:340px;padding-bottom:20px}
-
-/* final CTA */
-.final-cta{background:linear-gradient(135deg,var(--navy) 0%,var(--accent) 130%);border-radius:var(--radius-lg);padding:60px 52px;text-align:center;color:#fff;position:relative;overflow:hidden}
-.final-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 20% 0%,rgba(255,255,255,.12),transparent 60%)}
-.final-cta h2{color:#fff;position:relative;font-size:clamp(28px,3.4vw,40px)}
-.final-cta p{color:#DCE6F7;font-size:18px;max-width:600px;margin:16px auto 30px;position:relative}
-.final-cta .hero-cta{justify-content:center;position:relative}
-.final-cta .btn-ghost{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);color:#fff}
-.final-cta .btn-ghost:hover{background:rgba(255,255,255,.2);color:#fff}
-
-/* footer */
-footer{background:var(--navy-ink);color:#9DB0D2;padding:56px 0 30px;font-size:14px}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px}
-footer .logo{color:#fff}
-footer .logo small{color:#7E93BC}
-footer h5{color:#fff;font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
-footer a{display:block;color:#9DB0D2;margin-bottom:9px;transition:.15s}
-footer a:hover{color:#fff}
-.foot-legal{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:12.5px;color:#7E93BC;line-height:1.7}
-.foot-legal .disc{margin-top:12px;padding:14px 16px;background:rgba(255,255,255,.04);border-radius:10px}
-
-/* responsive */
-@media(max-width:1080px){
-  .calc-body{grid-template-columns:1fr}
-  .steps-nav{display:flex;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line-2);padding:14px 16px;gap:6px}
-  .step-item{margin-bottom:0;white-space:nowrap;padding:9px 12px}
-  .step-item .num{width:23px;height:23px}
-  .summary{border-left:none;border-top:1px solid var(--line-2)}
-  .why-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:920px){
-  .hero-grid{grid-template-columns:1fr;gap:40px}
-  .hero-visual{max-width:480px}
-  .g3,.g4,.cat-grid,.layers{grid-template-columns:1fr 1fr}
-  .econ-grid,.two-panels,.timeline,.setup-section{grid-template-columns:1fr}
-  .timeline{gap:14px}
-  .tl-step::before{display:none}
-  .nav-links{display:none}
-  .nav-phone{display:none}
-  .nav-cta .btn-primary{display:none}
-  .burger{display:flex}
-  .mobile-menu.open{display:flex}
-}
-@media(max-width:640px){
-  body{font-size:16px}
-  .section{padding:60px 0}
-  .wrap{padding:0 18px}
-  .g2,.g3,.g4,.cat-grid,.layers,.result-grid,.variants,.scale-list,.econ-list,.placement-opts,.why-grid{grid-template-columns:1fr}
-  .rcard.hl{grid-column:span 1}
-  .two-col,.three-col{grid-template-columns:1fr}
-  .problem-box,.final-cta{padding:36px 24px}
-  .setup-section{padding:28px 22px}
-  .setup-list{grid-template-columns:1fr}
-  .step-panel{padding:22px 18px}
-  .calc-top{flex-direction:column;align-items:flex-start}
-  .pbar{width:120px}
-  .lead-form{padding:24px 20px}
-}
-.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:16px 24px;gap:4px;z-index:59;box-shadow:var(--shadow)}
-.mobile-menu a{padding:12px 0;font-weight:600;color:var(--navy);border-bottom:1px solid var(--line-2)}
-.mobile-menu .btn{margin-top:12px}
-
-/* ===== калькулятор v2 ===== */
-.tgroup{margin-bottom:22px}
-.tgroup-t{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.tasks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.task{display:flex;align-items:flex-start;gap:12px;text-align:left;font-family:inherit;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.15s;color:var(--ink)}
-.task:hover{border-color:#B9CBEC;background:var(--bg-soft)}
-.task.sel{border-color:var(--accent);background:var(--accent-soft)}
-.task-ic{width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.task.sel .task-ic{background:var(--accent)}
-.task-ic svg{width:20px;height:20px}
-.task-tx{flex:1;min-width:0}
-.task-tx b{display:block;font-size:14.5px;color:var(--navy);line-height:1.3;margin-bottom:3px}
-.task-tx span{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
-.task .cb{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff}
-.task .cb svg{width:12px;height:12px;color:#fff;opacity:0}
-.task.sel .cb{background:var(--accent);border-color:var(--accent)}
-.task.sel .cb svg{opacity:1}
-.qsec{border:1px solid var(--line);border-radius:14px;padding:18px 18px 4px;margin-bottom:14px;background:#fff}
-.qsec-h{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--navy);font-size:15.5px;margin-bottom:14px}
-.qsec-ic{width:30px;height:30px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.qsec-ic svg{width:17px;height:17px}
-.q{margin-bottom:18px}
-.q>label{display:block;font-size:14.5px;font-weight:600;color:var(--navy);margin-bottom:4px}
-.q .hint{font-size:12.5px;color:var(--muted-2);margin-bottom:8px}
-.opts{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
-.opt{font-family:inherit;font-size:13.5px;font-weight:500;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 13px;cursor:pointer;transition:.12s;text-align:left;line-height:1.3}
-.opt:hover{border-color:#B9CBEC;background:var(--bg-soft)}
-.opt.sel{border-color:var(--accent);background:var(--accent-soft);color:var(--navy);font-weight:600}
-.opt.unk{border-style:dashed;color:var(--muted)}
-.opt.unk.sel{border-style:solid;color:var(--navy)}
-.opt.multi.sel::before{content:"✓ ";color:var(--accent)}
-.opt.sm{padding:5px 10px;font-size:12.5px}
-.exact{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:13px;color:var(--muted)}
-.exact input{max-width:140px;padding:8px 11px;font-size:14px}
-.num-in{max-width:220px}
-.tri-list{display:grid;gap:8px;margin-top:8px}
-.tri{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border:1px solid var(--line-2);border-radius:10px;padding:8px 10px;background:var(--bg-soft)}
-.tri>span{font-size:14px;font-weight:500;color:var(--ink)}
-.tri-o{display:flex;gap:6px}
-.sum-block.hl-block{border-color:var(--accent);background:var(--accent-soft)}
-.sum-block .v.big{font-size:18px}
-/* результат */
-.res-hero{background:linear-gradient(135deg,var(--navy),var(--navy-ink));color:#fff;border-radius:16px;padding:24px 24px 20px;margin-bottom:14px}
-.res-badge{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,.14);padding:5px 10px;border-radius:7px;margin-bottom:10px}
-.res-hero h3{color:#fff;font-size:24px;margin-bottom:8px}
-.res-hero p{color:#C7D3EA;font-size:14.5px}
-.res-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.res-tags span{font-size:12px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:4px 9px;border-radius:7px;color:#DCE6F7}
-.manual,.softw{display:flex;gap:11px;border-radius:12px;padding:13px 15px;font-size:13.5px;margin-bottom:14px;line-height:1.5}
-.manual{background:var(--warn-soft);border:1px solid #F0E2C4;color:#6B5316}
-.softw{background:var(--accent-soft);border:1px solid #CFDDFB;color:var(--navy-ink);margin-top:14px}
-.manual svg,.softw svg{width:18px;height:18px;flex-shrink:0;margin-top:1px}
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.rbox{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff}
-.rl{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.node-i{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line-2)}
-.node-i:last-child{border-bottom:none}
-.node-i b{display:block;font-size:14px;color:var(--navy);line-height:1.35}
-.node-i span{font-size:12.5px;color:var(--muted)}
-.node-q{min-width:34px;height:26px;border-radius:7px;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.node-q svg{width:16px;height:16px}
-.notes{list-style:none;margin:8px 0 4px;display:grid;gap:5px}
-.notes li{font-size:12.5px;color:var(--muted);padding-left:14px;position:relative}
-.notes li::before{content:"·";position:absolute;left:3px;color:var(--accent);font-weight:800}
-.cap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.cap b{display:block;color:var(--navy);font-size:16px}
-.cap span{font-size:12.5px;color:var(--muted)}
-.can{list-style:none;display:grid;gap:6px}
-.can li{font-size:13.5px;padding-left:22px;position:relative;color:var(--ink)}
-.can li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
-.cost{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;margin-top:14px}
-.cost table{width:100%;border-collapse:collapse}
-.cost td{padding:10px 0;border-bottom:1px solid var(--line-2);font-size:14px;vertical-align:top}
-.cost td:last-child{text-align:right;font-weight:700;color:var(--navy);white-space:nowrap;padding-left:14px}
-.cost td small{display:block;font-size:11.5px;color:var(--muted-2);margin-top:3px;font-weight:400;line-height:1.4}
-.cost tr.total td{font-size:17px;font-weight:800;color:var(--navy);border-bottom:none;border-top:2px solid var(--navy);padding-top:14px}
-.cost tr.total td:last-child{color:var(--accent);font-size:19px}
-.cost tr.month td{color:var(--muted);font-size:13.5px;border-bottom:none}
-.cost tr.month td:last-child{color:var(--muted)}
-.excl{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
-.excl ul{list-style:none;display:grid;gap:5px}
-.excl li{font-size:13px;color:var(--muted);padding-left:16px;position:relative}
-.excl li::before{content:"-";position:absolute;left:2px}
-.variant .vs{font-size:13px;color:var(--muted);margin-top:4px}
-.unk-box{border:1px dashed #C3D0E6;border-radius:14px;padding:16px;margin-top:14px;background:var(--bg-soft)}
-.unk-l{display:flex;flex-wrap:wrap;gap:6px}
-.unk-l span{font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:4px 9px;color:var(--ink)}
-.why{margin-top:14px;font-size:13.5px}
-.why summary{cursor:pointer;font-weight:600;color:var(--accent)}
-.why ul{margin:10px 0 0 18px;color:var(--muted);display:grid;gap:4px}
-.expert{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:14px;background:#0B1B33}
-.expert .rl{color:#9DB4DC}
-.expert pre{color:#C7D3EA;font-size:12px;overflow-x:auto}
-.disclaimer{font-size:12.5px;color:var(--muted-2);margin-top:16px;line-height:1.55}
-.res-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-.res-actions .btn{padding:11px 18px;font-size:14.5px}
-.lf-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-#lfErr{color:#FFC9C0;font-size:13.5px}
-.print-only{display:none}
-@media(max-width:640px){
-  .tasks,.res-grid,.cap{grid-template-columns:1fr}
-  .res-hero h3{font-size:20px}
-  .cost td{font-size:13px}
-}
-
-
-/* ===== калькулятор v3 ===== */
-.panel-early .btn{white-space:normal;text-align:center}
-.two-panels>*{min-width:0}
-@media(max-width:640px){.foot-grid{grid-template-columns:1fr;gap:24px}}
-.cat .ci svg{width:22px;height:22px}
-.calc2{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden}
-.seg{display:flex;gap:6px;padding:10px;background:var(--bg-soft);border-bottom:1px solid var(--line-2)}
-.seg button{flex:1;font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);background:transparent;border:1.5px solid transparent;border-radius:12px;padding:12px;cursor:pointer}
-.seg button.on{background:#fff;color:var(--navy);border-color:var(--accent);box-shadow:var(--shadow-sm)}
-.c2-body{display:grid;grid-template-columns:1fr 360px;align-items:start}
-#c2Left{padding:26px 30px}
-.c2-right{padding:22px;background:var(--bg-soft);border-left:1px solid var(--line-2);position:sticky;top:76px}
-.c2-row{margin-bottom:22px}
-.c2-lab{font-weight:700;color:var(--navy);font-size:15px;margin-bottom:10px}
-.c2-lab span{font-weight:500;color:var(--muted-2);font-size:13px;margin-left:8px}
-.c2-sep{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line-2);padding-top:18px;margin:6px 0 16px}
-.c2-sub{border-left:3px solid var(--accent-soft);padding-left:16px;margin:-6px 0 18px}
-.emp{font-size:15px;color:var(--muted);margin-bottom:4px}.emp b{font-size:30px;font-weight:900;color:var(--accent);margin-right:4px}
-#c2Emp{width:100%;accent-color:var(--accent);height:26px}
-.rng-l{display:flex;justify-content:space-between;font-size:12px;color:var(--muted-2)}
-.tasks2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.t2{display:flex;gap:10px;align-items:flex-start;text-align:left;font-family:inherit;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer;color:var(--ink);transition:.12s}
-.t2:hover{border-color:#B9CBEC}.t2.on{border-color:var(--accent);background:var(--accent-soft)}
-.t2i{width:32px;height:32px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.t2.on .t2i{background:var(--accent)}.t2i svg{width:17px;height:17px}
-.t2 b{display:block;font-size:14px;color:var(--navy);line-height:1.3}.t2 small{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:2px}
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{font-family:inherit;font-size:14px;font-weight:500;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 13px;cursor:pointer;text-align:left;line-height:1.3}
-.chip small{display:block;font-size:11.5px;color:var(--muted);font-weight:400}
-.chip:hover{border-color:#B9CBEC}.chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--navy);font-weight:600}
-.c2-res .l{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.c2-res .p{font-size:27px;font-weight:900;color:var(--navy);line-height:1.2;margin:6px 0}
-.c2-res .c{font-size:14px;color:var(--muted);margin-bottom:12px}
-.indiv{background:var(--warn-soft);border:1px solid #F0E2C4;color:#6B5316;border-radius:10px;padding:9px 11px;font-size:12.5px;margin-bottom:12px}
-.c2-t{width:100%;border-collapse:collapse;margin-bottom:12px}
-.c2-t td{font-size:13px;padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.c2-t td:last-child{text-align:right;font-weight:700;color:var(--navy);white-space:nowrap;padding-left:10px}
-.c2-t tr.mo td{color:var(--muted);border-bottom:none}.c2-t tr.mo td:last-child{color:var(--muted)}
-.c2-nodes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
-.c2-nodes span{font-size:11.5px;font-weight:600;background:#fff;border:1px solid var(--line);color:var(--navy);padding:4px 8px;border-radius:7px}
-.c2-res .fine{font-size:11.5px;color:var(--muted-2);margin-top:10px;line-height:1.45}
-.xp{font-size:11px;background:#0B1B33;color:#C7D3EA;padding:10px;border-radius:8px;margin-top:10px;white-space:pre-wrap}
-.packs2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pk2{position:relative;text-align:left;font-family:inherit;background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px 16px;cursor:pointer;color:var(--ink)}
-.pk2.on{border-color:var(--accent);background:var(--accent-soft)}
-.pk2 b{display:block;font-size:18px;color:var(--navy)}.pk2 small{display:block;font-size:13px;color:var(--muted);margin:2px 0 10px}
-.pk2 .pr{display:block;font-size:20px;font-weight:900;color:var(--accent)}
-.pk2 ul{list-style:none;margin-top:10px;display:grid;gap:4px}.pk2 li{font-size:13px;color:var(--ink)}.pk2 li::before{content:"✓ ";color:var(--ok);font-weight:800}
-.pk2 .tag{position:absolute;top:-10px;left:14px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px}
-.addons2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ad2{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:inherit;font-size:14px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;text-align:left;color:var(--ink)}
-.ad2.on{border-color:var(--accent);background:var(--accent-soft);font-weight:600}.ad2 i{font-style:normal;color:var(--muted);font-size:12.5px;white-space:nowrap}
-.c2-tune{margin-top:18px}
-.c2-lead{margin-top:22px}
-.c2bar{display:none}
-@media(max-width:900px){
-  .c2-body{grid-template-columns:1fr}.c2-right{position:static;border-left:none;border-top:1px solid var(--line-2)}
-  #c2Left{padding:20px 18px}
-  .c2bar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(6,26,68,.1);padding:10px 16px;align-items:center;justify-content:space-between;gap:12px}
-  .c2bar.show{display:flex}.c2bar small{display:block;font-size:11px;color:var(--muted)}.c2bar b{font-size:16px;color:var(--navy)}.c2bar .btn{padding:11px 16px}
-}
-@media(max-width:640px){.tasks2,.packs2,.addons2{grid-template-columns:1fr}.seg button{font-size:14px;padding:10px 6px}}
-
-@media print{
-  header,.mobile-menu,footer,body>section:not(#calc){display:none!important}
-  #calc .section-head,#calc .calc-top,#calc .steps-nav,#calc .summary,.no-print,#calc>.wrap>p{display:none!important}
-  .calc-section{padding:0;background:#fff}
-  .calc-shell{box-shadow:none;border:none}
-  .calc-body{display:block}
-  .step-panel{padding:0}
-  .print-only{display:block!important;margin-bottom:14px;font-size:13px}
-  .res-hero,.expert{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .rbox,.cost,.variant{break-inside:avoid}
-}
-
-.fade{animation:fade .3s ease}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-/* ================= PREMIUM THEME v4 ================= */
-:root{--navy:#0A1F44;--navy-2:#12306A;--navy-ink:#070F1E;--accent:#1D4ED8;--accent-600:#1E40AF;--accent-soft:#EEF2FB;
- --ink:#0E1726;--muted:#5C6677;--muted-2:#8B93A1;--line:#E6E2D9;--line-2:#EFECE5;--bg:#FFFFFF;--bg-soft:#F6F3EC;--gold:#B08D57;
- --radius:18px;--radius-lg:24px;--shadow:0 1px 2px rgba(14,23,38,.04),0 18px 44px rgba(14,23,38,.07);--shadow-sm:0 1px 2px rgba(14,23,38,.04);--shadow-lg:0 30px 80px rgba(7,15,30,.14)}
-body{background:#FBFAF7;color:var(--ink);letter-spacing:-.003em}
-h1,h2,h3,h4{font-weight:600;letter-spacing:-.025em;color:var(--ink)}
-h2{font-size:clamp(30px,3.4vw,46px);font-weight:600;line-height:1.1}
-h3{font-weight:600}
-.eyebrow{background:none;padding:0;border-radius:0;color:var(--gold);letter-spacing:.16em;font-size:12px;font-weight:600;gap:12px}
-.eyebrow::before{content:"";width:28px;height:1px;background:currentColor;display:inline-block}
-.section{padding:112px 0}
-.section--soft{background:var(--bg-soft)}
-.section-head{margin-bottom:52px}
-.section-head p,.lead{color:var(--muted)}
-.btn{border-radius:10px;font-weight:600;letter-spacing:-.005em}
-.btn-primary{background:var(--navy);box-shadow:none}
-.btn-primary:hover{background:var(--accent);box-shadow:0 10px 24px rgba(29,78,216,.22);transform:none}
-.btn-ghost{background:transparent;border-color:#CFC8BA;color:var(--navy)}
-.btn-ghost:hover{border-color:var(--navy);color:var(--navy);background:transparent}
-.btn-navy{background:var(--navy)}
-header{background:rgba(251,250,247,.9);border-bottom:1px solid var(--line-2)}
-.logo{font-weight:700}.logo .mark{background:var(--navy);border-radius:8px}
-.nav-links a{color:#3A4456;font-weight:500}
-.card{box-shadow:none;border-color:var(--line);border-radius:var(--radius)}
-.card:hover{transform:none;box-shadow:var(--shadow);border-color:#D8D2C4}
-.card .ci{background:transparent;border:1px solid var(--line);color:var(--navy);border-radius:12px}
-.sec-cta{display:inline-flex;margin-top:22px;font-weight:600;color:var(--accent);border-bottom:1px solid rgba(29,78,216,.3);padding-bottom:2px}
-.sec-cta:hover{border-color:var(--accent)}
-/* hero */
-.hero{background:radial-gradient(900px 520px at 88% 0%,rgba(29,78,216,.28),transparent 60%),radial-gradient(700px 400px at 0% 100%,rgba(176,141,87,.10),transparent 60%),linear-gradient(180deg,#070F1E 0%,#0A1730 100%);padding:104px 0 96px;border-bottom:none;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 75%);pointer-events:none}
-.hero .wrap{position:relative}
-.hero-grid{grid-template-columns:1.1fr .9fr;gap:64px}
-.hero .eyebrow{color:#C9A96E}
-.hero h1{color:#fff;font-size:clamp(38px,5.2vw,66px);font-weight:600;line-height:1.04;letter-spacing:-.035em;margin:22px 0 22px}
-.hero .lead{color:#A9B4C6;font-size:18.5px;max-width:560px;margin-bottom:34px}
-.hero .btn-primary{background:#fff;color:var(--navy)}
-.hero .btn-primary:hover{background:#E8EDF7;color:var(--navy);box-shadow:none}
-.hero .btn-ghost{border-color:rgba(255,255,255,.25);color:#fff}
-.hero .btn-ghost:hover{border-color:#fff;color:#fff}
-.hero-points{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:30px}
-.hero-points span{font-size:14px;color:#8E9AAF;display:flex;align-items:center;gap:9px}
-.hero-points span::before{content:"";width:5px;height:5px;border-radius:50%;background:#C9A96E}
-.hero-calc{background:#fff;border-radius:22px;padding:26px;box-shadow:0 40px 100px rgba(0,0,0,.45);color:var(--ink)}
-.hc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line-2)}
-.hc-top b{font-size:17px;font-weight:600;color:var(--ink)}.hc-top i{font-style:normal;font-size:12.5px;color:var(--muted-2)}
-.hc-q{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:4px 0 9px}
-.hc-o{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px}
-.hc-o.t{grid-template-columns:repeat(3,1fr)}
-.hc-o button{font-family:inherit;font-size:13.5px;font-weight:500;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 6px;cursor:pointer;transition:.12s;line-height:1.25}
-.hc-o button:hover{border-color:#BDB5A6}
-.hc-o button.on{background:var(--navy);border-color:var(--navy);color:#fff}
-.hc-res{background:var(--bg-soft);border-radius:14px;padding:16px 18px;margin:6px 0 14px}
-.hc-res small{display:block;font-size:12px;color:var(--muted)}
-.hc-res b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin:3px 0 2px}
-.hc-res span{font-size:13px;color:var(--muted)}
-.hero-calc .btn{width:100%}
-.hc-fine{font-size:11.5px;color:var(--muted-2);margin-top:10px;text-align:center}
-/* strip */
-.strip{background:#fff;border-bottom:1px solid var(--line-2)}
-.strip-grid{display:grid;grid-template-columns:repeat(4,1fr)}
-.strip-grid>div{padding:30px 24px;border-left:1px solid var(--line-2)}
-.strip-grid>div:first-child{border-left:none;padding-left:0}
-.strip b{display:block;font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--navy)}
-.strip span{font-size:14px;color:var(--muted)}
-/* calc */
-.calc-section{background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EC 100%);padding:104px 0}
-.calc2{border-color:var(--line);box-shadow:0 30px 80px rgba(14,23,38,.08);border-radius:24px}
-.seg{background:#F6F3EC;border-bottom-color:var(--line-2);padding:8px}
-.seg button{font-weight:600;border-radius:10px}
-.seg button.on{border-color:transparent;background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(14,23,38,.1)}
-.c2-right{background:#FBFAF7}
-.emp b{font-weight:600;color:var(--navy)}
-.c2-res .p{font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.t2{border-width:1px;border-radius:12px}.t2i{background:transparent;border:1px solid var(--line);color:var(--navy)}
-.t2.on{background:#F3F6FC;border-color:var(--navy)}.t2.on .t2i{background:var(--navy);border-color:var(--navy);color:#fff}
-.chip{border-width:1px}.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}.chip.on small{color:#B9C3D6}
-.pk2{border-width:1px}.pk2.on{border-color:var(--navy);background:#F3F6FC}.pk2 .pr{font-weight:600;color:var(--navy)}.pk2 .tag{background:var(--gold)}
-.ad2{border-width:1px}.ad2.on{border-color:var(--navy);background:#F3F6FC}
-.lead-form{background:#0A1730;border-radius:24px}
-.lead-form h3{font-weight:600}
-/* other blocks */
-.problem-box{background:#0A1730;border-radius:24px}
-.problem-box::after{background:radial-gradient(circle,rgba(176,141,87,.22),transparent 70%)}
-.setup-section{background:#fff;border-color:var(--line)}
-.setup-price{background:#0A1730}.sp-num{font-weight:600}
-.setup-list li::before{background:var(--navy)}
-table.cmp thead th{background:#0A1730}
-table.cmp .hl-col{background:#F3F6FC}
-.layer .ln{background:transparent;border:1px solid var(--line);color:var(--navy)}
-.layer{border-color:var(--line)}.layer:hover{transform:none;border-color:#CFC8BA}
-.tl-step .dot{background:var(--navy);box-shadow:0 0 0 5px #FBFAF7,0 0 0 6px var(--line)}
-.tco-card{background:#0A1730}
-.stat .n{font-weight:600;color:var(--navy)}
-.stat{border-color:var(--line)}
-.econ-item{border-color:var(--line)}.econ-item .d{background:var(--gold)}
-.final-cta{background:radial-gradient(700px 360px at 80% 0%,rgba(29,78,216,.3),transparent 60%),#070F1E;border-radius:28px;padding:80px 52px}
-.final-cta .eyebrow{color:#C9A96E;justify-content:center}
-.final-cta h2{margin-top:16px}
-.final-cta .btn-primary{background:#fff;color:var(--navy)}
-.final-cta .btn-primary:hover{background:#E8EDF7}
-.faq-q{font-weight:600}.faq-q .fx{background:transparent;border:1px solid var(--line);color:var(--navy)}
-footer{background:#070F1E}
-.hero-calc .btn-primary{background:var(--navy);color:#fff}
-.hero-calc .btn-primary:hover{background:var(--accent);color:#fff}
-.hero h1{font-size:clamp(36px,4.3vw,58px)}
-.c2-res .p{font-size:23px}
-.lead-form .btn-primary{background:#fff;color:var(--navy)}
-.lead-form .btn-primary:hover{background:#E8EDF7;color:var(--navy)}
-.problem-box .eyebrow,.setup-price .eyebrow{color:#C9A96E}
-/* floating CTA */
-.float-cta{position:fixed;right:24px;bottom:24px;z-index:65;background:var(--navy);color:#fff;font-weight:600;padding:15px 22px;border-radius:12px;box-shadow:0 16px 40px rgba(7,15,30,.28);opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s}
-.float-cta.show{opacity:1;transform:none;pointer-events:auto}
-.float-cta:hover{background:var(--accent)}
-@media(max-width:920px){
-  .hero-grid{grid-template-columns:1fr;gap:40px}.hero{padding:72px 0 64px}
-  .strip-grid{grid-template-columns:1fr 1fr}.strip-grid>div{border-left:none;padding:20px 0;border-top:1px solid var(--line-2)}
-  .strip-grid>div:nth-child(-n+2){border-top:none}
-}
-@media(max-width:640px){
-  .section{padding:72px 0}.hc-o{grid-template-columns:1fr 1fr}.hc-o.t{grid-template-columns:1fr 1fr}
-  .hero-calc{padding:20px}.float-cta{left:16px;right:16px;bottom:16px;text-align:center}
-  .final-cta{padding:48px 22px}.strip b{font-size:22px}
-  .hero-cta .btn{width:100%}.hero .lead{font-size:16.5px}
-}
-
-</style>
+<meta property="og:type" content="website"><meta property="og:title" content="Корпоративный ИИ на ваших серверах: данные внутри компании · MakeBiz"><meta property="og:description" content="Свой аналог ChatGPT на сервере компании: данные не уходят во внешние сервисы, нет оплаты за каждый запрос, проще соблюдать 152-ФЗ. Установка от 300 000 ₽, расчёт стоимости и окупаемости за 30 секунд."><meta property="og:url" content="https://localai-dusky.vercel.app/"><meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "MakeBiz", "url": "https://localai-dusky.vercel.app", "email": "ai@makebiz.ru", "telephone": "+7 495 000-00-00"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Чем свой ИИ отличается от ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "Для сотрудника почти ничем: такой же чат, который пишет тексты, отвечает на вопросы и работает с документами. Разница в том, где он живёт. Свой ИИ стоит на вашем сервере или в выделенном ЦОД в России, данные не уходят во внешний сервис, а платить за каждый запрос и подписку на человека не нужно."}}, {"@type": "Question", "name": "Это поможет соблюдать 152-ФЗ?", "acceptedAnswer": {"@type": "Answer", "text": "Локальный ИИ убирает главный риск: персональные данные клиентов и сотрудников не передаются в зарубежный сервис. Но соответствие закону обеспечивает вся система: права доступа, журналирование, регламенты и документы. Их мы помогаем выстроить вместе с вашим юристом."}}, {"@type": "Question", "name": "Как сотрудник может вынести данные, и что мешает это сделать?", "acceptedAnswer": {"@type": "Answer", "text": "В публичном чате сотрудник сам решает, что туда вставить, и никто этого не видит. В своём ИИ доступ настраивается по ролям, каждый запрос и ответ записывается в журнал, выгрузки ограничиваются правилами, а при увольнении доступ закрывается вместе с корпоративной учётной записью."}}, {"@type": "Question", "name": "Сколько стоит и когда окупится?", "acceptedAnswer": {"@type": "Answer", "text": "Установка и настройка системы стоит 300 000 ₽, решение под ключ вместе с сервером начинается от 1,8 млн ₽. Окупаемость зависит от числа сотрудников: за счёт подписок и сэкономленного времени компания на 100 человек окупает систему примерно за 6-8 месяцев. Точно посчитать под себя можно в калькуляторе."}}, {"@type": "Question", "name": "А если модели устареют?", "acceptedAnswer": {"@type": "Answer", "text": "Бизнес-логика, данные, права и интеграции отделены от конкретной модели. Когда выходит модель лучше, мы проверяем её на ваших задачах и заменяем без перестройки системы."}}, {"@type": "Question", "name": "Можно без покупки сервера?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Если сервер уже есть, проверим совместимость и установим систему. Для пилота можно арендовать сервер помесячно в российском дата-центре."}}, {"@type": "Question", "name": "Кто будет это обслуживать?", "acceptedAnswer": {"@type": "Answer", "text": "Мы. Сопровождение включает мониторинг, обновления, резервное копирование и помощь пользователям. Если есть свой администратор, обучим его и останемся на второй линии."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Корпоративный ИИ на серверах компании под ключ", "provider": {"@type": "Organization", "name": "MakeBiz"}, "areaServed": "RU", "offers": {"@type": "Offer", "price": "300000", "priceCurrency": "RUB", "description": "Базовая установка и настройка системы"}}</script>
 </head>
 <body>
-
-<!-- ============ HEADER ============ -->
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo">
-      <span class="mark">M</span>
-      <span>MakeBiz<small>Локальный ИИ</small></span>
-    </a>
-    <nav class="nav-links">
-      <a href="#calc">Калькулятор</a>
-      <a href="#calc" data-open-packs>Пакеты</a>
-      <a href="#scenarii">Что входит</a>
-      <a href="#kak">Как внедряем</a>
-      <a href="#security">Безопасность</a>
-      <a href="#faq">Вопросы</a>
-    </nav>
+    <a href="/" class="logo"><span class="mark">M</span><span>MakeBiz<small>Локальный ИИ</small></span></a>
+    <nav class="nav-links"><a href="/" class="act">Главная</a><a href="/#problemy">Почему локально</a><a href="/#bezopasnost">Безопасность</a><a href="/keysy">Кейсы</a><a href="/novosti">Новости</a><a href="/#faq">Вопросы</a></nav>
     <div class="nav-cta">
-      <span class="nav-phone">+7 495 000-00-00</span>
-      <a href="#calc" class="btn btn-primary">Рассчитать стоимость</a>
+      <a class="nav-phone" href="tel:+74950000000">+7 495 000-00-00</a>
+      <a href="/raschet" class="btn btn-primary">Рассчитать стоимость</a>
       <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#calc">Калькулятор</a>
-  <a href="#calc" data-open-packs>Готовые пакеты</a>
-  <a href="#scenarii">Что входит</a>
-  <a href="#kak">Как внедряем</a>
-  <a href="#security">Безопасность</a>
-  <a href="#faq">Вопросы</a>
-  <a href="#calc" class="btn btn-primary">Рассчитать стоимость</a>
-</div>
+<div class="mobile-menu" id="mobileMenu"><a href="/" class="act">Главная</a><a href="/#problemy">Почему локально</a><a href="/#bezopasnost">Безопасность</a><a href="/keysy">Кейсы</a><a href="/novosti">Новости</a><a href="/#faq">Вопросы</a><a href="/raschet" class="btn btn-primary">Рассчитать стоимость</a></div>
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="top">
+<section class="hero" id="top" data-nofloat>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">Локальный ИИ для бизнеса · под ключ</span>
-      <h1>Корпоративный ИИ<br>на ваших серверах</h1>
-      <p class="lead">Собственный аналог ChatGPT для сотрудников, клиентов, звонков и документов. Данные остаются внутри компании, а внешнему сервису не нужно платить за каждый запрос. Подберём сервер, установим систему и возьмём на сопровождение.</p>
+      <span class="eyebrow">Корпоративный ИИ под ключ</span>
+      <h1>ИИ для компании, который не выносит данные наружу</h1>
+      <p class="lead">Сотрудники уже копируют договоры, базы клиентов и переписку в зарубежные нейросети. Мы ставим такой же ИИ на ваш сервер: работает как ChatGPT, данные остаются внутри компании, а за каждый запрос и подписку на человека платить не нужно.</p>
       <div class="hero-cta">
-        <a href="#calc" class="btn btn-primary btn-lg">Рассчитать стоимость</a>
-        <a href="#calc" class="btn btn-ghost btn-lg" data-open-packs>Готовые пакеты</a>
+        <a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость и окупаемость</a>
+        <a href="#problemy" class="btn btn-ghost btn-lg">Зачем это бизнесу</a>
       </div>
-      <div class="hero-points"><span>Данные внутри компании</span><span>Без оплаты за каждый запрос</span><span>Модели можно менять</span></div>
+      <div class="hero-points"><span>Данные внутри компании</span><span>Проще соблюдать 152-ФЗ</span><span>Без оплаты за каждый запрос</span></div>
     </div>
-    <div class="hero-calc" id="heroCalc"></div>
+    <div class="hero-calc" id="heroPay"></div>
   </div>
+  <a href="#problemy" class="scroll-hint" aria-label="Листать дальше"><span>Почему это важно</span><i></i></a>
 </section>
 
 <section class="strip">
   <div class="wrap strip-grid">
-    <div><b>30 сек</b><span>расчёт стоимости без технических вопросов</span></div>
+    <div><b>1-3% выручки</b><span>оборотный штраф за повторную утечку персональных данных</span></div>
+    <div><b>0 ₽</b><span>за запросы и подписки после запуска своего ИИ</span></div>
     <div><b>300 000 ₽</b><span>установка и настройка системы</span></div>
-    <div><b>от 1,8 млн ₽</b><span>решение под ключ вместе с оборудованием</span></div>
-    <div><b>0 ₽</b><span>внешнему сервису за каждый запрос</span></div>
+    <div><b>от 1,8 млн ₽</b><span>решение под ключ вместе с сервером</span></div>
   </div>
 </section>
 
-<!-- ============ CALCULATOR ============ -->
-<section class="calc-section" id="calc">
-  <div class="wrap">
-    <div class="section-head" style="text-align:center;margin:0 auto 30px">
-      <span class="eyebrow">Калькулятор</span>
-      <h2>Сколько стоит ИИ на ваших серверах</h2>
-      <p style="margin:0 auto">Выберите размер компании и задачи, цена меняется сразу. Или посмотрите готовые пакеты. Знания о видеокартах и моделях не нужны.</p>
-    </div>
-    <div class="calc2">
-      <div class="seg" id="calcMode"><button type="button" data-mode="custom" class="on">Собрать под себя</button><button type="button" data-mode="packs">Готовые пакеты</button></div>
-      <div class="c2-body"><div id="c2Left"></div><aside class="c2-right" id="c2Right"></aside></div>
-    </div>
-    <div class="lead-form c2-lead" id="leadForm">
-      <h3>Получить точный расчёт</h3>
-      <p>Инженер проверит вашу конфигурацию, подберёт модели и оборудование и назначит техническую встречу. Выбранные параметры придут вместе с заявкой.</p>
-      <div class="two-col"><div class="field"><label>Имя</label><input type="text" id="lfName" placeholder="Как к вам обращаться"></div><div class="field"><label>Телефон</label><input type="tel" id="lfPhone" placeholder="+7 ..."></div></div>
-      <div class="two-col"><div class="field"><label>Компания</label><input type="text" id="lfCompany" placeholder="Название компании"></div><div class="field"><label>Email</label><input type="email" id="lfEmail" placeholder="you@company.ru"></div></div>
-      <label class="consent"><input type="checkbox" id="lfConsent"> Согласен на обработку персональных данных. Расчёт предварительный и не является офертой.</label>
-      <div class="lf-row"><button class="btn btn-primary btn-lg" id="lfSubmit" type="button">Получить точный расчёт</button><span id="lfErr"></span></div>
-    </div>
-    <p style="text-align:center;font-size:13px;color:var(--muted-2);margin-top:16px">Расчёт предварительный. Итоговая конфигурация подтверждается после технического обследования и теста на ваших задачах.</p>
-  </div>
-</section>
-<div class="c2bar" id="c2Bar"></div>
-
-<!-- ============ PROBLEM ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="problem-box">
-      <h2>Публичный AI удобен для экспериментов. Корпоративным процессам нужен управляемый контур.</h2>
-      <p>В рабочих запросах могут находиться договоры, персональные данные, код, звонки клиентов, финансовая информация и коммерческая тайна. При большой постоянной нагрузке также важно контролировать стоимость, скорость, доступность и версии моделей. Локальная AI-платформа позволяет собрать эти требования в одной архитектуре.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHAT'S INCLUDED ============ -->
-<section class="section" id="scenarii">
+<section class="section" id="problemy">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Полный контур, а не одна модель</span>
-      <h2>Что входит в решение</h2>
-      <p>Локальная модель без интеграций остаётся демонстрацией. Мы соединяем её с реальными процессами, данными и системами компании, а затем сопровождаем результат.</p>
-      <a href="#calc" class="sec-cta">Рассчитать для своей компании →</a>
+      <span class="eyebrow">Почему это важно сейчас</span>
+      <h2>Публичные нейросети удобны. Но у компании с ними четыре проблемы</h2>
+      <p>Запретить сотрудникам ИИ уже не получится: он экономит часы работы. Вопрос в том, где этот ИИ работает и кто видит ваши данные.</p>
     </div>
-    <div class="grid g3">
-      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3 8 4-16 3 8h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Нагрузочный расчёт</h3><p>Пики, параллельность, скорость, рост и резерв. Считаем не абстрактную мощность, а реальные операции.</p></div>
-      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 9h6M7 13h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Модели и база знаний</h3><p>Выбор, тестирование, RAG и управление версиями. Архитектура не привязана к одной модели.</p></div>
-      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="18" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M7 6.5h.01M7 17.5h.01" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div><h3>Инфраструктура</h3><p>Вычисления, хранение, сеть, резервирование и мониторинг под выбранный SLA.</p></div>
-      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></div><h3>Интеграции</h3><p>Bitrix24, CRM, 1С, телефония, СЭД, DWH, сайты и мессенджеры под ваши процессы.</p></div>
-      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3 7-7 9-4-2-7-4-7-9V6l7-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Безопасность</h3><p>SSO, роли, аудит, шифрование и изоляция. Контроль всего пути данных, а не только места установки.</p></div>
-      <div class="card"><div class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 3v3H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Сопровождение</h3><p>Обновления, поддержка, оптимизация и capacity planning. Managed On-Prem как основной сервис.</p></div>
+    <div class="pains">
+      <div class="pain"><span class="pn">01</span><h3>Данные уходят за периметр</h3><p>Менеджер вставляет в чат договор, бухгалтер загружает выгрузку из 1С, разработчик копирует код. Всё это оказывается на серверах зарубежного сервиса, и вы не контролируете, что с этим происходит дальше.</p></div>
+      <div class="pain"><span class="pn">02</span><h3>Риски по закону о персональных данных</h3><p>С 1 марта 2023 года передавать персональные данные за рубеж можно только после уведомления Роскомнадзора. С 30 мая 2025 года за утечки выросли штрафы, а за повторную утечку он оборотный: 1-3% выручки, от 25 до 500 млн ₽.</p><a class="src" href="https://www.consultant.ru/law/hotdocs/87300.html" target="_blank" rel="noopener">Закон 420-ФЗ, КонсультантПлюс</a></div>
+      <div class="pain"><span class="pn">03</span><h3>Расходы растут вместе с командой</h3><p>Подписка на каждого сотрудника плюс оплата API за каждый запрос бота. Чем активнее пользуются ИИ, тем больше счёт, а цены привязаны к курсу доллара.</p></div>
+      <div class="pain"><span class="pn">04</span><h3>Зависимость от чужого сервиса</h3><p>Доступ могут ограничить, условия и цены поменять в любой момент. Часть сервисов доступна только через обходные пути, и это ещё одна брешь в безопасности.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ TURNKEY SETUP ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="setup-section">
-      <div>
-        <span class="eyebrow">Установка и настройка под ключ</span>
-        <h2 style="margin:16px 0 14px">Железо, это половина. Систему нужно развернуть.</h2>
-        <p class="lead" style="margin-bottom:22px">Купить сервер мало. Чтобы LLM реально работала в вашем контуре, её нужно установить и настроить. Мы делаем это под ключ: настройка сервера и установка оборудования вместе с развёртыванием самой системы, моделей и интеграций.</p>
-        <ul class="setup-list">
-          <li>Настройка сервера и установка оборудования</li>
-          <li>Платформа инференса и управление моделями</li>
-          <li>Установка и оптимизация моделей</li>
-          <li>RAG, корпоративный поиск и база знаний</li>
-          <li>SSO, роли, аудит и изоляция</li>
-          <li>Интеграции: Bitrix24, 1С, телефония, СЭД</li>
-          <li>Мониторинг и резервное копирование</li>
-          <li>Запуск, обучение и передача в эксплуатацию</li>
-        </ul>
-      </div>
-      <div class="setup-price">
-        <div class="sp-label">Базовая установка и настройка</div>
-        <div class="sp-num">300 000 ₽</div>
-        <div class="sp-sub">ОС, драйверы, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, первичный benchmark, документация и обучение администратора.</div>
-        <div class="sp-note">Без учёта оборудования. Сборка и тестирование сервера (100-250 тыс. ₽) и интеграции с CRM, 1С, телефонией считаются отдельно, калькулятор покажет всё построчно.</div>
-        <a href="#calc" class="btn btn-primary btn-block">Рассчитать под свою задачу</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DEPLOYMENT COMPARISON ============ -->
-<section class="section section--soft">
+<section class="section section--soft" id="reshenie">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Мы не навязываем покупку</span>
-      <h2>Публичный API, российский cloud или локальный контур</h2>
-      <p>В результате расчёта покажем, где рациональнее собственный контур, выделенная аренда или гибрид.</p>
-      <a href="#calc" class="sec-cta">Рассчитать для своей компании →</a>
+      <span class="eyebrow">Решение</span>
+      <h2>Свой ИИ на вашем сервере закрывает все четыре</h2>
+      <p>Для сотрудников это такой же чат с ИИ, только он знает ваши регламенты и продукты. Для компании это контролируемая система с понятной стоимостью.</p>
     </div>
-    <div class="tbl-wrap">
-      <table class="cmp">
-        <thead><tr><th>Критерий</th><th>Публичный API</th><th>Российский выделенный cloud</th><th class="hl-col" style="color:#fff;background:var(--accent)">Локальный контур</th></tr></thead>
-        <tbody>
-          <tr><td>Быстрый старт</td><td>Высокий</td><td>Высокий</td><td class="hl-col">Средний</td></tr>
-          <tr><td>Начальные вложения</td><td>Низкие</td><td>Низкие / средние</td><td class="hl-col">Средние / высокие</td></tr>
-          <tr><td>Контроль инфраструктуры</td><td>Низкий</td><td>Средний</td><td class="hl-col">Высокий</td></tr>
-          <tr><td>Изоляция данных</td><td>Зависит от сервиса</td><td>Высокая при правильной архитектуре</td><td class="hl-col">Максимальная управляемость</td></tr>
-          <tr><td>Оплата за использование</td><td>Обычно да, за токены</td><td>Аренда / ресурсы</td><td class="hl-col">Собственный TCO</td></tr>
-          <tr><td>Работа без интернета</td><td>Нет</td><td>Нет</td><td class="hl-col">Возможна</td></tr>
-          <tr><td>Постоянная большая нагрузка</td><td>Может быть дорого</td><td>Зависит от тарифа</td><td class="hl-col">Часто экономически интересно</td></tr>
-          <tr><td>Эксплуатация</td><td>У провайдера</td><td>Совместная</td><td class="hl-col">У клиента или MakeBiz</td></tr>
-        </tbody>
-      </table>
+    <div class="sol">
+      <div><span class="sol-k">Данные</span><h3>Не покидают компанию</h3><p>Сервер стоит у вас или в выделенном ЦОД в России. Можно работать вообще без выхода в интернет.</p></div>
+      <div><span class="sol-k">Закон</span><h3>Проще соблюдать 152-ФЗ</h3><p>Нет передачи персональных данных во внешние ИИ-сервисы. Права, журналы и регламенты выстраиваем вместе с вашим юристом.</p></div>
+      <div><span class="sol-k">Деньги</span><h3>Фиксированная стоимость</h3><p>Платите один раз за сервер и установку, дальше только сопровождение. Никаких токенов и подписок на каждого.</p></div>
+      <div><span class="sol-k">Контроль</span><h3>Независимость от поставщика</h3><p>Открытые модели работают без внешних API. Появится модель лучше, заменим без перестройки системы.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ WHEN LOCAL / WHEN EARLY ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Инженерная дисциплина</span>
-      <h2>Когда локальный контур действительно оправдан</h2>
-      <p>Мы не предлагаем купить сервер, пока не проверили, что выбранная задача, модель и нагрузка на нём работают.</p>
-    </div>
-    <div class="two-panels">
-      <div class="panel-good">
-        <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#12855B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Локальный ИИ оправдан</h3>
-        <ul>
-          <li><span class="mk">→</span> Конфиденциальные документы и код</li>
-          <li><span class="mk">→</span> Постоянная высокая нагрузка</li>
-          <li><span class="mk">→</span> Закрытая сеть и строгие права доступа</li>
-          <li><span class="mk">→</span> Интеграция с внутренними системами</li>
-          <li><span class="mk">→</span> Предсказуемая задержка и независимость от внешнего API</li>
-          <li><span class="mk">→</span> Полный аудит и несколько AI-процессов на общей платформе</li>
-        </ul>
-      </div>
-      <div class="panel-early">
-        <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8595AD" stroke-width="2"/><path d="M12 8v5" stroke="#8595AD" stroke-width="2" stroke-linecap="round"/><path d="M12 16h.01" stroke="#8595AD" stroke-width="2.5" stroke-linecap="round"/></svg> Покупать сервер рано</h3>
-        <ul>
-          <li><span class="mk">·</span> Нагрузка небольшая или нерегулярная</li>
-          <li><span class="mk">·</span> Задача ещё не проверена на данных</li>
-          <li><span class="mk">·</span> Нет владельца процесса</li>
-          <li><span class="mk">·</span> Нет подготовленных данных</li>
-          <li><span class="mk">·</span> Нужен разовый проект</li>
-          <li><span class="mk">·</span> Невозможно заранее оценить качество</li>
-        </ul>
-        <a href="#calc" class="btn btn-ghost" style="margin-top:20px">Начать с пилота на выделенной инфраструктуре</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SECURITY ============ -->
-<section class="section section--soft" id="security">
-  <div class="wrap">
-    <div class="section-head">
+<section class="section sec-dark" id="bezopasnost">
+  <div class="wrap sec-grid">
+    <div>
       <span class="eyebrow">Безопасность</span>
-      <h2>Локальное размещение: только первый уровень</h2>
-      <p>Мы проектируем не только место установки модели, но и полный путь данных: кто может отправить запрос, какие источники доступны, что модель может сделать и как каждое действие фиксируется.</p>
+      <h2>Сотрудник не унесёт то, к чему у него нет доступа</h2>
+      <p class="lead">В публичном чате сотрудник сам решает, что туда вставить, и никто этого не видит. В своём ИИ всё наоборот: доступы, журналы и правила настраивает компания.</p>
+      <a href="/raschet" class="btn btn-primary btn-lg">Рассчитать для своей компании</a>
     </div>
-    <div class="layers">
-      <div class="layer"><span class="ln"></span><span class="lt">Сеть и изоляция</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Идентификация и SSO</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Права на источники данных</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Фильтрация входных данных</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Защита от prompt injection</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Контроль исходящих ответов</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Аудит действий агентов</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Подтверждение критичных операций</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Резервное копирование</span></div>
-      <div class="layer"><span class="ln"></span><span class="lt">Мониторинг и реагирование</span></div>
+    <ul class="sec-list">
+      <li><b>Доступ по ролям</b><span>Менеджер видит только свои сделки и документы, бухгалтерия свои, руководитель всё</span></li>
+      <li><b>Журнал каждого запроса</b><span>Видно, кто, когда и что спрашивал у ИИ и что получил в ответ</span></li>
+      <li><b>Контроль выгрузок</b><span>Правила, какие данные можно копировать и выгружать, а какие нет</span></li>
+      <li><b>Вход через корпоративную учётку</b><span>Сотрудник уволился, доступ к ИИ закрылся вместе с учётной записью</span></li>
+      <li><b>Закрытый контур</b><span>Сервер может работать совсем без интернета, данным просто некуда уйти</span></li>
+      <li><b>Подтверждение действий</b><span>ИИ-агент не изменит CRM или 1С без согласования человеком</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="effekt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Эффект</span>
+      <h2>Сколько вы сэкономите и когда окупится</h2>
+      <p>Считаем две вещи: подписки и API, которые больше не нужны, и время, которое ИИ освобождает у сотрудников. В примере сотрудник экономит 2 часа в неделю, час стоит 700 ₽, подписка 2 500 ₽ в месяц.</p>
+    </div>
+    <div class="tbl-wrap"><table class="cmp econ-t">
+      <thead><tr><th>Компания</th><th>Подписки в год</th><th>Время сотрудников в год</th><th>Свой ИИ под ключ</th><th>Окупаемость</th></tr></thead>
+      <tbody><tr><td>50 сотрудников</td><td>1,5 млн ₽</td><td>3,6 млн ₽</td><td>4,1-5,9 млн ₽</td><td><b>13-19 месяцев</b></td></tr><tr><td>100 сотрудников</td><td>3 млн ₽</td><td>7,3 млн ₽</td><td>4,1-5,9 млн ₽</td><td><b>6-8 месяцев</b></td></tr><tr><td>300 сотрудников</td><td>9 млн ₽</td><td>21,8 млн ₽</td><td>5,9-8,6 млн ₽</td><td><b>2-3 месяца</b></td></tr><tr><td>750 сотрудников</td><td>22,5 млн ₽</td><td>54,6 млн ₽</td><td>10,4-16,1 млн ₽</td><td><b>2-3 месяца</b></td></tr></tbody>
+    </table></div>
+    <p class="note-s">Пример для задач «чат, база знаний, документы». Окупаемость сценарная: подставьте свои цифры в калькуляторе. Если считать только подписки, небольшим командам сервер окупается дольше, основной эффект даёт время сотрудников и безопасность данных.</p>
+    <a href="/raschet" class="btn btn-primary btn-lg" style="margin-top:24px">Посчитать свою окупаемость</a>
+  </div>
+</section>
+
+<section class="section section--soft" id="vozmozhnosti">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Что умеет</span>
+      <h2>Один ИИ для всей компании</h2>
+      <p>Начинают обычно с чата и базы знаний, потом подключают продажи, звонки и документы на том же сервере.</p>
+    </div>
+    <div class="grid g3 abil">
+      <div class="card"><h3>Чат для сотрудников</h3><p>Письма, тексты, идеи, анализ информации. Как ChatGPT, только внутри компании</p></div>
+      <div class="card"><h3>База знаний</h3><p>Отвечает по регламентам, инструкциям и договорам со ссылкой на источник</p></div>
+      <div class="card"><h3>Документы и КП</h3><p>Готовит договоры и коммерческие предложения по вашим шаблонам, проверяет риски</p></div>
+      <div class="card"><h3>Продажи и CRM</h3><p>Разбирает заявки, готовит ответы, заполняет карточки в Bitrix24 или amoCRM</p></div>
+      <div class="card"><h3>Звонки</h3><p>Расшифровывает разговоры, проверяет скрипт, достаёт договорённости</p></div>
+      <div class="card"><h3>Бот для клиентов</h3><p>Отвечает на сайте и в мессенджерах круглосуточно, передаёт заявки менеджерам</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ HOW WE DEPLOY ============ -->
-<section class="section" id="kak">
+<section class="section" id="pakety">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Готовые пакеты</span>
+      <h2>Выберите пакет под размер компании</h2>
+      <p>Цены под ключ, вместе с сервером, установкой и подключением задач. Любой пакет можно донастроить в калькуляторе.</p>
+    </div>
+    <div class="pps"><a class="pp" href="/raschet?pack=start"><b>Старт</b><small>Команда до 30 человек, пилот</small><span class="pr">от 1,8 млн ₽</span><ul><li>AI-чат и база знаний</li><li>Рабочая станция</li><li>Установка под ключ</li></ul><span class="go">Посчитать →</span></a><a class="pp" href="/raschet?pack=biz"><span class="tag">Чаще выбирают</span><b>Бизнес</b><small>Компания 30-100 человек</small><span class="pr">от 6,3 млн ₽</span><ul><li>Чат, база знаний, документы</li><li>Ассистент в CRM</li><li>Круглосуточно</li></ul><span class="go">Посчитать →</span></a><a class="pp" href="/raschet?pack=corp"><b>Корпорация</b><small>100-300 человек, клиентский сервис</small><span class="pr">от 11,2 млн ₽</span><ul><li>Всё из «Бизнес»</li><li>Бот для клиентов</li><li>Интеграция с 1С</li></ul><span class="go">Посчитать →</span></a><a class="pp" href="/raschet?pack=ent"><b>Enterprise</b><small>300+ человек, без простоя</small><span class="pr">от 30 млн ₽</span><ul><li>Всё из «Корпорации»</li><li>Аналитика данных</li><li>Запасной сервер 24×7</li></ul><span class="go">Посчитать →</span></a></div>
+  </div>
+</section>
+
+<section class="section section--soft" id="kak">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Как внедряем</span>
-      <h2>От расчёта до промышленной эксплуатации</h2>
-      <p>Мы фиксируем метрики до начала проекта: качество ответа, скорость, долю автоматизации, стоимость операции и правила передачи человеку. Покупка инфраструктуры начинается после проверки этих параметров.</p>
+      <h2>От расчёта до работающей системы</h2>
+      <p>Сначала проверяем, что задача работает на ваших данных, и только потом закупаем оборудование.</p>
     </div>
     <div class="timeline">
-      <div class="tl-step"><div class="dot">1</div><h4>Интервью и расчёт</h4><ul><li>Процесс и данные</li><li>Нагрузка и SLA</li><li>Ограничения</li><li>Варианты размещения</li></ul></div>
-      <div class="tl-step"><div class="dot">2</div><h4>Benchmark</h4><ul><li>Тест моделей</li><li>Качество и скорость</li><li>Память и стоимость</li><li>Критерии приёмки</li></ul></div>
-      <div class="tl-step"><div class="dot">3</div><h4>Пилот</h4><ul><li>Ограниченный контур</li><li>Интеграция</li><li>Реальные пользователи</li><li>Измерение KPI</li></ul></div>
-      <div class="tl-step"><div class="dot">4</div><h4>Production</h4><ul><li>Инфраструктура</li><li>Безопасность и резерв</li><li>Мониторинг</li><li>Обучение</li></ul></div>
-      <div class="tl-step"><div class="dot">5</div><h4>Сопровождение</h4><ul><li>Обновления</li><li>Новые процессы</li><li>Отчётность</li><li>Оптимизация</li></ul></div>
+      <div class="tl-step"><div class="dot">1</div><h4>Расчёт</h4><ul><li>Задачи и объёмы</li><li>Требования к данным</li><li>Вилка стоимости</li></ul></div>
+      <div class="tl-step"><div class="dot">2</div><h4>Проверка</h4><ul><li>Тест моделей на ваших задачах</li><li>Скорость и качество</li><li>Точная смета</li></ul></div>
+      <div class="tl-step"><div class="dot">3</div><h4>Пилот</h4><ul><li>Первые пользователи</li><li>Подключение CRM и 1С</li><li>Замер эффекта</li></ul></div>
+      <div class="tl-step"><div class="dot">4</div><h4>Запуск</h4><ul><li>Сервер и установка</li><li>Права и журналы</li><li>Обучение</li></ul></div>
+      <div class="tl-step"><div class="dot">5</div><h4>Сопровождение</h4><ul><li>Обновления моделей</li><li>Мониторинг</li><li>Новые задачи</li></ul></div>
     </div>
   </div>
 </section>
 
-<!-- ============ ECONOMICS ============ -->
-<section class="section section--soft">
+<section class="section" id="faq">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Экономика</span>
-      <h2>Считаем не цену сервера, а стоимость владения</h2>
-      <p>После запуска собственного контура расходы становятся прогнозируемыми. Для каждого проекта мы сравниваем покупку, выделенную аренду и гибрид на горизонте 36 месяцев.</p>
-      <a href="#calc" class="sec-cta">Рассчитать для своей компании →</a>
-    </div>
-    <div class="econ-grid">
-      <div class="econ-list">
-        <div class="econ-item"><span class="d"></span> Инфраструктура</div>
-        <div class="econ-item"><span class="d"></span> Поставка и гарантия</div>
-        <div class="econ-item"><span class="d"></span> Внедрение</div>
-        <div class="econ-item"><span class="d"></span> Интеграции</div>
-        <div class="econ-item"><span class="d"></span> Электроэнергия и размещение</div>
-        <div class="econ-item"><span class="d"></span> Сопровождение</div>
-        <div class="econ-item"><span class="d"></span> Резерв мощности</div>
-        <div class="econ-item"><span class="d"></span> Обновление моделей</div>
-        <div class="econ-item"><span class="d"></span> Стоимость простоя</div>
-        <div class="econ-item"><span class="d"></span> Рост нагрузки</div>
-      </div>
-      <div class="tco-card">
-        <h3>Сравнить на 36 месяцев</h3>
-        <div class="tco-opt"><span>Внешний API</span><span class="badge">оплата за токены</span></div>
-        <div class="tco-opt"><span>Выделенная аренда</span><span class="badge">OPEX</span></div>
-        <div class="tco-opt"><span>Собственный контур</span><span class="badge">CAPEX + TCO</span></div>
-        <p style="color:#A9BBDA;font-size:13px;margin-top:16px">Финальный TCO выполняется после консультации: цена внешнего API зависит от модели и структуры токенов.</p>
-      </div>
-    </div>
+    <div class="section-head center"><span class="eyebrow">Вопросы</span><h2>Частые вопросы</h2></div>
+    <div class="faq"><div class="faq-item"><div class="faq-q">Чем свой ИИ отличается от ChatGPT?<span class="fx">+</span></div><div class="faq-a"><p>Для сотрудника почти ничем: такой же чат, который пишет тексты, отвечает на вопросы и работает с документами. Разница в том, где он живёт. Свой ИИ стоит на вашем сервере или в выделенном ЦОД в России, данные не уходят во внешний сервис, а платить за каждый запрос и подписку на человека не нужно.</p></div></div><div class="faq-item"><div class="faq-q">Это поможет соблюдать 152-ФЗ?<span class="fx">+</span></div><div class="faq-a"><p>Локальный ИИ убирает главный риск: персональные данные клиентов и сотрудников не передаются в зарубежный сервис. Но соответствие закону обеспечивает вся система: права доступа, журналирование, регламенты и документы. Их мы помогаем выстроить вместе с вашим юристом.</p></div></div><div class="faq-item"><div class="faq-q">Как сотрудник может вынести данные, и что мешает это сделать?<span class="fx">+</span></div><div class="faq-a"><p>В публичном чате сотрудник сам решает, что туда вставить, и никто этого не видит. В своём ИИ доступ настраивается по ролям, каждый запрос и ответ записывается в журнал, выгрузки ограничиваются правилами, а при увольнении доступ закрывается вместе с корпоративной учётной записью.</p></div></div><div class="faq-item"><div class="faq-q">Сколько стоит и когда окупится?<span class="fx">+</span></div><div class="faq-a"><p>Установка и настройка системы стоит 300 000 ₽, решение под ключ вместе с сервером начинается от 1,8 млн ₽. Окупаемость зависит от числа сотрудников: за счёт подписок и сэкономленного времени компания на 100 человек окупает систему примерно за 6-8 месяцев. Точно посчитать под себя можно в калькуляторе.</p></div></div><div class="faq-item"><div class="faq-q">А если модели устареют?<span class="fx">+</span></div><div class="faq-a"><p>Бизнес-логика, данные, права и интеграции отделены от конкретной модели. Когда выходит модель лучше, мы проверяем её на ваших задачах и заменяем без перестройки системы.</p></div></div><div class="faq-item"><div class="faq-q">Можно без покупки сервера?<span class="fx">+</span></div><div class="faq-a"><p>Да. Если сервер уже есть, проверим совместимость и установим систему. Для пилота можно арендовать сервер помесячно в российском дата-центре.</p></div></div><div class="faq-item"><div class="faq-q">Кто будет это обслуживать?<span class="fx">+</span></div><div class="faq-a"><p>Мы. Сопровождение включает мониторинг, обновления, резервное копирование и помощь пользователям. Если есть свой администратор, обучим его и останемся на второй линии.</p></div></div></div>
   </div>
 </section>
 
-<!-- ============ WHY MAKEBIZ ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Почему MakeBiz</span>
-      <h2>Один ответственный за процесс, AI-платформу и инфраструктуру</h2>
-      <p>Опыт внедрения CRM, аналитики и AI для среднего и крупного бизнеса. Собственная команда разработки, проектирование бизнес-процессов и поддержка после запуска.</p>
-    </div>
-    <div class="why-grid">
-      <div class="stat"><div class="n">150+</div><div class="l">проектов внедрения*</div></div>
-      <div class="stat"><div class="n">Bitrix24</div><div class="l">1С, телефония, СЭД</div></div>
-      <div class="stat"><div class="n">On-Prem</div><div class="l">от пилота до сопровождения</div></div>
-      <div class="stat"><div class="n">24×7</div><div class="l">Managed-контур и SLA</div></div>
-    </div>
-    <p style="font-size:12.5px;color:var(--muted-2);margin-top:14px">* Демо-показатели для макета. На боевом сайте выводятся только подтверждённые после внутренней проверки данные.</p>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="section section--soft" id="faq">
-  <div class="wrap">
-    <div class="section-head" style="text-align:center;margin:0 auto 40px">
-      <span class="eyebrow">Вопросы</span>
-      <h2>Частые вопросы</h2>
-    </div>
-    <div class="faq" id="faqList"><!-- JS --></div>
-  </div>
-</section>
-
-<!-- ============ FINAL CTA ============ -->
-<section class="section" id="final">
+<section class="section" id="final" data-nofloat>
   <div class="wrap">
     <div class="final-cta">
       <span class="eyebrow">Следующий шаг</span>
-      <h2>Узнайте стоимость для своей компании за 30 секунд</h2>
-      <p>Выберите размер компании и задачи, калькулятор сразу покажет вилку «от и до». Точную конфигурацию подтвердим на технической встрече.</p>
-      <div class="hero-cta">
-        <a href="#calc" class="btn btn-primary btn-lg">Рассчитать стоимость</a>
-        <a href="#calc" class="btn btn-ghost btn-lg" data-open-packs>Готовые пакеты</a>
-      </div>
+      <h2>Узнайте стоимость и окупаемость для своей компании</h2>
+      <p>30 секунд в калькуляторе, без регистрации. Точную конфигурацию подтвердим на технической встрече.</p>
+      <div class="hero-cta"><a href="/raschet" class="btn btn-primary btn-lg">Рассчитать стоимость</a><a href="/raschet?packs" class="btn btn-ghost btn-lg">Готовые пакеты</a></div>
     </div>
   </div>
 </section>
-
-<a href="#calc" class="float-cta" id="floatCta">Рассчитать стоимость</a>
-
-<!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a href="#top" class="logo"><span class="mark">M</span><span>MakeBiz<small>Локальный ИИ</small></span></a>
-        <p style="margin-top:16px;max-width:320px">Независимый интегратор локального корпоративного ИИ: рассчитываем систему от бизнес-процесса и нагрузки, проверяем на данных, поставляем инфраструктуру и отвечаем за эксплуатацию.</p>
+        <a href="/" class="logo"><span class="mark">M</span><span>MakeBiz<small>Локальный ИИ</small></span></a>
+        <p style="margin-top:16px;max-width:340px">Внедряем корпоративный ИИ на серверах компании: подбираем оборудование, устанавливаем модели, подключаем CRM и 1С, сопровождаем.</p>
       </div>
       <div>
-        <h5>Направление</h5>
-        <a href="#vozmozhnosti">Возможности</a>
-        <a href="#calc">Калькулятор нагрузки</a>
-        <a href="#security">Безопасность</a>
-        <a href="#kak">Как внедряем</a>
-        <a href="#faq">Вопросы</a>
+        <h5>Разделы</h5>
+        <a href="/raschet">Расчёт стоимости</a>
+        <a href="/raschet?packs">Готовые пакеты</a>
+        <a href="/keysy">Кейсы</a>
+        <a href="/novosti">Новости</a>
+        <a href="/#faq">Вопросы</a>
       </div>
       <div>
         <h5>Контакты</h5>
         <a href="tel:+74950000000">+7 495 000-00-00</a>
         <a href="mailto:ai@makebiz.ru">ai@makebiz.ru</a>
-        <a href="#">Telegram</a>
-        <a href="#">Реквизиты</a>
+        <a href="/raschet#leadForm">Оставить заявку</a>
       </div>
     </div>
     <div class="foot-legal">
-      ООО «МейкБиз» (демо-реквизиты для макета) · ИНН 0000000000 · ОГРН 0000000000000 · г. Москва
-      <div class="disc">
-        Значения бюджета и сроки в калькуляторе являются предварительными инженерными диапазонами для квалификации задачи и не являются офертой. Локальное размещение помогает контролировать обработку данных, но само по себе не является юридической гарантией соответствия требованиям. Финальная архитектура определяется после интервью, анализа данных и нагрузочного тестирования.
-      </div>
-      <div style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap">
-        <a href="#" style="display:inline">Политика обработки персональных данных</a>
-        <a href="#" style="display:inline">Согласие на обработку</a>
-        <a href="#" style="display:inline">Политика cookie</a>
-        <a href="#" style="display:inline">Условия использования калькулятора</a>
-      </div>
+      ООО «МейкБиз» (демо-реквизиты) · ИНН 0000000000 · ОГРН 0000000000000 · Москва
+      <div class="disc">Стоимость и окупаемость на сайте предварительные и не являются офертой. Локальное размещение помогает контролировать обработку данных, но само по себе не гарантирует соответствие требованиям закона: оно обеспечивается архитектурой, регламентами и документами. Информация о законодательстве носит справочный характер и не является юридической консультацией.</div>
+      <div class="foot-links"><a href="#">Политика обработки персональных данных</a><a href="#">Согласие на обработку</a><a href="#">Политика cookie</a></div>
     </div>
   </div>
 </footer>
-
-<script>
-'use strict';
-/* =====================================================================
-   MakeBiz · Калькулятор локального ИИ v3 (простой: индивидуально + пакеты)
-   Все цены в CFG (аналог админки). Внутренний технический режим: ?expert=1
-   ===================================================================== */
-const CFG={
-  version:'2026.09-v3', priceDate:'сентябрь 2026',
-  bitrixWebhook:'', // https://portal.bitrix24.ru/rest/1/xxxx/  (пусто = демо-режим)
-  eq:{A:[1.2,1.7],B:[2.2,3.2],C:[3.2,4.8],D:[5,7.5],E:[9.5,15],F:[13,20]}, // оборудование, млн ₽
-  asm:{A:.1,B:.15,C:.15,D:.15,E:.15,F:.25},                               // сборка и тест, млн ₽
-  speech:{S1:[2.2,3.2],S2:[3.4,4.8],S4:[5.5,8]},
-  vram:{A:'1×32 ГБ',B:'1×32 ГБ ECC',C:'1×48 ГБ ECC',D:'1×96 ГБ ECC',E:'2×96 ГБ',F:'4×96 ГБ',S1:'1×32 ГБ',S2:'2×32 ГБ',S4:'4×32 ГБ'},
-  names:{A:'Рабочая станция для небольшой команды',B:'Бизнес-сервер начального уровня',C:'Универсальный бизнес-сервер',D:'Корпоративный AI-сервер',E:'Корпоративный multi-GPU сервер',F:'Высоконагруженный AI-контур'},
-  install:.3,                  // базовая установка и настройка, млн ₽
-  integr:{crm:.2,onec:.25,tel:.1,mail:.1},
-  ha:{infra:[1.5,4],svc:.25},
-  rent:[.035,.05],             // аренда в месяц, доля от стоимости оборудования
-  support:{self:50000,help:120000,sla:250000},
-  svcSpread:1.3                // верхняя граница услуг = нижняя × 1,3
-};
-const TASKS={
-  chat:{t:'AI-чат для сотрудников',d:'Письма, тексты, идеи, ответы на рабочие вопросы',svc:0,ic:'chat'},
-  kb:{t:'База знаний',d:'Ответы по регламентам и документам компании',svc:.2,ic:'book'},
-  docs:{t:'Документы, договоры, КП',d:'Подготовка и проверка по шаблонам',svc:.2,ic:'doc'},
-  sales:{t:'Продажи и CRM',d:'Ассистент менеджеров, заполнение CRM',svc:.2,ic:'deal'},
-  bot:{t:'Бот для клиентов',d:'Сайт и мессенджеры, круглосуточно',svc:.15,ic:'bot'},
-  calls:{t:'Анализ звонков',d:'Расшифровка, резюме, контроль скрипта',svc:.25,ic:'phone'},
-  voice:{t:'Голосовой робот',d:'Сам звонит и отвечает клиентам',svc:.35,ic:'voice'},
-  media:{t:'Картинки и видео',d:'Креативы, редактирование фото, ролики',svc:.25,ic:'image'},
-  code:{t:'Помощь разработчикам',d:'Код, тесты, документация',svc:.15,ic:'code'},
-  data:{t:'Аналитика данных',d:'Вопросы к CRM, 1С и таблицам обычным языком',svc:.2,ic:'chart'}
-};
-const EMP=[5,10,20,30,50,75,100,150,200,300,500,750,1000,2000,5000];
-const OPT={
-  mode:[['work','Рабочее время','Для сотрудников в офисе'],['247','Круглосуточно','Перерыв на обслуживание допустим'],['nodown','Без остановок','Запасной сервер, простой недопустим']],
-  quality:[['std','Стандартное','Письма, ответы, простые документы'],['high','Высокое','Сложные документы, анализ, код'],['max','Максимальное','Самые мощные модели']],
-  growth:[['0','Без роста'],['.5','+50% за год'],['1','В 2 раза']],
-  calls:[['50','до 50 тыс. минут'],['250','50-250 тыс.'],['750','250-750 тыс.'],['1500','больше 750 тыс.']],
-  bot:[['100','до 100 тыс. сообщений'],['500','до 500 тыс.'],['1000','до 1 млн'],['5000','больше 1 млн']],
-  voice:[['10','до 10 линий'],['40','до 40'],['100','до 100'],['300','больше 100']],
-  media:[['low','Немного, до 5 тыс. в месяц'],['mid','Много, до 50 тыс.'],['high','Очень много или видео']],
-  integr:[['crm','Bitrix24 / amoCRM'],['onec','1С'],['tel','Телефония'],['mail','Почта']],
-  supply:[['turnkey','Подберите и поставьте','Оборудование под ключ'],['own','Уже есть сервер','Проверим и установим'],['rent','Аренда','Без покупки, помесячно']],
-  support:[['self','Справимся сами','Мониторинг по желанию'],['help','Нужна поддержка','Обновления и помощь'],['sla','24×7','Дежурство и SLA']]
-};
-const PACKS=[
-  {id:'start',n:'Старт',w:'Команда до 30 человек, пилот',s:{emp:3,tasks:['chat','kb'],mode:'work'},inc:['AI-чат и база знаний','Рабочая станция','Установка под ключ']},
-  {id:'biz',n:'Бизнес',w:'Компания 30-100 человек',s:{emp:6,tasks:['chat','kb','docs','sales'],mode:'247',integr:['crm']},inc:['Чат, база знаний, документы','Ассистент в CRM','Круглосуточно'],tag:'Чаще выбирают'},
-  {id:'corp',n:'Корпорация',w:'100-300 человек, клиентский сервис',s:{emp:9,tasks:['chat','kb','docs','sales','bot'],mode:'247',integr:['crm','onec']},inc:['Всё из «Бизнес»','Бот для клиентов','Интеграция с 1С']},
-  {id:'ent',n:'Enterprise',w:'300+ человек, без простоя',s:{emp:12,tasks:['chat','kb','docs','sales','bot','data'],mode:'nodown',quality:'high',integr:['crm','onec']},inc:['Всё из «Корпорации»','Аналитика данных','Запасной сервер 24×7']}
-];
-const ADDONS=['calls','voice','media','code','data','bot'];
-const DEF={emp:6,tasks:['chat'],mode:'work',quality:'std',growth:'.5',calls:'50',bot:'100',voice:'10',media:'low',integr:[],supply:'turnkey',support:'help'};
-let S={view:'custom',...JSON.parse(JSON.stringify(DEF))};
-let PK={i:1,add:[]};
-const EXPERT=/expert=1/.test(location.search+location.hash);
-
-/* ---------- иконки ---------- */
-const P='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
-const IC={
-  chat:P+'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12z"/></svg>',
-  book:P+'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6"/></svg>',
-  doc:P+'<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg>',
-  deal:P+'<path d="M3 7h18v12H3z"/><path d="M8 7V5h8v2M3 12h18"/></svg>',
-  bot:P+'<rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 13h.01M15 13h.01"/></svg>',
-  phone:P+'<path d="M5 3h4l2 5-3 2a11 11 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>',
-  voice:P+'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
-  image:P+'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 9"/></svg>',
-  code:P+'<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></svg>',
-  chart:P+'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15l3-3 2 2 5-5"/></svg>',
-  check:'<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-};
-
-/* ===================== ДВИЖОК ===================== */
-const LV=['B','C','D','E','F'];
-function calc(s){
-  const t=k=>s.tasks.includes(k);
-  const emp=EMP[s.emp]; const why=[]; let indiv=[];
-  let i=emp<=30?0:emp<=100?1:emp<=300?2:emp<=1000?3:4; why.push(emp+' сотрудников → уровень '+(i+1));
-  if((t('bot')||t('sales'))&&i<3){i++;why.push('Продажи или клиентский бот → +1 уровень');}
-  if(t('code')&&emp>100)i=Math.max(i,3);
-  if(t('bot')){const m=+s.bot;if(m>=1000){i=Math.max(i,3);why.push('Бот до 1 млн сообщений → минимум уровень 4');}if(m>1000){i=Math.max(i,4);indiv.push('больше 1 млн сообщений бота');}}
-  if(s.quality==='high'){i=Math.min(4,i+1);why.push('Высокое качество → +1 уровень');}
-  if(s.quality==='max'){i=Math.min(4,Math.max(i+2,3));indiv.push('максимальные модели');why.push('Максимальное качество → +2 уровня');}
-  if(s.growth==='1'&&i<4){i++;why.push('Рост в 2 раза → +1 уровень');}
-  let main=LV[i];
-  if(i===0&&s.mode==='work'&&!t('bot')&&!t('voice'))main='A';
-  const txt=['chat','kb','docs','sales','bot','code','data'].some(t);const nodes=txt?[{k:main,q:s.mode==='nodown'?2:1,l:'Основной сервер'}]:[];
-  const g=s.growth==='0'?1:s.growth==='.5'?1.5:2;
-  if(t('calls')){const m=+s.calls;const sp=m<=50?null:m<=250?'S1':m<=750?'S2':'S4';if(sp)nodes.push({k:sp,q:1,l:'Сервер для звонков',sp:1});else why.push('Звонки до 50 тыс. минут помещаются на основной сервер');if(+s.calls>=1500)indiv.push('больше 750 тыс. минут звонков');}
-  if(t('voice')){const n=+s.voice*1.5;const sp=n<=10?'S1':n<=40?'S2':'S4';nodes.push({k:sp,q:s.mode==='nodown'?2:1,l:'Голосовой сервер',sp:1});if(+s.voice>100)indiv.push('больше 100 голосовых линий');}
-  if(t('media')){let k=s.media==='low'?(emp<=100&&txt?null:'B'):s.media==='mid'?'D':'E';if(k)nodes.push({k,q:!txt&&s.mode==='nodown'?2:1,l:'Сервер для картинок и видео'});else why.push('Небольшой объём картинок идёт на основной сервер в очереди');if(s.media==='high')indiv.push('генерация видео');}
-  if(!nodes.length)nodes.push({k:main,q:s.mode==='nodown'?2:1,l:'Основной сервер'});
-  nodes.forEach(n=>{if(n.k==='A'&&(nodes.length>1||s.mode!=='work'))n.k='B';});
-  // деньги (млн ₽)
-  let eqLo=0,eqHi=0,asm=0;
-  nodes.forEach(n=>{const e=n.sp?CFG.speech[n.k]:CFG.eq[n.k];eqLo+=e[0]*n.q;eqHi+=e[1]*n.q;asm+=(n.sp?(n.k==='S4'?.25:.15):CFG.asm[n.k])*n.q;});
-  const inc=s.supply==='turnkey';
-  let svc=CFG.install+s.tasks.reduce((a,k)=>a+TASKS[k].svc,0)+s.integr.reduce((a,k)=>a+CFG.integr[k],0);
-  if(s.mode==='nodown')svc+=CFG.ha.svc;
-  const svcR=[svc,svc*CFG.svcSpread];
-  const haR=s.mode==='nodown'?CFG.ha.infra:[0,0];
-  const lo=(inc?eqLo+asm:0)+svcR[0]+haR[0], hi=(inc?eqHi+asm:0)+svcR[1]+haR[1];
-  const nq=nodes.reduce((a,n)=>a+n.q,0);
-  const title=nq>1?'AI-контур из '+nq+' серверов':(nodes[0].sp?'Речевой сервер':CFG.names[nodes[0].k]||CFG.names[main]);
-  return {lo,hi,eq:[eqLo+asm,eqHi+asm],inc,svc:svcR,ha:haR,nodes,title,indiv:[...new Set(indiv)],why,main,
-    rent:s.supply==='rent'?[eqLo*1e6*CFG.rent[0],eqHi*1e6*CFG.rent[1]]:null,support:CFG.support[s.support]};
-}
-
-/* ---------- формат ---------- */
-const fN=n=>Number(n).toLocaleString('ru-RU');
-const m1=x=>(Math.round(x*10)/10).toString().replace('.',',');
-const mm=x=>x<1?fN(Math.round(x*1000/10)*10)+' тыс.':m1(x)+' млн';
-const rng=(a,b)=>'от '+mm(a)+' до '+mm(b)+' ₽';
-const rub=x=>x>=1e6?m1(x/1e6)+' млн ₽':fN(Math.round(x/1000))+' тыс. ₽';
-
-/* ===================== ИНТЕРФЕЙС ===================== */
-const L=document.getElementById('c2Left'),R=document.getElementById('c2Right'),MB=document.getElementById('c2Bar');
-function chips(key,opts,multi,sub){
-  const cur=S[key];
-  return '<div class="chips'+(sub?' sub':'')+'">'+opts.map(o=>{const on=multi?cur.includes(o[0]):cur===o[0];return '<button type="button" class="chip'+(on?' on':'')+'" data-k="'+key+'" data-v="'+o[0]+'"'+(multi?' data-multi="1"':'')+'>'+(multi&&on?'✓ ':'')+o[1]+(o[2]?'<small>'+o[2]+'</small>':'')+'</button>';}).join('')+'</div>';
-}
-const row=(label,body,hint)=>'<div class="c2-row"><div class="c2-lab">'+label+(hint?'<span>'+hint+'</span>':'')+'</div>'+body+'</div>';
-function renderCustom(){
-  const e=EMP[S.emp];
-  let h=row('Сколько сотрудников будут пользоваться ИИ','<div class="emp"><b>'+(S.emp===EMP.length-1?'5 000+':fN(e))+'</b> человек</div><input type="range" min="0" max="'+(EMP.length-1)+'" value="'+S.emp+'" id="c2Emp" aria-label="Сотрудники"><div class="rng-l"><span>5</span><span>100</span><span>1 000</span><span>5 000+</span></div>');
-  h+=row('Что должен делать ИИ','<div class="tasks2">'+Object.entries(TASKS).map(([k,x])=>'<button type="button" class="t2'+(S.tasks.includes(k)?' on':'')+'" data-task="'+k+'"><span class="t2i">'+IC[x.ic]+'</span><span><b>'+x.t+'</b><small>'+x.d+'</small></span></button>').join('')+'</div>','можно несколько');
-  const sub=[];
-  if(S.tasks.includes('bot'))sub.push(row('Сколько сообщений от клиентов в месяц',chips('bot',OPT.bot)));
-  if(S.tasks.includes('calls'))sub.push(row('Сколько минут звонков в месяц',chips('calls',OPT.calls)));
-  if(S.tasks.includes('voice'))sub.push(row('Сколько разговоров робот ведёт одновременно',chips('voice',OPT.voice)));
-  if(S.tasks.includes('media'))sub.push(row('Сколько картинок и видео',chips('media',OPT.media)));
-  if(sub.length)h+='<div class="c2-sub">'+sub.join('')+'</div>';
-  h+='<div class="c2-sep">Требования</div>';
-  h+=row('Когда должна работать система',chips('mode',OPT.mode));
-  h+=row('Качество ответов',chips('quality',OPT.quality),'чем сложнее задачи, тем мощнее сервер');
-  h+=row('Рост нагрузки за год',chips('growth',OPT.growth));
-  h+=row('С чем связать',chips('integr',OPT.integr,true),'по желанию');
-  h+='<div class="c2-sep">Оборудование и поддержка</div>';
-  h+=row('Сервер',chips('supply',OPT.supply));
-  h+=row('Сопровождение',chips('support',OPT.support));
-  L.innerHTML=h;
-  L.querySelector('#c2Emp').oninput=ev=>{S.emp=+ev.target.value;L.querySelector('.emp b').textContent=S.emp===EMP.length-1?'5 000+':fN(EMP[S.emp]);renderRight();};
-}
-function renderPacks(){
-  const P0=PACKS[PK.i];const st=packState();
-  let h='<div class="packs2">'+PACKS.map((p,i)=>{const r=calc({...DEF,...p.s,integr:p.s.integr||[]});return '<button type="button" class="pk2'+(i===PK.i?' on':'')+'" data-pk="'+i+'">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<b>'+p.n+'</b><small>'+p.w+'</small><span class="pr">от '+mm(r.lo)+' ₽</span><ul>'+p.inc.map(x=>'<li>'+x+'</li>').join('')+'</ul></button>';}).join('')+'</div>';
-  const base=calc(st);
-  const adds=ADDONS.filter(k=>!P0.s.tasks.includes(k));
-  if(adds.length)h+='<div class="c2-lab" style="margin-top:22px">Добавить к пакету</div><div class="addons2">'+adds.map(k=>{const on=PK.add.includes(k);const w=on?st.tasks:[...st.tasks,k],wo=st.tasks.filter(x=>x!==k);const d=calc({...st,tasks:w}).lo-calc({...st,tasks:wo}).lo;return '<button type="button" class="ad2'+(on?' on':'')+'" data-add="'+k+'"><span>'+(on?'✓ ':'+ ')+TASKS[k].t+'</span><i>+'+mm(Math.max(d,0.05))+' ₽</i></button>';}).join('')+'</div>';
-  h+='<button type="button" class="btn btn-ghost c2-tune" data-tune="1">Настроить этот пакет под себя →</button>';
-  L.innerHTML=h;
-}
-function packState(){const p=PACKS[PK.i];return {...JSON.parse(JSON.stringify(DEF)),...JSON.parse(JSON.stringify(p.s)),integr:[...(p.s.integr||[])],tasks:[...new Set([...p.s.tasks,...PK.add])]};}
-function cur(){return S.view==='packs'?packState():S;}
-function renderRight(){
-  const s=cur(),r=calc(s);
-  const sup=OPT.support.find(o=>o[0]===s.support)[1];
-  let h='<div class="c2-res"><div class="l">'+(S.view==='packs'?'Пакет «'+PACKS[PK.i].n+'»':'Ориентировочно под ключ')+'</div>';
-  h+='<div class="p">'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</div><div class="c">'+r.title+'</div>';
-  if(r.indiv.length)h+='<div class="indiv">Нужен индивидуальный расчёт: '+r.indiv.join(', ')+'</div>';
-  h+='<table class="c2-t">';
-  h+='<tr><td>Оборудование, сборка, тест</td><td>'+(r.inc?rng(r.eq[0],r.eq[1]).replace('от ','').replace(' до ','-'):s.supply==='own'?'ваше':'в аренде')+'</td></tr>';
-  h+='<tr><td>Установка и подключение задач</td><td>'+rng(r.svc[0],r.svc[1]).replace('от ','').replace(' до ','-')+'</td></tr>';
-  if(r.ha[1])h+='<tr><td>Резервирование сети и питания</td><td>'+rng(r.ha[0],r.ha[1]).replace('от ','').replace(' до ','-')+'</td></tr>';
-  if(r.rent)h+='<tr><td>Аренда сервера в месяц</td><td>'+rub(r.rent[0])+'-'+rub(r.rent[1])+'</td></tr>';
-  h+='<tr class="mo"><td>'+sup+', в месяц</td><td>'+rub(r.support)+'</td></tr></table>';
-  h+='<div class="c2-nodes">'+r.nodes.map(n=>'<span>'+(n.q>1?n.q+'× ':'')+n.l+(EXPERT?' · '+CFG.vram[n.k]:'')+'</span>').join('')+'<span>Установка 300 000 ₽</span></div>';
-  h+='<button type="button" class="btn btn-primary btn-block" data-lead="1">Получить точный расчёт</button>';
-  h+='<div class="fine">Предварительная вилка на '+CFG.priceDate+'. Точную конфигурацию подтвердим на технической встрече. Доставка и подготовка площадки считаются отдельно</div>';
-  if(EXPERT)h+='<pre class="xp">'+r.why.join('\n')+'\n'+r.nodes.map(n=>n.q+'× '+n.k+' '+CFG.vram[n.k]).join('\n')+'</pre>';
-  R.innerHTML=h+'</div>';
-  if(MB)MB.innerHTML='<div><small>Ориентировочно</small><b>'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</b></div><button type="button" class="btn btn-primary" data-goto="1">Подробнее</button>';
-}
-function render(){
-  document.querySelectorAll('#calcMode button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.view));
-  S.view==='packs'?renderPacks():renderCustom();renderRight();renderHero();
-  try{localStorage.setItem('mb_localai_v3',JSON.stringify({S,PK}));}catch(e){}
-}
-document.getElementById('calcMode').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;S.view=b.dataset.mode;render();});
-L.addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.task){const k=b.dataset.task;S.tasks=S.tasks.includes(k)?(S.tasks.length>1?S.tasks.filter(x=>x!==k):S.tasks):[...S.tasks,k];return render();}
-  if(b.dataset.k){const k=b.dataset.k,v=b.dataset.v;if(b.dataset.multi)S[k]=S[k].includes(v)?S[k].filter(x=>x!==v):[...S[k],v];else S[k]=v;return render();}
-  if(b.dataset.pk){PK={i:+b.dataset.pk,add:[]};return render();}
-  if(b.dataset.add){const k=b.dataset.add;PK.add=PK.add.includes(k)?PK.add.filter(x=>x!==k):[...PK.add,k];return render();}
-  if(b.dataset.tune){S={view:'custom',...packState()};return render();}
-});
-function goLead(){const f=document.getElementById('leadForm');f.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{const n=document.getElementById('lfName');n&&n.focus({preventScroll:true});},500);}
-R.addEventListener('click',e=>{if(e.target.closest('[data-lead]'))goLead();});
-if(MB){MB.addEventListener('click',e=>{if(e.target.closest('[data-goto]'))R.scrollIntoView({behavior:'smooth',block:'start'});});
-  const calcEl=document.getElementById('calc');
-  if('IntersectionObserver' in window)new IntersectionObserver(en=>{MB.classList.toggle('show',en[0].isIntersecting&&innerWidth<=900);},{threshold:.05}).observe(calcEl);}
-
-/* ---------- заявка → Bitrix24 ---------- */
-function utm(){const p=new URLSearchParams(location.search);const o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(p.get(k))o[k.toUpperCase()]=p.get(k);});return o;}
-async function submitLead(){
-  const g=id=>((document.getElementById(id)||{}).value||'').trim();
-  const err=document.getElementById('lfErr');err.textContent='';
-  const name=g('lfName'),phone=g('lfPhone'),company=g('lfCompany'),email=g('lfEmail');
-  if(!name||!(phone||email)){err.textContent='Укажите имя и телефон или email';return;}
-  if(!document.getElementById('lfConsent').checked){err.textContent='Нужно согласие на обработку данных';return;}
-  const s=cur(),r=calc(s);
-  const opt=(k,v)=>((OPT[k]||[]).find(o=>o[0]===v)||[,v])[1];
-  const lines=[
-    'Режим: '+(S.view==='packs'?'пакет «'+PACKS[PK.i].n+'»':'индивидуально'),
-    'Сотрудников: '+EMP[s.emp],'Задачи: '+s.tasks.map(k=>TASKS[k].t).join('; '),
-    'Работа: '+opt('mode',s.mode)+', качество: '+opt('quality',s.quality)+', рост: '+opt('growth',s.growth),
-    s.tasks.includes('bot')?'Бот: '+opt('bot',s.bot):'',s.tasks.includes('calls')?'Звонки: '+opt('calls',s.calls):'',s.tasks.includes('voice')?'Голос: '+opt('voice',s.voice):'',s.tasks.includes('media')?'Медиа: '+opt('media',s.media):'',
-    'Интеграции: '+(s.integr.map(k=>opt('integr',k)).join(', ')||'нет'),'Сервер: '+opt('supply',s.supply)+', сопровождение: '+opt('support',s.support),
-    'Вилка: '+rng(r.lo,r.hi)+(r.indiv.length?' (ИНДИВИДУАЛЬНО: '+r.indiv.join(', ')+')':''),
-    'Состав: '+r.nodes.map(n=>n.q+'× '+n.k+' '+CFG.vram[n.k]).join(', '),'Версия: '+CFG.version
-  ].filter(Boolean).join('\n');
-  const fields={TITLE:'Калькулятор локального ИИ: '+(company||name),NAME:name,COMPANY_TITLE:company,SOURCE_ID:'WEB',SOURCE_DESCRIPTION:'Калькулятор локального ИИ',COMMENTS:lines,OPPORTUNITY:Math.round(r.lo*1e6),CURRENCY_ID:'RUB',PHONE:phone?[{VALUE:phone,VALUE_TYPE:'WORK'}]:[],EMAIL:email?[{VALUE:email,VALUE_TYPE:'WORK'}]:[],...utm()};
-  const btn=document.getElementById('lfSubmit');btn.disabled=true;btn.textContent='Отправляем...';
-  try{
-    if(CFG.bitrixWebhook){const res=await fetch(CFG.bitrixWebhook.replace(/\/?$/,'/')+'crm.lead.add.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields})});if(!res.ok)throw 0;}
-    else console.log('[MakeBiz] Заявка (демо, вебхук не задан):',fields);
-    document.getElementById('leadForm').innerHTML='<div class="form-ok"><div class="ic">'+IC.check+'</div><h3>Заявка принята</h3><p>Инженер проверит расчёт и свяжется с вами, чтобы назначить техническую встречу.</p></div>';
-  }catch(e){btn.disabled=false;btn.textContent='Получить точный расчёт';err.textContent='Не получилось отправить, попробуйте ещё раз или позвоните нам';}
-}
-document.getElementById('lfSubmit').onclick=submitLead;
-
-/* ===================== СТАТИЧЕСКИЕ БЛОКИ ===================== */
-const CATS=[
-  {ic:'chat',t:'Помогать сотрудникам',d:'AI-чат, база знаний, документы и КП',tasks:['chat','kb','docs']},
-  {ic:'deal',t:'Продавать и общаться с клиентами',d:'Ассистент в CRM и клиентский бот',tasks:['sales','bot']},
-  {ic:'phone',t:'Анализировать звонки',d:'Расшифровка, аналитика, голосовой робот',tasks:['calls']},
-  {ic:'code',t:'Писать код',d:'Помощник разработчиков без отправки кода вовне',tasks:['code']},
-  {ic:'image',t:'Создавать изображения и видео',d:'Креативы, редактирование фото, ролики',tasks:['media']},
-  {ic:'chart',t:'Анализировать данные',d:'Вопросы к CRM, 1С и BI обычным языком',tasks:['data']}
-];
-function renderCatGrid(){
-  const grid=document.getElementById('catGrid');if(!grid)return;
-  grid.innerHTML=CATS.map((c,i)=>'<a class="cat" href="#calc" data-c="'+i+'"><span class="ci">'+IC[c.ic]+'</span><h3>'+c.t+'</h3><p>'+c.d+'</p><span class="go">Посчитать в калькуляторе →</span></a>').join('');
-  grid.querySelectorAll('.cat').forEach(el=>el.addEventListener('click',()=>{S.view='custom';CATS[+el.dataset.c].tasks.forEach(t=>{if(!S.tasks.includes(t))S.tasks.push(t);});render();}));
-}
-const FAQ=[
-  ['Я не разбираюсь в видеокартах. Как понять, что нам нужно?','Выберите в калькуляторе, чем занимаются сотрудники и сколько их. Калькулятор сразу покажет вилку цены и из каких серверов состоит решение. Модели и оборудование подберёт инженер на технической встрече.'],
-  ['Мы правда перестанем платить за токены?','Локально работающая модель не требует оплаты внешнего API за каждый запрос. Остаются понятные расходы: оборудование или аренда, электроэнергия, сопровождение и обновления.'],
-  ['Сколько стоит установка?','Базовая установка и настройка системы стоит 300 000 ₽: ОС, драйверы, среда моделей, основная модель, API, веб-интерфейс, мониторинг, роли доступа, первичный benchmark, документация и обучение администратора. Сборка сервера и подключение CRM, 1С, телефонии считаются отдельно, калькулятор уже учитывает это в вилке.'],
-  ['Почему вилка, а не точная цена?','Цена оборудования зависит от курса, наличия, гарантии и НДС, а мощность подтверждается тестом на ваших задачах. Поэтому до технической встречи показываем честный диапазон, а точную сумму фиксируем в коммерческом предложении.'],
-  ['Можно поставить на наше оборудование или взять в аренду?','Да. Если сервер уже есть, проверим совместимость и установим систему. Для пилота или если площадка не готова можно арендовать сервер помесячно.'],
-  ['А если появится модель лучше?','Бизнес-логика, данные, права и интеграции отделены от конкретной модели. Новую модель проверяем на ваших задачах и заменяем без перестройки системы.'],
-  ['Это законно и безопасно?','Локальная инфраструктура позволяет обрабатывать данные внутри контролируемого контура. Соответствие требованиям обеспечивается всей архитектурой: права доступа, журналирование, изоляция, регламенты.']
-];
-function renderFAQ(){
-  const list=document.getElementById('faqList');
-  list.innerHTML=FAQ.map(f=>'<div class="faq-item"><div class="faq-q">'+f[0]+'<span class="fx">+</span></div><div class="faq-a"><p>'+f[1]+'</p></div></div>').join('');
-  list.querySelectorAll('.faq-item').forEach(it=>{it.querySelector('.faq-q').onclick=()=>it.classList.toggle('open');});
-}
-document.getElementById('burger').onclick=()=>document.getElementById('mobileMenu').classList.toggle('open');
-document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>document.getElementById('mobileMenu').classList.remove('open'));
-
-
-/* ---------- мини-калькулятор в первом экране ---------- */
-const HC_EMP=[[3,'до 30'],[6,'30-100'],[9,'100-300'],[12,'300+']];
-const HC_T=[['chat','Сотрудникам'],['docs','Документы'],['sales','Продажи и CRM'],['bot','Бот для клиентов'],['calls','Звонки'],['media','Картинки и видео']];
-function renderHero(){
-  const el=document.getElementById('heroCalc');if(!el)return;
-  const r=calc(S);const near=HC_EMP.reduce((b,x)=>Math.abs(x[0]-S.emp)<Math.abs(b[0]-S.emp)?x:b);
-  el.innerHTML='<div class="hc-top"><b>Расчёт в 2 клика</b><i>цена обновляется сразу</i></div>'+
-   '<div class="hc-q">1. Сколько сотрудников</div><div class="hc-o">'+HC_EMP.map(x=>'<button type="button" data-he="'+x[0]+'" class="'+(x===near?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
-   '<div class="hc-q">2. Для чего нужен ИИ</div><div class="hc-o t">'+HC_T.map(x=>'<button type="button" data-ht="'+x[0]+'" class="'+(S.tasks.includes(x[0])?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
-   '<div class="hc-res"><small>Под ключ, вместе с оборудованием</small><b>'+(r.indiv.length?'от '+mm(r.lo)+' ₽':rng(r.lo,r.hi))+'</b><span>'+r.title+'</span></div>'+
-   '<a href="#calc" class="btn btn-primary btn-lg">Уточнить расчёт →</a><div class="hc-fine">Предварительная вилка. Без регистрации и звонков</div>';
-}
-document.getElementById('heroCalc').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.he){S.emp=+b.dataset.he;}
-  if(b.dataset.ht){const k=b.dataset.ht;S.tasks=S.tasks.includes(k)?(S.tasks.length>1?S.tasks.filter(x=>x!==k):S.tasks):[...S.tasks,k];}
-  S.view='custom';render();});
-document.addEventListener('click',e=>{if(e.target.closest('[data-open-packs]')){S.view='packs';render();document.getElementById('mobileMenu').classList.remove('open');}});
-(function(){const fc=document.getElementById('floatCta');if(!fc||!('IntersectionObserver' in window))return;const vis=new Set();
-  const io=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?vis.add(x.target.id):vis.delete(x.target.id));fc.classList.toggle('show',vis.size===0);},{threshold:.02});
-  ['top','calc','final'].forEach(id=>{const el=document.getElementById(id);el&&io.observe(el);});})();
-try{const sv=JSON.parse(localStorage.getItem('mb_localai_v3')||'null');if(sv&&sv.S&&Array.isArray(sv.S.tasks)){S={...S,...sv.S};PK=sv.PK||PK;}}catch(e){}
-renderCatGrid();renderFAQ();render();
-
-</script>
+<a href="/raschet" class="float-cta" id="floatCta">Рассчитать стоимость</a>
+<script src="/assets/engine.js"></script><script src="/assets/site.js"></script>
 </body>
 </html>
