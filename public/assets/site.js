@@ -1,3 +1,7 @@
+/* ===== метки рекламы: запоминаем первый заход, чтобы заявка с любой страницы несла utm ===== */
+(function(){try{const p=new URLSearchParams(location.search);const k=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  if(k.some(x=>p.get(x))){const o={};k.forEach(x=>{if(p.get(x))o[x]=p.get(x);});o.landing=location.pathname;sessionStorage.setItem('mb_utm',JSON.stringify(o));}}catch(e){}})();
+function mbGoal(g){try{if(window.ym&&window.MB_METRIKA)ym(window.MB_METRIKA,'reachGoal',g);}catch(e){}}
 /* ===== общие скрипты всех страниц ===== */
 (function(){
   const bg=document.getElementById('burger'),mm_=document.getElementById('mobileMenu');

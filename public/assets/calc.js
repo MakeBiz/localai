@@ -102,7 +102,7 @@ if(MB){MB.addEventListener('click',e=>{if(e.target.closest('[data-goto]'))R.scro
     const LF=document.getElementById('leadForm');const io2=new IntersectionObserver(en=>{en.forEach(x=>{v[x.target===R?'r':'f']=x.isIntersecting;});upd();},{rootMargin:'0px 0px -35% 0px'});io2.observe(R);if(LF)io2.observe(LF);}}
 
 /* ---------- заявка → Bitrix24 ---------- */
-function utm(){const p=new URLSearchParams(location.search);const o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(p.get(k))o[k.toUpperCase()]=p.get(k);});return o;}
+function utm(){const p=new URLSearchParams(location.search);let st={};try{st=JSON.parse(sessionStorage.getItem('mb_utm')||'{}');}catch(e){}const o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{const v=p.get(k)||st[k];if(v)o[k.toUpperCase()]=v;});return o;}
 async function submitLead(){
   const g=id=>((document.getElementById(id)||{}).value||'').trim();
   const err=document.getElementById('lfErr');err.textContent='';
@@ -126,6 +126,7 @@ async function submitLead(){
   try{
     if(CFG.bitrixWebhook){const res=await fetch(CFG.bitrixWebhook.replace(/\/?$/,'/')+'crm.lead.add.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields})});if(!res.ok)throw 0;}
     else console.log('[MakeBiz] Заявка (демо, вебхук не задан):',fields);
+    if(typeof mbGoal==='function')mbGoal('lead');
     document.getElementById('leadForm').innerHTML='<div class="form-ok"><div class="ic">'+IC.check+'</div><h3>Заявка принята</h3><p>Инженер проверит расчёт и свяжется с вами, чтобы назначить техническую встречу.</p></div>';
   }catch(e){btn.disabled=false;btn.textContent='Получить точный расчёт';err.textContent='Не получилось отправить, попробуйте ещё раз или позвоните нам';}
 }
